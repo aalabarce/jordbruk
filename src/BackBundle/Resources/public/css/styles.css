@@ -1,0 +1,43 @@
+.fa-check-circle {
+    color:green;
+    font-size: 20px !important;    
+}
+
+.fa-times-circle {
+    color:red;
+    font-size: 20px !important;
+}
+
+.constancia {
+    padding-left: 30px;
+    color: inherit;
+    font-size: 20px;
+}
+
+#constancias {
+    list-style-type: none;
+    width: 28%;
+    margin: 0 auto;
+    text-align: left !important
+}
+
+.constancia:visited {
+    color: #337AB7;
+}
+
+#titulo {
+    font-size: 30px;    
+    text-align: center;
+}
+
+#numeroAndreani {
+    width: 300px; 
+    display: inline-block; 
+    height: 35px;
+}
+
+.centrar {
+    text-align: center;
+    margin-bottom: 35px;
+    margin-top: 50px;
+}

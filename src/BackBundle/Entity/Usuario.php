@@ -17,9 +17,48 @@ class Usuario extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var type 
+     */
+    protected $nombre;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var type 
+     */
+    protected $apellido;
+    
+    
     public function __construct()
     {
         parent::__construct();
     }
+    
+    
+    function getId() {
+        return $this->id;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function getNombre() {
+        return $this->nombre;
+    }
+
+    function setNombre(type $nombre) {
+        $this->nombre = $nombre;
+    }
+
+    function getApellido() {
+        return $this->apellido;
+    }
+
+    function setApellido(type $apellido) {
+        $this->apellido = $apellido;
+    }
+
 }

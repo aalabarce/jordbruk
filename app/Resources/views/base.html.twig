@@ -2,12 +2,31 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Jordbruk{% endblock %}</title>
+        {% block stylesheets %}
+            {% stylesheets 
+                'bundles/back/css/bootstrap.min.css'
+                'bundles/back/css/styles.css'
+                output='css/*.css'
+            %}
+                <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+            {% endstylesheets %}
+        {% endblock %} 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    {% block header %}{% endblock %}
+    {% block body %}{% endblock %}
+    {% block javascripts %}
+        {% javascripts
+            'bundles/back/js/jquery-2.2.3.min.js'  
+            'bundles/back/js/bootstrap.min.js'      
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        {% endjavascripts %}
+        {% endblock %}
     </body>
 </html>
