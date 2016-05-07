@@ -1,0 +1,9 @@
+api:
+    resource: "@ApiBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+back:
+    resource: "@BackBundle/Controller/"
+    type:     annotation
+    prefix:   /
