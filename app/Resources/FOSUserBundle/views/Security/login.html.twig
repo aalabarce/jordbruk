@@ -1,7 +1,4 @@
 {% block fos_user_content %}
-    {% if error %}
-        <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
-    {% endif %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -38,6 +35,9 @@
                               <input type="checkbox" id="recordame" name="_remember_me" value="on"/> Recordame
                             </label>
                         </div>
+                        {% if error %}
+                            <div>Usuario o clave incorrecto</div>
+                        {% endif %}
                         <button type="submit" class="btn block full-width m-b ingresar"> Ingresar</button>
                     </div>
                 </form>
