@@ -49,7 +49,7 @@ class Usuario extends BaseUser
         return $this->nombre;
     }
 
-    function setNombre(type $nombre) {
+    function setNombre($nombre) {
         $this->nombre = $nombre;
     }
 
@@ -57,7 +57,7 @@ class Usuario extends BaseUser
         return $this->apellido;
     }
 
-    function setApellido(type $apellido) {
+    function setApellido($apellido) {
         $this->apellido = $apellido;
     }
 

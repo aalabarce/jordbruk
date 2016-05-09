@@ -13,7 +13,6 @@
         filter='?yui_css'
             %}
             <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
             {% endstylesheets %}
         {% endblock %}
     </head>  
@@ -39,6 +38,7 @@
                             <div>Usuario o clave incorrecto</div>
                         {% endif %}
                         <button type="submit" class="btn block full-width m-b ingresar"> Ingresar</button>
+                        <a href="{{ path('registrar') }}">Registrate</a>
                     </div>
                 </form>
             </div>
