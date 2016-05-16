@@ -19,7 +19,6 @@ class UsuarioController extends FOSRestController {
     /**
      * @ApiDoc(
      *  description="Crear un nuevo usuario",
-     *  authenticationRoles={"authentication by client_credentials"},
      *  resource=true,
      *  input={"name"="", "class"="ApiBundle\Form\UsuarioType"},
      *  output={"class"="BackBundle/Entity/Usuario"}
@@ -32,6 +31,7 @@ class UsuarioController extends FOSRestController {
         $form->submit(($request->request->all()));
         
         if ($form->isValid()) {
+            $usuario->setRoles(array("ROLE_USER"));
             $usuario->setEnabled(true);
             $this->getDoctrine()->getManager()->persist($usuario);
             $this->getDoctrine()->getManager()->flush();
