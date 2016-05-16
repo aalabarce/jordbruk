@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi:             ~
-    translator:      { fallbacks: es }
+    translator:      { fallbacks: en }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -57,8 +57,7 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-
+           
 fos_user:
     db_driver: orm
     firewall_name: jordbruk
@@ -69,7 +68,38 @@ fos_user:
         confirmation:
             enabled:    false 
 
-    
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    disable_csrf_role: ROLE_API
+    view:
+        jsonp_handler:
+            callback_param: false
+        view_response_listener: 'force'
+        formats:
+            json : true
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+    routing_loader:
+        default_format: json
+        include_format: false
+    exception:
+        enabled: true
+
+fos_oauth_server:
+    db_driver: orm
+    client_class:        ApiBundle\Entity\Client
+    access_token_class:  ApiBundle\Entity\AccessToken
+    refresh_token_class: ApiBundle\Entity\RefreshToken
+    auth_code_class:     ApiBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username
+        
 assetic:
     debug:          '%kernel.debug%'
     use_controller: '%kernel.debug%'
@@ -84,3 +114,9 @@ assetic:
             inputs: '@BackBundle/Resources/public/fonts/fontawesome-webfont.woff'
             output: 'fonts/fontawesome-webfont.woff'
 
+jms_serializer:
+    metadata:
+        directories:
+            FOSUB:
+                namespace_prefix: "FOS\\UserBundle"
+                path: "%kernel.root_dir%/serializer/FOSUB"

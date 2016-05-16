@@ -9,14 +9,41 @@ security:
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-            
+            pattern:    ^/(_(profiler|wdt)|css|images|js)/
+            security:   false
+
+        oauth_token:
+            pattern:    ^/oauth/v2/token
+            security:   false
+        
+        api_oauth:
+            pattern:    ^/api/autenticacion
+            stateless:  true
+            anonymous:  true 
+
+        api_rutas:
+            pattern:    ^/api/doc
+            stateless:  true
+            anonymous:  true 
+
+        api_registrar:
+            pattern:    ^/api/usuario/registrar
+            stateless:  true
+            anonymous:  true 
+
+        api:
+            pattern:    ^/api
+            fos_oauth:  true
+            stateless:  true
+            anonymous:  false
+
         main:
+            anonymous: ~
             pattern: ^/
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
+
             logout:       true
             anonymous:    true
 
@@ -26,4 +53,6 @@ security:
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/registrar, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/doc, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/, role: ROLE_ADMIN }

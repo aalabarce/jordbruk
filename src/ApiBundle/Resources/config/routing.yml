@@ -1,0 +1,4 @@
+api_usuario:
+    type: rest
+    prefix: usuario
+    resource: ApiBundle\Controller\UsuarioController
