@@ -24,7 +24,7 @@ class RefreshToken extends BaseRefreshToken
     protected $client;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Usuario")
+     * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Usuario")
      */
     protected $user;
     

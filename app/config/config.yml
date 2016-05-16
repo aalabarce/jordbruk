@@ -61,10 +61,10 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: jordbruk
-    user_class: BackBundle\Entity\Usuario
+    user_class: ApiBundle\Entity\Usuario
     registration:
         form:
-            type: BackBundle\Form\UsuarioType
+            type: ApiBundle\Form\UsuarioType
         confirmation:
             enabled:    false 
 

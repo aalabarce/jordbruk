@@ -22,7 +22,7 @@ class UsuarioType extends AbstractType {
 
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'BackBundle\Entity\Usuario',
+            'data_class' => 'ApiBundle\Entity\Usuario',
             'cascade_validation' => false,
             'csrf_protection' => false
         ));
