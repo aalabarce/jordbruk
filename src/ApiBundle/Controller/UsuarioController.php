@@ -4,6 +4,7 @@ namespace ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -40,27 +41,15 @@ class UsuarioController extends FOSRestController {
     }
 
     /**
-     * @return array
-     *
      * @ApiDoc(
      *  description="Obtener listado de usuarios",
      *  resource=true,
      *  output={"class"="ApiBundle\Entity\Usuario"}
      * )
-     * @Get("/", name="api_obtener")
+     * @Get("", name="api_obtener")
      */
-    public function obtenerAction()
-    {
-        $response = array();
-        $em = $this->getDoctrine()->getManager();
-        $usuarios = $em->getRepository('ApiBundle:Usuario')->findAll();
-
-        if(!$usuarios)
-        {
-             return $this->view(null, 400);
-        }
-
-        return $this->view($usuarios, 200);
+    public function obtenerAction() {
+        return $this->getDoctrine()->getManager()->getRepository('ApiBundle:Usuario')->findAll();
     }
 
 

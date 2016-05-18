@@ -9,8 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="Usuario")
  */
-class Usuario extends BaseUser
-{
+class Usuario extends BaseUser {
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -20,19 +19,26 @@ class Usuario extends BaseUser
     
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @var type 
      */
     protected $nombre;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @var type 
      */
     protected $apellido;
     
+    /**
+     * @ORM\OneToMany(targetEntity="ApiBundle\Entity\Lote", mappedBy="usuario")
+     */
+    protected $lotes;
     
-    public function __construct()
-    {
+    /**
+     * @ORM\OneToMany(targetEntity="ApiBundle\Entity\Siembra", mappedBy="usuario")
+     */
+    protected $siembras;
+    
+    
+    public function __construct() {
         parent::__construct();
     }
     
@@ -60,5 +66,20 @@ class Usuario extends BaseUser
     function setApellido($apellido) {
         $this->apellido = $apellido;
     }
+    
+    function getLotes() {
+        return $this->lotes;
+    }
 
+    function setLotes($lotes) {
+        $this->lotes = $lotes;
+    }
+    
+    function getSiembras() {
+        return $this->siembras;
+    }
+
+    function setSiembras($siembras) {
+        $this->siembras = $siembras;
+    }
 }
