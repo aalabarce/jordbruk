@@ -1,48 +1,47 @@
 {% block fos_user_content %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Login</title>
-        {% block stylesheets %}
-            {% stylesheets 
-            'bundles/back/css/bootstrap.min.css'
-            'bundles/back/css/animate.css'
-            'bundles/back/css/style.min.css'
-            'bundles/back/less/styles.less'
-        output='css/*.css'
-        filter='?yui_css'
-            %}
-            <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
-            {% endstylesheets %}
-        {% endblock %}
-    </head>  
-    <body class="login">
-        <div class="middle-box text-center loginscreen animated fadeInDown">
-            <div id="login-page">
-                <form class="m-t form-login thumbnail" action="{{ path("fos_user_security_check") }}" method="post">
-                    <h2 class="form-login-heading">INICIAR SESIÓN</h2>
-                    <div class="login-container">
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                        <div class="form-group form-group-login">
-                            <input type="text" class="form-control" value="{{ last_username }}" placeholder="Usuario" id="username" name="_username" required="required"/>
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <title>Login</title>
+            {% block stylesheets %}
+                {% stylesheets 
+                'bundles/back/css/bootstrap.min.css'
+                'bundles/back/css/animate.css'
+                'bundles/back/css/style.min.css'
+                'bundles/back/less/styles.less'
+            output='css/*.css'
+                %}
+                <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+                {% endstylesheets %}
+            {% endblock %}
+        </head>  
+        <body class="login">
+            <div class="middle-box text-center loginscreen animated fadeInDown">
+                <div id="login-page">
+                    <form class="m-t form-login thumbnail" action="{{ path("fos_user_security_check") }}" method="post">
+                        <h2 class="form-login-heading">INICIAR SESIÓN</h2>
+                        <div class="login-container">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                            <div class="form-group form-group-login">
+                                <input type="text" class="form-control" value="{{ last_username }}" placeholder="Usuario" id="username" name="_username" required="required"/>
+                            </div>
+                            <div class="form-group form-group-login">
+                                <input type="password" class="form-control" placeholder="Contraseña"  name="_password" required="required"/>
+                            </div>
+                            <div class="form-group form-group-login pull-left">
+                                <label>
+                                  <input type="checkbox" id="recordame" name="_remember_me" value="on"/> Recordame
+                                </label>
+                            </div>
+                            {% if error %}
+                                <div>Usuario o clave incorrecto</div>
+                            {% endif %}
+                            <button type="submit" class="btn block full-width m-b ingresar"> Ingresar</button>
+                            <a href="{{ path('registrar') }}">Registrate</a>
                         </div>
-                        <div class="form-group form-group-login">
-                            <input type="password" class="form-control" placeholder="Contraseña"  name="_password" required="required"/>
-                        </div>
-                        <div class="form-group form-group-login pull-left">
-                            <label>
-                              <input type="checkbox" id="recordame" name="_remember_me" value="on"/> Recordame
-                            </label>
-                        </div>
-                        {% if error %}
-                            <div>Usuario o clave incorrecto</div>
-                        {% endif %}
-                        <button type="submit" class="btn block full-width m-b ingresar"> Ingresar</button>
-                        <a href="{{ path('registrar') }}">Registrate</a>
-                    </div>
-                </form>
-            </div>
-        </div>        
-    </body>
-</html>
+                    </form>
+                </div>
+            </div>        
+        </body>
+    </html>
 {% endblock fos_user_content %}

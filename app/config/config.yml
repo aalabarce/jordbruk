@@ -105,7 +105,8 @@ assetic:
     use_controller: '%kernel.debug%'
     filters:
         cssrewrite: ~
-        
+   
+                
     assets:
         font-awesome-ttf:
             inputs: '@BackBundle/Resources/public/fonts/fontawesome-webfont.ttf'
