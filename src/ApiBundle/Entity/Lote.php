@@ -17,9 +17,25 @@ class Lote {
     protected $id;
     
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $superficie;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $suelo;
+        
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $descripcion;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Usuario", inversedBy="lotes")
      */
     protected $usuario;
+    
 
     function getId() {
         return $this->id;
@@ -29,6 +45,30 @@ class Lote {
         $this->id = $id;
     }
     
+    function getSuperficie() {
+        return $this->superficie;
+    }
+
+    function setSuperficie($superficie) {
+        $this->superficie = $superficie;
+    }
+
+    function getSuelo() {
+        return $this->suelo;
+    }
+
+    function setSuelo($suelo) {
+        $this->suelo = $suelo;
+    }
+
+    function getDescripcion() {
+        return $this->descripcion;
+    }
+
+    function setDescripcion($descripcion) {
+        $this->descripcion = $descripcion;
+    }
+
     function getUsuario() {
         return $this->usuario;
     }
