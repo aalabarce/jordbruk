@@ -88,6 +88,4 @@ class Cosecha {
     function setDescripcion($descripcion) {
         $this->descripcion = $descripcion;
     }
-
-
 }
