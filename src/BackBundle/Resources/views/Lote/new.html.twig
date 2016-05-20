@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <section class="container">
+        <h4 class="header up">Nuevo lote</h4>
+        <hr>
+        <div class="adresses col-sm-6"> 
+            <form id="lote_form" action="{{ path('lote_create') }}" method="post">                
+                {% include 'BackBundle:Lote:form.html.twig' with {'form':form } %}                
+            </form>
+        </div>
+    </section>
+{% endblock %}

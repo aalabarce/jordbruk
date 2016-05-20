@@ -25,7 +25,6 @@ class UsuarioController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $this->get('security.password_encoder')->encodePassword($usuario, $usuario->getPlainPassword());
             $usuario->setPassword($password);
-            $usuario->setRoles(array("ROLE_USER"));
             $usuario->setEnabled(true);
             
             $this->getDoctrine()->getManager()->persist($usuario);

@@ -5,25 +5,23 @@ namespace BackBundle\Controller;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use BackBundle\Entity\Datos;
-use BackBundle\Form\DatosType;
+use ApiBundle\Entity\Siembra;
+use ApiBundle\Form\SiembraType;
 
 /**
  * @Route("/siembra")
  */
-class SiembraController extends BaseController
-{
+class SiembraController extends BaseController {
     
     /**
-     * @Route("/", name="siembra_index")
+     * @Route("/", name="siembra")
      */
     public function indexAction() {
-        $em = $this->getDoctrine()->getManager();
-        $usuarioId = $this->container->get('security.context')->getToken()->getUser();
-        $datos = $em->getRepository('BackBundle:Datos')->findBy(array('id' => $usuarioId));
+        $usuario = $this->container->get('security.token_storage')->getToken()->getUser();
+        $siembras = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getPorUsuario($usuario->getId());
         
         return $this->render('BackBundle:Siembra:index.html.twig', array(
-            'datos' => $datos,
+            'siembras' => $siembras,
         ));
     }
 
@@ -31,11 +29,11 @@ class SiembraController extends BaseController
      * @Route("/new", name="siembra_new")
      */
     public function newAction() {
-        $datos = new Datos();
-        $form = $this->createForm(DatosType::class, $datos);
+        $siembra = new Siembra();
+        $form = $this->createForm(SiembraType::class, $siembra);
 
         return $this->render('BackBundle:Siembra:new.html.twig', array(
-            'datos' => $datos,
+            'siembra' => $siembra,
             'form' => $form->createView(),
         ));
     }
@@ -44,19 +42,19 @@ class SiembraController extends BaseController
      * @Route("/create", name="siembra_create")
      */
     public function createAction(Request $request) {
-        $datos = new Datos();
-        $form = $this->createForm(DatosType::class, $datos);
-        $form->submit($request->request->all());
+        $siembra= new Siembra();
+        $form = $this->createForm(SiembraType::class, $siembra);
+        $form->handleRequest($request);
         
         if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->persist($datos);
+            $this->getDoctrine()->getManager()->persist($siembra);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirect($this->generateUrl('siembra'));
         }
 
         return $this->render('BackBundle:Siembra:new.html.twig', array(
-            'datos' => $datos,
+            'siembra' => $siembra,
             'form' => $form->createView(),
         ));
     }
@@ -65,15 +63,15 @@ class SiembraController extends BaseController
      * @Route("/edit/{id}", name="siembra_edit")
      */
     public function editAction($id) {
-        $datos = $this->getDoctrine()->getManager()->getRepository('BackBundle:Datos')->find($id);
-        if (!$datos) 
+        $siembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->find($id);
+        if (!$siembra) 
             throw $this->createNotFoundException('Unable to find entity');
         
-        $form = $this->createForm(DatosType::class, $datos);
+        $form = $this->createForm(SiembraType::class, $siembra);
 
         return $this->render('BackBundle:Siembra:edit.html.twig', array(
-                    'datos' => $datos,
-                    'form' => $form->createView(),
+            'siembra' => $siembra,
+            'form' => $form->createView(),
         ));
     }
 
@@ -82,12 +80,12 @@ class SiembraController extends BaseController
      */
     public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
-        $datos = $em->getRepository('BackBundle:Datos')->find($id);
-        if (!$datos)
+        $siembra = $em->getRepository('ApiBundle:Siembra')->find($id);
+        if (!$siembra)
             throw $this->createNotFoundException('Unable to find entity');
         
-        $form = $this->createForm(DatosType::class, $datos);
-        $form->submit($request->request->all());
+        $form = $this->createForm(SiembraType::class, $siembra);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -97,8 +95,8 @@ class SiembraController extends BaseController
         }
 
         return $this->render('BackBundle:Siembra:edit.html.twig', array(
-                    'datos' => $datos,
-                    'form' => $form->createView(),
+            'siembra' => $siembra,
+            'form' => $form->createView(),
         ));
     }
     

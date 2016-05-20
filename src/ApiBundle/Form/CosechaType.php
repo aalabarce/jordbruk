@@ -15,7 +15,7 @@ class CosechaType extends AbstractType {
             ->add('siembra', null, array("description" => "Siembra", 'constraints' => new NotBlank()))
             ->add('rinde', null, array("description" => "Rinde", 'constraints' => new NotBlank()))
             ->add('beneficio', null, array("description" => "Beneficio", 'constraints' => new NotBlank()))
-            ->add('descripcion', null, array("description" => "Descripcion", 'constraints' => new NotBlank()))
+            ->add('descripcion', null, array("description" => "Descripcion"))
         ;
     }
 

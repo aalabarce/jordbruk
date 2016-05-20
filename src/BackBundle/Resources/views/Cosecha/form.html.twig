@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+    {{ form_row(form.siembra) }}
+    {{ form_row(form.fecha) }}
+    {{ form_row(form.rinde) }}
+    {{ form_row(form.beneficio) }}
+    {{ form_row(form.descripcion) }}
+
+    <button type="submit">Guardar</button>
+    <a class="btn btn-default" href="{{url('cosecha')}}">Cancelar</a>                    
+{{ form_end(form) }}

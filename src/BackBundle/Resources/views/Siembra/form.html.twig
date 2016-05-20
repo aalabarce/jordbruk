@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+    {{ form_row(form.nombre) }}
+    {{ form_row(form.fecha) }}
+    {{ form_row(form.cultivo) }}
+    {{ form_row(form.lote) }}
+    {{ form_row(form.aguaRecibida) }}
+    {{ form_row(form.fertilizado) }}
+    {{ form_row(form.fumigado) }}
+    {{ form_row(form.arado) }}
+    {{ form_row(form.costo) }}
+    {{ form_row(form.descripcion) }}
+
+    <button type="submit">Guardar</button>
+    <a class="btn btn-default" href="{{url('siembra')}}">Cancelar</a>                    
+{{ form_end(form) }}

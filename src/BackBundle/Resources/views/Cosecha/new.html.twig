@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <section class="container">
+        <h4 class="header up">Nueva cosecha</h4>
+        <hr>
+        <div class="adresses col-sm-6"> 
+            <form id="cosecha_form" action="{{ path('cosecha_create') }}" method="post">                
+                {% include 'BackBundle:Cosecha:form.html.twig' with {'form':form } %}                
+            </form>
+        </div>
+    </section>
+{% endblock %}

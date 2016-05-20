@@ -1,0 +1,43 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <section class="container list">
+        <div class="new-btn actions">
+            <div class="form-changes btnCLienteNuevo">
+                <a href="{{url('lote_new')}}" class="btn btn-danger">Nuevo</a>
+            </div>
+        </div>
+        <form type="get" action="{{ path('lote') }}">
+            <div class="table-responsive">
+                <table id="tabla-usuarios" class="table table-striped table-hover grilla-generica">
+                    <h4 class="header up">Administrar Lotes</h4>
+                    <thead>
+                        {% if lotes %}
+                            <tr>
+                                <th><strong>Nombre</strong></th>
+                                <th><strong>Superficie</strong></th>
+                                <th><strong>Suelo</strong></th>
+                                <th><strong>Descripción</strong></th>
+                                <th class="col-sm-1"><strong>Acciones</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for lote in lotes %}
+                                <tr>
+                                    <td>{{lote.nombre}}</td>
+                                    <td>{{lote.superficie}}</td>
+                                    <td>{{lote.suelo}}</td>
+                                    <td>{{lote.descripcion}}</td>
+                                    <td>borrar</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </section>
+    {% else %}
+        <hr>
+        {{"No se encontraron resultados"}}
+    {% endif %}
+{% endblock %}

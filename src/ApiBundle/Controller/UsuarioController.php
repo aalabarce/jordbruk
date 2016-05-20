@@ -28,7 +28,6 @@ class UsuarioController extends FOSRestController {
         $form->submit(($request->request->all()));
         
         if ($form->isValid()) {
-            $usuario->setRoles(array("ROLE_USER"));
             $usuario->setEnabled(true);
             
             $this->getDoctrine()->getManager()->persist($usuario);

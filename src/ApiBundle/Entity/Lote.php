@@ -17,6 +17,11 @@ class Lote {
     protected $id;
     
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $nombre;
+    
+    /**
      * @ORM\Column(type="integer")
      */
     protected $superficie;
@@ -35,7 +40,12 @@ class Lote {
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Usuario", inversedBy="lotes")
      */
     protected $usuario;
+
     
+    public function __toString() {
+        return $this->nombre;
+    }
+
 
     function getId() {
         return $this->id;
@@ -45,6 +55,14 @@ class Lote {
         $this->id = $id;
     }
     
+    function getNombre() {
+        return $this->nombre;
+    }
+
+    function setNombre($nombre) {
+        $this->nombre = $nombre;
+    }
+
     function getSuperficie() {
         return $this->superficie;
     }

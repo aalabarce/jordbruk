@@ -5,7 +5,7 @@ namespace ApiBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ApiBundle\Repository\SiembraRepository")
  * @ORM\Table(name="Siembra")
  */
 class Siembra {
@@ -15,6 +15,11 @@ class Siembra {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $nombre;
     
     /**
      * @ORM\Column(type="datetime")
@@ -60,14 +65,13 @@ class Siembra {
      * @ORM\Column(type="string", nullable=true)
      */
     protected $descripcion;
-            
-    /**
-     * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Usuario", inversedBy="siembras")
-     */
-    protected $usuario;
+    
+        
+    public function __toString() {
+        return $this->nombre;
+    }
     
     
-
     function getId() {
         return $this->id;
     }
@@ -76,14 +80,14 @@ class Siembra {
         $this->id = $id;
     }
     
-    function getUsuario() {
-        return $this->usuario;
+    function getNombre() {
+        return $this->nombre;
     }
 
-    function setUsuario($usuario) {
-        $this->usuario = $usuario;
+    function setNombre($nombre) {
+        $this->nombre = $nombre;
     }
-    
+
     function getFecha() {
         return $this->fecha;
     }

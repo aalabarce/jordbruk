@@ -11,6 +11,7 @@ class LoteType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
+            ->add('nombre', null, array("description" => "Nombre identificador", 'constraints' => new NotBlank()))
             ->add('superficie', null, array("description" => "Superficie", 'constraints' => new NotBlank()))
             ->add('suelo', null, array("description" => "Suelo", 'constraints' => new NotBlank()))
             ->add('descripcion', null, array("description" => "Descripcion"))

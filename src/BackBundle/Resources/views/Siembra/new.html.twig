@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <section class="container">
+        <h4 class="header up">Nueva siembra</h4>
+        <hr>
+        <div class="adresses col-sm-6"> 
+            <form id="siembra_form" action="{{ path('siembra_create') }}" method="post">
+                {% include 'BackBundle:Siembra:form.html.twig' with {'form':form } %}
+            </form>
+        </div>
+    </section>
+{% endblock %}

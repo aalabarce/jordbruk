@@ -11,15 +11,16 @@ class SiembraType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
+            ->add('nombre', null, array("description" => "Nombre identificador", 'constraints' => new NotBlank()))
             ->add('fecha', null, array("description" => "Fecha de siembra", 'constraints' => new NotBlank()))
             ->add('cultivo', null, array("description" => "Cultivo", 'constraints' => new NotBlank()))
             ->add('lote', null, array("description" => "Lote", 'constraints' => new NotBlank()))
             ->add('aguaRecibida', null, array("description" => "Cantidad de agua recibida", 'constraints' => new NotBlank()))
-            ->add('fertilizado', null, array("description" => "Si el campo fue fertilizado o no", 'constraints' => new NotBlank()))
-            ->add('fumigado', null, array("description" => "Si el campo fue fumigado o no", 'constraints' => new NotBlank()))
-            ->add('arado', null, array("description" => "Si el campo fue arado o no", 'constraints' => new NotBlank()))
+            ->add('fertilizado', null, array("description" => "Si el campo fue fertilizado o no"))
+            ->add('fumigado', null, array("description" => "Si el campo fue fumigado o no"))
+            ->add('arado', null, array("description" => "Si el campo fue arado o no"))
             ->add('costo', null, array("description" => "Costo", 'constraints' => new NotBlank()))
-            ->add('descripcion', null, array("description" => "Descripcion", 'constraints' => new NotBlank()))
+            ->add('descripcion', null, array("description" => "Descripcion"))
         ;
     }
 
