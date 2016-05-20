@@ -4,7 +4,7 @@
     <section class="container list">
         <div class="new-btn actions">
             <div class="form-changes btnCLienteNuevo">
-                <a href="{{url('siembra_new')}}" class="btn btn-danger btn-xs">Nuevo</a>
+                <a href="{{url('siembra_new')}}" class="btn btn-danger">Nuevo</a>
             </div>
         </div>
         <form type="get" action="{{ path('siembra') }}">
@@ -40,7 +40,9 @@
                                     <td>{{siembra.arado ? "Si" : "No"}}</td>
                                     <td>{{siembra.costo}}</td>
                                     <td>{{siembra.descripcion}}</td>
-                                    <td>borrar</td>
+                                    <td>
+                                        <a href="{{url('siembra_edit', { 'id': siembra.id })}}"><i class="fa fa-pencil"></i></a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

@@ -28,7 +28,9 @@
                                     <td>{{lote.superficie}}</td>
                                     <td>{{lote.suelo}}</td>
                                     <td>{{lote.descripcion}}</td>
-                                    <td>borrar</td>
+                                    <td>
+                                        <a href="{{url('lote_edit', { 'id': lote.id })}}"><i class="fa fa-pencil"></i></a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

@@ -1,1 +1,13 @@
-Hello World!
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <section class="container">
+        <h4 class="header up">Editar lote</h4>
+        <hr>
+        <div class="adresses col-sm-6"> 
+            <form id="lote_form" action="{{ url('lote_update', { 'id': lote.id }) }}" method="post">                
+                {% include 'BackBundle:Lote:form.html.twig' with {'form':form } %}                
+            </form>
+        </div>
+    </section>
+{% endblock %}

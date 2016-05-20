@@ -79,8 +79,7 @@ class SiembraController extends BaseController {
      * @Route("/update/{id}", name="siembra_update")
      */
     public function updateAction(Request $request, $id) {
-        $em = $this->getDoctrine()->getManager();
-        $siembra = $em->getRepository('ApiBundle:Siembra')->find($id);
+        $siembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->find($id);
         if (!$siembra)
             throw $this->createNotFoundException('Unable to find entity');
         
@@ -88,8 +87,7 @@ class SiembraController extends BaseController {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $this->getDoctrine()->getManager()->flush();
             
             return $this->redirect($this->generateUrl('siembra'));
         }

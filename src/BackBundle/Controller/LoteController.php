@@ -81,8 +81,7 @@ class LoteController extends BaseController {
      * @Route("/update/{id}", name="lote_update")
      */
     public function updateAction(Request $request, $id) {
-        $em = $this->getDoctrine()->getManager();
-        $lote = $em->getRepository('ApiBundle:Lote')->find($id);
+        $lote = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->find($id);
         if (!$lote)
             throw $this->createNotFoundException('Unable to find entity');
         
@@ -90,8 +89,7 @@ class LoteController extends BaseController {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $this->getDoctrine()->getManager()->flush();
             
             return $this->redirect($this->generateUrl('lote'));
         }
