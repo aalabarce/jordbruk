@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\View;
 use ApiBundle\Entity\Usuario;
 use ApiBundle\Form\UsuarioType;
 
@@ -20,6 +21,7 @@ class UsuarioController extends FOSRestController {
      *  input={"class"="ApiBundle\Form\UsuarioType"},
      *  output={"class"="ApiBundle\Entity\Usuario"}
      * )
+     * @View(serializerGroups={"Usuario"})
      * @Post("/registrar", name="api_usuario_registrar")
      */
     public function registrarAction(Request $request) {
@@ -45,6 +47,7 @@ class UsuarioController extends FOSRestController {
      *  resource=true,
      *  output={"class"="ApiBundle\Entity\Usuario"}
      * )
+     * @View(serializerGroups={"Usuario"})
      * @Get("", name="api_usuario_obtener")
      */
     public function obtenerAction() {

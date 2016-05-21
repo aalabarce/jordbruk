@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\View;
 use ApiBundle\Entity\Cosecha;
 use ApiBundle\Form\CosechaType;
 
@@ -20,6 +21,7 @@ class CosechaController extends FOSRestController {
      *  input={"class"="ApiBundle\Form\CosechaType"},
      *  output={"class"="ApiBundle\Entity\Cosecha"}
      * )
+     * @View(serializerGroups={"Cosecha"})
      * @Post("", name="api_cosecha_new")
      */
     public function newAction(Request $request) {
@@ -31,8 +33,7 @@ class CosechaController extends FOSRestController {
             $this->getDoctrine()->getManager()->persist($cosecha);
             $this->getDoctrine()->getManager()->flush();
             
-            return "ok";
-//            return $cosecha;
+            return $cosecha;
         } else {
             return $form;
         }
@@ -45,6 +46,7 @@ class CosechaController extends FOSRestController {
      *  input={"class"="ApiBundle\Form\CosechaType"},
      *  output={"class"="ApiBundle\Entity\Cosecha"}
      * )
+     * @View(serializerGroups={"Cosecha"})
      * @Post("/editar/{id}", name="api_cosecha_edit")
      */
     public function editAction(Request $request, $id) {
@@ -55,8 +57,7 @@ class CosechaController extends FOSRestController {
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             
-            return "ok";
-//            return $cosecha;
+            return $cosecha;
         } else {
             return $form;
         }
@@ -68,6 +69,7 @@ class CosechaController extends FOSRestController {
      *  resource=true,
      *  output={"class"="ApiBundle\Entity\Cosecha"}
      * )
+     * @View(serializerGroups={"Cosecha"})
      * @Get("", name="api_cosecha_obtener")
      */
     public function obtenerAction() {

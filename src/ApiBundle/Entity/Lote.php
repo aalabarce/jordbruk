@@ -3,36 +3,50 @@
 namespace ApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\ExclusionPolicy;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="Lote")
+ * @ExclusionPolicy("all")
  */
 class Lote {
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
+     * @Groups({"Lote", "Siembra"})
      */
     protected $id;
     
     /**
      * @ORM\Column(type="string")
+     * @Expose
+     * @Groups({"Lote", "Siembra"})
      */
     protected $nombre;
     
     /**
      * @ORM\Column(type="integer")
+     * @Expose
+     * @Groups({"Lote"})
      */
     protected $superficie;
     
     /**
      * @ORM\Column(type="string")
+     * @Expose
+     * @Groups({"Lote"})
      */
     protected $suelo;
         
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Expose
+     * @Groups({"Lote"})
      */
     protected $descripcion;
     

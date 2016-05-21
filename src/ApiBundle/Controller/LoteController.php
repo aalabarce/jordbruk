@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\View;
 use ApiBundle\Entity\Lote;
 use ApiBundle\Form\LoteType;
 
@@ -20,6 +21,7 @@ class LoteController extends FOSRestController {
      *  input={"class"="ApiBundle\Form\LoteType"},
      *  output={"class"="ApiBundle\Entity\Lote"}
      * )
+     * @View(serializerGroups={"Lote"})
      * @Post("", name="api_lote_new")
      */
     public function newAction(Request $request) {
@@ -33,8 +35,7 @@ class LoteController extends FOSRestController {
             $this->getDoctrine()->getManager()->persist($lote);
             $this->getDoctrine()->getManager()->flush();
             
-            return "ok";
-//            return $lote;
+            return $lote;
         } else {
             return $form;
         }
@@ -47,6 +48,7 @@ class LoteController extends FOSRestController {
      *  input={"class"="ApiBundle\Form\LoteType"},
      *  output={"class"="ApiBundle\Entity\Lote"}
      * )
+     * @View(serializerGroups={"Lote"})
      * @Post("/editar/{id}", name="api_lote_edit")
      */
     public function editAction(Request $request, $id) {
@@ -57,8 +59,7 @@ class LoteController extends FOSRestController {
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             
-            return "ok";
-//            return $lote;
+            return $lote;
         } else {
             return $form;
         }
@@ -70,6 +71,7 @@ class LoteController extends FOSRestController {
      *  resource=true,
      *  output={"class"="ApiBundle\Entity\Lote"}
      * )
+     * @View(serializerGroups={"Lote"})
      * @Get("", name="api_lote_obtener")
      */
     public function obtenerAction() {

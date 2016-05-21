@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\View;
 use ApiBundle\Entity\Siembra;
 use ApiBundle\Form\SiembraType;
 
@@ -20,6 +21,7 @@ class SiembraController extends FOSRestController {
      *  input={"class"="ApiBundle\Form\SiembraType"},
      *  output={"class"="ApiBundle\Entity\Siembra"}
      * )
+     * @View(serializerGroups={"Siembra"})
      * @Post("", name="api_siembra_new")
      */
     public function newAction(Request $request) {
@@ -31,8 +33,7 @@ class SiembraController extends FOSRestController {
             $this->getDoctrine()->getManager()->persist($siembra);
             $this->getDoctrine()->getManager()->flush();
             
-            return "ok";
-//            return $siembra;
+            return $siembra;
         } else {
             return $form;
         }
@@ -45,6 +46,7 @@ class SiembraController extends FOSRestController {
      *  input={"class"="ApiBundle\Form\SiembraType"},
      *  output={"class"="ApiBundle\Entity\Siembra"}
      * )
+     * @View(serializerGroups={"Siembra"})
      * @Post("/editar/{id}", name="api_siembra_edit")
      */
     public function editAction(Request $request, $id) {
@@ -54,9 +56,8 @@ class SiembraController extends FOSRestController {
         
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            
-            return "ok";
-//            return $siembra;
+
+        return $siembra;
         } else {
             return $form;
         }
@@ -68,6 +69,7 @@ class SiembraController extends FOSRestController {
      *  resource=true,
      *  output={"class"="ApiBundle\Entity\Siembra"}
      * )
+     * @View(serializerGroups={"Siembra"})
      * @Get("", name="api_siembra_obtener")
      */
     public function obtenerAction() {

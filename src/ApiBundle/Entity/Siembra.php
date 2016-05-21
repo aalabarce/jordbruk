@@ -3,66 +3,92 @@
 namespace ApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\ExclusionPolicy;
 
 /**
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\SiembraRepository")
  * @ORM\Table(name="Siembra")
+ * @ExclusionPolicy("all")
  */
 class Siembra {
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
+     * @Groups({"Siembra", "Cosecha"})
      */
     protected $id;
     
     /**
      * @ORM\Column(type="string")
+     * @Expose
+     * @Groups({"Siembra", "Cosecha"})
      */
     protected $nombre;
     
     /**
      * @ORM\Column(type="datetime")
+     * @Expose
+     * @Groups({"Siembra"})
      */
     protected $fecha;
     
     /**
      * @ORM\Column(type="string")
+     * @Expose
+     * @Groups({"Siembra"})
      */
     protected $cultivo;
     
     /**
      * @ORM\OneToOne(targetEntity="ApiBundle\Entity\Lote")
+     * @Expose
+     * @Groups({"Siembra"})
      */
     protected $lote;
 
     /**
      * @ORM\Column(type="integer")
+     * @Expose
+     * @Groups({"Siembra"})
      */
     protected $aguaRecibida;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Expose
+     * @Groups({"Siembra"})
      */
     protected $fertilizado;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Expose
+     * @Groups({"Siembra"})
      */
     protected $fumigado;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Expose
+     * @Groups({"Siembra"})
      */
     protected $arado;
 
     /**
      * @ORM\Column(type="integer")
+     * @Expose
+     * @Groups({"Siembra"})
      */
     protected $costo;
         
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Expose
+     * @Groups({"Siembra"})
      */
     protected $descripcion;
     
