@@ -2,3 +2,18 @@ api_usuario:
     type: rest
     prefix: usuario
     resource: ApiBundle\Controller\UsuarioController
+
+api_lote:
+    type: rest
+    prefix: lote
+    resource: ApiBundle\Controller\LoteController
+
+api_siembra:
+    type: rest
+    prefix: siembra
+    resource: ApiBundle\Controller\SiembraController
+
+api_cosecha:
+    type: rest
+    prefix: cosecha
+    resource: ApiBundle\Controller\CosechaController

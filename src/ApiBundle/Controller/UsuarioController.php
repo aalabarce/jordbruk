@@ -20,12 +20,12 @@ class UsuarioController extends FOSRestController {
      *  input={"class"="ApiBundle\Form\UsuarioType"},
      *  output={"class"="ApiBundle\Entity\Usuario"}
      * )
-     * @Post("/registrar", name="api_registrar")
+     * @Post("/registrar", name="api_usuario_registrar")
      */
     public function registrarAction(Request $request) {
         $usuario = new Usuario();
         $form = $this->createForm(UsuarioType::class, $usuario);
-        $form->submit(($request->request->all()));
+        $form->submit($request->request->all());
         
         if ($form->isValid()) {
             $usuario->setEnabled(true);
@@ -45,7 +45,7 @@ class UsuarioController extends FOSRestController {
      *  resource=true,
      *  output={"class"="ApiBundle\Entity\Usuario"}
      * )
-     * @Get("", name="api_obtener")
+     * @Get("", name="api_usuario_obtener")
      */
     public function obtenerAction() {
         return $this->getDoctrine()->getManager()->getRepository('ApiBundle:Usuario')->findAll();
