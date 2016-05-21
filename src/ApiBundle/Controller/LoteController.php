@@ -19,7 +19,7 @@ class LoteController extends FOSRestController {
      *  description="Crear un lote",
      *  resource=true,
      *  input={"class"="ApiBundle\Form\LoteType"},
-     *  output={"class"="ApiBundle\Entity\Lote"}
+     *  output={"class"="ApiBundle\Entity\Lote", "groups"={"Lote"}}
      * )
      * @View(serializerGroups={"Lote"})
      * @Post("", name="api_lote_new")
@@ -46,7 +46,7 @@ class LoteController extends FOSRestController {
      *  description="Editar un lote",
      *  resource=true,
      *  input={"class"="ApiBundle\Form\LoteType"},
-     *  output={"class"="ApiBundle\Entity\Lote"}
+     *  output={"class"="ApiBundle\Entity\Lote", "groups"={"Lote"}}
      * )
      * @View(serializerGroups={"Lote"})
      * @Post("/editar/{id}", name="api_lote_edit")
@@ -69,7 +69,7 @@ class LoteController extends FOSRestController {
      * @ApiDoc(
      *  description="Obtener lotes",
      *  resource=true,
-     *  output={"class"="ApiBundle\Entity\Lote"}
+     *  output={"class"="ApiBundle\Entity\Lote", "groups"={"Lote"}}
      * )
      * @View(serializerGroups={"Lote"})
      * @Get("", name="api_lote_obtener")

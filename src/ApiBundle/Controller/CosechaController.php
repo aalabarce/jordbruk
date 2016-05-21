@@ -19,7 +19,7 @@ class CosechaController extends FOSRestController {
      *  description="Crear un cosecha",
      *  resource=true,
      *  input={"class"="ApiBundle\Form\CosechaType"},
-     *  output={"class"="ApiBundle\Entity\Cosecha"}
+     *  output={"class"="ApiBundle\Entity\Cosecha", "groups"={"Cosecha"}}
      * )
      * @View(serializerGroups={"Cosecha"})
      * @Post("", name="api_cosecha_new")
@@ -44,7 +44,7 @@ class CosechaController extends FOSRestController {
      *  description="Editar un cosecha",
      *  resource=true,
      *  input={"class"="ApiBundle\Form\CosechaType"},
-     *  output={"class"="ApiBundle\Entity\Cosecha"}
+     *  output={"class"="ApiBundle\Entity\Cosecha", "groups"={"Cosecha"}}
      * )
      * @View(serializerGroups={"Cosecha"})
      * @Post("/editar/{id}", name="api_cosecha_edit")
@@ -67,7 +67,7 @@ class CosechaController extends FOSRestController {
      * @ApiDoc(
      *  description="Obtener cosechas",
      *  resource=true,
-     *  output={"class"="ApiBundle\Entity\Cosecha"}
+     *  output={"class"="ApiBundle\Entity\Cosecha", "groups"={"Cosecha"}}
      * )
      * @View(serializerGroups={"Cosecha"})
      * @Get("", name="api_cosecha_obtener")

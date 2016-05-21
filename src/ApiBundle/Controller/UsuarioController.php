@@ -19,7 +19,7 @@ class UsuarioController extends FOSRestController {
      *  description="Crear un nuevo usuario",
      *  resource=true,
      *  input={"class"="ApiBundle\Form\UsuarioType"},
-     *  output={"class"="ApiBundle\Entity\Usuario"}
+     *  output={"class"="ApiBundle\Entity\Usuario", "groups"={"Usuario"}}
      * )
      * @View(serializerGroups={"Usuario"})
      * @Post("/registrar", name="api_usuario_registrar")
@@ -45,7 +45,7 @@ class UsuarioController extends FOSRestController {
      * @ApiDoc(
      *  description="Obtener listado de usuarios",
      *  resource=true,
-     *  output={"class"="ApiBundle\Entity\Usuario"}
+     *  output={"class"="ApiBundle\Entity\Usuario", "groups"={"Usuario"}}
      * )
      * @View(serializerGroups={"Usuario"})
      * @Get("", name="api_usuario_obtener")

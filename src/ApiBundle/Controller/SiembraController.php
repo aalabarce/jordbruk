@@ -19,7 +19,7 @@ class SiembraController extends FOSRestController {
      *  description="Crear un siembra",
      *  resource=true,
      *  input={"class"="ApiBundle\Form\SiembraType"},
-     *  output={"class"="ApiBundle\Entity\Siembra"}
+     *  output={"class"="ApiBundle\Entity\Siembra", "groups"={"Siembra"}}
      * )
      * @View(serializerGroups={"Siembra"})
      * @Post("", name="api_siembra_new")
@@ -44,7 +44,7 @@ class SiembraController extends FOSRestController {
      *  description="Editar un siembra",
      *  resource=true,
      *  input={"class"="ApiBundle\Form\SiembraType"},
-     *  output={"class"="ApiBundle\Entity\Siembra"}
+     *  output={"class"="ApiBundle\Entity\Siembra", "groups"={"Siembra"}}
      * )
      * @View(serializerGroups={"Siembra"})
      * @Post("/editar/{id}", name="api_siembra_edit")
@@ -67,7 +67,7 @@ class SiembraController extends FOSRestController {
      * @ApiDoc(
      *  description="Obtener siembras",
      *  resource=true,
-     *  output={"class"="ApiBundle\Entity\Siembra"}
+     *  output={"class"="ApiBundle\Entity\Siembra", "groups"={"Siembra"}}
      * )
      * @View(serializerGroups={"Siembra"})
      * @Get("", name="api_siembra_obtener")
