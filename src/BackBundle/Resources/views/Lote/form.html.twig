@@ -1,9 +1,31 @@
 {{ form_start(form) }}
-    {{ form_row(form.nombre) }}
-    {{ form_row(form.superficie) }}
-    {{ form_row(form.suelo) }}
-    {{ form_row(form.descripcion) }}
 
-    <button type="submit">Guardar</button>
-    <a class="btn btn-default" href="{{url('lote')}}">Cancelar</a>                    
+<div class="form-group">
+    <label class="col-sm-2 col-sm-2 control-label">Nombre</label>
+    <div class="col-sm-10">
+        {{ form_widget(form.nombre, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 col-sm-2 control-label">Superficie</label>
+    <div class="col-sm-10">
+        {{ form_widget(form.superficie, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 col-sm-2 control-label">Suelo</label>
+    <div class="col-sm-10">
+        {{ form_widget(form.suelo, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 col-sm-2 control-label">Descripción</label>
+    <div class="col-sm-10">
+        {{ form_widget(form.descripcion, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+</div>
+
+<button type="submit" class="btn btn-default">Guardar</button>
+<a class="btn btn-default" href="{{url('lote')}}">Cancelar</a>   
+    
 {{ form_end(form) }}

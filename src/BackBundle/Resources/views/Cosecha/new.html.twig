@@ -1,13 +1,18 @@
-{% extends '::base.html.twig' %}
+{% extends 'BackBundle::base.html.twig' %}
 
-{% block body %}
-    <section class="container">
-        <h4 class="header up">Nueva cosecha</h4>
-        <hr>
-        <div class="adresses col-sm-6"> 
-            <form id="cosecha_form" action="{{ path('cosecha_create') }}" method="post">                
-                {% include 'BackBundle:Cosecha:form.html.twig' with {'form':form } %}                
-            </form>
-        </div>
+{% block main %}
+    <section id="main-content">
+        <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i> Nueva cosecha</h3>
+            <div class="row mt">
+                <div class="col-lg-12">
+                    <div class="form-panel">
+                        <form id="cosecha_form" action="{{ path('cosecha_create') }}" method="post">                
+                            {% include 'BackBundle:Cosecha:form.html.twig' with {'form':form } %}                
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
     </section>
 {% endblock %}
