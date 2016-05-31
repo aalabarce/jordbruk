@@ -15,19 +15,19 @@
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
             {% endstylesheets %}
         {% endblock %} 
-        {% block javascripts %}
-            {% javascripts
-                'bundles/back/js/jquery-2.2.3.min.js'  
-                'bundles/back/js/bootstrap.min.js'      
-            %}
-                <script type="text/javascript" src="{{ asset_url }}"></script>
-                <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-                <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
-            {% endjavascripts %}
-        {% endblock %}
     </head>
     <body>
         {% block header %}{% endblock %}
         {% block body %}{% endblock %}
     </body>
+    {% block javascripts %}
+        {% javascripts
+            'bundles/back/js/jquery-2.2.3.min.js'  
+            'bundles/back/js/bootstrap.min.js'      
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
 </html>

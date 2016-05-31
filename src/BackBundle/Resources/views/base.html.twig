@@ -6,7 +6,7 @@
             <div class="sidebar-toggle-box">
                 <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
             </div>
-            <a href="#" class="logo"><b>Jordbruk</b></a>
+            <a href="{{ url('home') }}" class="logo"><b>Jordbruk</b></a>
             <div class="top-menu">
                 <ul class="nav pull-right top-menu">
                     <li><a class="logout" href="{{ url('fos_user_security_logout') }}">Logout</a></li>
@@ -17,56 +17,42 @@
         <aside>
             <div id="sidebar"  class="nav-collapse ">
                 <ul class="sidebar-menu" id="nav-accordion">
-                    <p class="centered"><a href="profile.html"><img src="bundles/back/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-                    <h5 class="centered">Marcel Newman</h5>
+                    {% set image = 'bundles/back/images/jordbruk.jpg' %}
+                    <p class="centered"><img src="{{ asset(image) }}" class="img-circle" width="60"></p>
+                    <h5 class="centered">{{ app.user.nombre }} {{ app.user.apellido }}</h5>
                     <li class="mt">
-                        <a class="active" href="{{ url('home') }}">
+                        <a id="home" href="{{ url('home') }}">
                             <span>Principal</span>
                         </a>
                     </li>
                     <li class="sub-menu">
-                        <a href="javascript:;" >
+                        <a id="datos">
                             <span>Mis datos</span>
                         </a>
                         <ul class="sub">
-                            <li><a href="{{ url('lote') }}">Lotes</a></li>
-                            <li><a href="{{ url('siembra') }}">Siembras</a></li>
-                            <li><a href="{{ url('cosecha') }}">Cosechas</a></li>
+                            <li id="lote"><a href="{{ url('lote') }}">Lotes</a></li>
+                            <li id="siembra"><a href="{{ url('siembra') }}">Siembras</a></li>
+                            <li id="cosecha"><a href="{{ url('cosecha') }}">Cosechas</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#">
-                            <span>RNA</span>
-                        </a>
-                    </li>
+                    <li><a id="rna" href="#">RNA</a></li>
                 </ul>
             </div>
         </aside>
         
         {% block main %}
-            <div class="form-group">
-                <label class="col-sm-2 col-sm-2 control-label">Default</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
         {% endblock %}                
     </section>
-
-    <script src="bundles/back/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="bundles/back/js/jquery.scrollTo.min.js"></script> 
-    <script src="bundles/back/js/common-scripts.js"></script>
 {% endblock %}
 
-{#
 {% block javascripts %}
     {{ parent() }}
     {% javascripts    
         "bundles/back/js/jquery.dcjqaccordion.2.7.js"
         "bundles/back/js/jquery.scrollTo.min.js"
         "bundles/back/js/common-scripts.js"
+        "bundles/back/js/Menu.js"
     %}
     <script type="text/javascript" src="{{ asset_url }}" ></script>
     {% endjavascripts %}
 {% endblock %}
-#}

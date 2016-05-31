@@ -3,50 +3,56 @@
 {% block main %}
     <section id="main-content">
         <section class="wrapper">
-            <a href="{{url('siembra_new')}}" class="btn btn-danger">Nuevo</a>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <h4>Administrar Siembras</h4>
-                    <thead>
-                        <tr>
-                            <th><strong>Nombre</strong></th>
-                            <th><strong>Fecha</strong></th>
-                            <th><strong>Cultivo</strong></th>
-                            <th><strong>Lote</strong></th>
-                            <th><strong>Agua recibida</strong></th>
-                            <th><strong>Fertilizado</strong></th>
-                            <th><strong>Fumigado</strong></th>
-                            <th><strong>Arado</strong></th>
-                            <th><strong>Costo</strong></th>
-                            <th><strong>Descripción</strong></th>
-                            <th class="col-sm-1"><strong>Acciones</strong></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if siembras %}
-                            {% for siembra in siembras %}
-                                <tr>
-                                    <td>{{siembra.nombre}}</td>
-                                    <td>{{siembra.fecha|date('d-m-Y')}}</td>
-                                    <td>{{siembra.cultivo}}</td>
-                                    <td>{{siembra.lote}}</td>
-                                    <td>{{siembra.aguaRecibida}}</td>
-                                    <td>{{siembra.fertilizado ? "Si" : "No"}}</td>
-                                    <td>{{siembra.fumigado ? "Si" : "No"}}</td>
-                                    <td>{{siembra.arado ? "Si" : "No"}}</td>
-                                    <td>{{siembra.costo}}</td>
-                                    <td>{{siembra.descripcion}}</td>
-                                    <td>
-                                        <a href="{{url('siembra_edit', { 'id': siembra.id })}}"><i class="fa fa-pencil"></i></a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% else %}
-                        <hr>
-                        No se encontraron resultados
-                    {% endif %}
-                    </tbody>
-                </table>
+            <h3><i class="fa fa-angle-right"></i> Administrar Siembras</h3>
+            <div class="row mt">
+                <div class="col-lg-12">
+                    <div class="form-panel">
+                        <a href="{{url('siembra_new')}}" class="btn btn-danger">Nuevo</a>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th><strong>Nombre</strong></th>
+                                        <th><strong>Fecha</strong></th>
+                                        <th><strong>Cultivo</strong></th>
+                                        <th><strong>Lote</strong></th>
+                                        <th><strong>Agua recibida</strong></th>
+                                        <th><strong>Fertilizado</strong></th>
+                                        <th><strong>Fumigado</strong></th>
+                                        <th><strong>Arado</strong></th>
+                                        <th><strong>Costo</strong></th>
+                                        <th><strong>Descripción</strong></th>
+                                        <th class="col-sm-1"><strong>Acciones</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if siembras %}
+                                        {% for siembra in siembras %}
+                                            <tr>
+                                                <td>{{siembra.nombre}}</td>
+                                                <td>{{siembra.fecha|date('d-m-Y')}}</td>
+                                                <td>{{siembra.cultivo}}</td>
+                                                <td>{{siembra.lote}}</td>
+                                                <td>{{siembra.aguaRecibida}}</td>
+                                                <td>{{siembra.fertilizado ? "Si" : "No"}}</td>
+                                                <td>{{siembra.fumigado ? "Si" : "No"}}</td>
+                                                <td>{{siembra.arado ? "Si" : "No"}}</td>
+                                                <td>{{siembra.costo}}</td>
+                                                <td>{{siembra.descripcion}}</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-xs" href="{{url('siembra_edit', { 'id': siembra.id })}}"><i class="fa fa-pencil"></i></a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                    <hr>
+                                    No se encontraron resultados
+                                {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </section>

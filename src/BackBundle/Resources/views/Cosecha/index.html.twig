@@ -3,40 +3,46 @@
 {% block main %}
     <section id="main-content">
         <section class="wrapper">
-            <a href="{{url('cosecha_new')}}" class="btn btn-danger">Nuevo</a>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <h4>Administrar Cosechas</h4>
-                    <thead>
-                        <tr>
-                            <th><strong>Siembra</strong></th>
-                            <th><strong>Fecha</strong></th>
-                            <th><strong>Rinde</strong></th>
-                            <th><strong>Beneficio</strong></th>
-                            <th><strong>Descripcion</strong></th>
-                            <th class="col-sm-1"><strong>Acciones</strong></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if cosechas %}
-                            {% for cosecha in cosechas %}
-                                <tr>
-                                    <td>{{cosecha.siembra}}</td>
-                                    <td>{{cosecha.fecha|date('d-m-Y')}}</td>
-                                    <td>{{cosecha.rinde}}</td>
-                                    <td>{{cosecha.beneficio}}</td>
-                                    <td>{{cosecha.descripcion}}</td>
-                                    <td>
-                                        <a href="{{url('cosecha_edit', { 'id': cosecha.id })}}"><i class="fa fa-pencil"></i></a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% else %}
-                        <hr>
-                        No se encontraron resultados
-                    {% endif %}
-                    </tbody>
-                </table>
+            <h3><i class="fa fa-angle-right"></i> Administrar Cosechas</h3>
+            <div class="row mt">
+                <div class="col-lg-12">
+                    <div class="form-panel">
+                        <a href="{{url('cosecha_new')}}" class="btn btn-danger">Nuevo</a>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th><strong>Siembra</strong></th>
+                                        <th><strong>Fecha</strong></th>
+                                        <th><strong>Rinde</strong></th>
+                                        <th><strong>Beneficio</strong></th>
+                                        <th><strong>Descripcion</strong></th>
+                                        <th class="col-sm-1"><strong>Acciones</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if cosechas %}
+                                        {% for cosecha in cosechas %}
+                                            <tr>
+                                                <td>{{cosecha.siembra}}</td>
+                                                <td>{{cosecha.fecha|date('d-m-Y')}}</td>
+                                                <td>{{cosecha.rinde}}</td>
+                                                <td>{{cosecha.beneficio}}</td>
+                                                <td>{{cosecha.descripcion}}</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-xs" href="{{url('cosecha_edit', { 'id': cosecha.id })}}"><i class="fa fa-pencil"></i></a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                    <hr>
+                                    No se encontraron resultados
+                                {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </section>

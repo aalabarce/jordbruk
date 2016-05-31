@@ -3,38 +3,44 @@
 {% block main %}
     <section id="main-content">
         <section class="wrapper">
-            <a href="{{url('lote_new')}}" class="btn btn-danger">Nuevo</a>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <h4>Administrar Lotes</h4>
-                    <thead>
-                        <tr>
-                            <th><strong>Nombre</strong></th>
-                            <th><strong>Superficie</strong></th>
-                            <th><strong>Suelo</strong></th>
-                            <th><strong>Descripción</strong></th>
-                            <th class="col-sm-1"><strong>Acciones</strong></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if lotes %}
-                            {% for lote in lotes %}
-                                <tr>
-                                    <td>{{lote.nombre}}</td>
-                                    <td>{{lote.superficie}}</td>
-                                    <td>{{lote.suelo}}</td>
-                                    <td>{{lote.descripcion}}</td>
-                                    <td>
-                                        <a href="{{url('lote_edit', { 'id': lote.id })}}"><i class="fa fa-pencil"></i></a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% else %}
-                        <hr>
-                        No se encontraron resultados
-                    {% endif %}
-                    </tbody>
-                </table>
+            <h3><i class="fa fa-angle-right"></i> Administrar Lotes</h3>
+            <div class="row mt">
+                <div class="col-lg-12">
+                    <div class="form-panel">
+                        <a href="{{url('lote_new')}}" class="btn btn-danger">Nuevo</a>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th><strong>Nombre</strong></th>
+                                        <th><strong>Superficie</strong></th>
+                                        <th><strong>Suelo</strong></th>
+                                        <th><strong>Descripción</strong></th>
+                                        <th class="col-sm-1"><strong>Acciones</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if lotes %}
+                                        {% for lote in lotes %}
+                                            <tr>
+                                                <td>{{lote.nombre}}</td>
+                                                <td>{{lote.superficie}}</td>
+                                                <td>{{lote.suelo}}</td>
+                                                <td>{{lote.descripcion}}</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-xs" href="{{url('lote_edit', { 'id': lote.id })}}"><i class="fa fa-pencil"></i></a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                    <hr>
+                                    No se encontraron resultados
+                                {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </section>
