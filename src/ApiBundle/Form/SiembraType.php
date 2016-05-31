@@ -25,9 +25,9 @@ class SiembraType extends AbstractType {
             ->add('descripcion', null, array("description" => "Descripcion"))
         ;
         
-        $transformer = new DateTimeToStringTransformer();
+        $transformer = new DateTimeToStringTransformer(null, null, 'Y-m-d');
         $builder->add($builder->create('fecha', TextType::class)
-                ->addModelTransformer($transformer)
+            ->addModelTransformer($transformer)
         );
     }
 

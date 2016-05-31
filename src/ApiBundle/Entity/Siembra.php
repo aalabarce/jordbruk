@@ -30,7 +30,7 @@ class Siembra {
     protected $nombre;
     
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      * @Expose
      * @Groups({"Siembra"})
      */

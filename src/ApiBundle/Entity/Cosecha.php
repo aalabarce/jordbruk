@@ -23,7 +23,7 @@ class Cosecha {
     protected $id;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      * @Expose
      * @Groups({"Cosecha"})
      */
