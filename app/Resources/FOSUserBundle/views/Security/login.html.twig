@@ -5,43 +5,63 @@
             <title>Login</title>
             {% block stylesheets %}
                 {% stylesheets 
-                'bundles/back/css/bootstrap.min.css'
-                'bundles/back/css/animate.css'
-                'bundles/back/css/style.min.css'
-                'bundles/back/less/styles.less'
-            output='css/*.css'
+                    'bundles/back/css/bootstrap.min.css'
+                    'bundles/back/css/style.css'
+                    output='css/*.css'
                 %}
                 <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
                 {% endstylesheets %}
             {% endblock %}
         </head>  
         <body class="login">
-            <div class="middle-box text-center loginscreen animated fadeInDown">
-                <div id="login-page">
-                    <form class="m-t form-login thumbnail" action="{{ path("fos_user_security_check") }}" method="post">
-                        <h2 class="form-login-heading">INICIAR SESIÓN</h2>
-                        <div class="login-container">
+            <div id="login-page">
+                <div class="container">
+                    <form class="form-login" action="{{ path("fos_user_security_check") }}" method="post">
+                        <h2 class="form-login-heading">iniciar sesión</h2>
+                        <div class="login-wrap">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                            <div class="form-group form-group-login">
-                                <input type="text" class="form-control" value="{{ last_username }}" placeholder="Usuario" id="username" name="_username" required="required"/>
-                            </div>
-                            <div class="form-group form-group-login">
-                                <input type="password" class="form-control" placeholder="Contraseña"  name="_password" required="required"/>
-                            </div>
-                            <div class="form-group form-group-login pull-left">
-                                <label>
-                                  <input type="checkbox" id="recordame" name="_remember_me" value="on"/> Recordame
+                            <input type="text" class="form-control" value="{{ last_username }}" placeholder="Usuario" name="_username" required="required"/>
+                            <br>
+                            <input type="password" class="form-control" placeholder="Contraseña" name="_password" required="required"/>
+                            <div>
+                                <label class="checkbox">
+                                    <span class="pull-right">
+                                        <a>Olvidó su contraseña?</a>
+                                    </span>
+                                </label>
+                                <label class="pull-left">
+                                    <input type="checkbox" id="recordame" name="_remember_me" value="on"/> Recordame
                                 </label>
                             </div>
                             {% if error %}
-                                <div>Usuario o clave incorrecto</div>
+                                <div>Usuario o contraseña incorrecto</div>
                             {% endif %}
-                            <button type="submit" class="btn block full-width m-b ingresar"> Ingresar</button>
-                            <a href="{{ path('registrar') }}">Registrate</a>
+                            <br>
+                            <br>
+                            <button class="btn btn-success btn-block" type="submit"><i class="fa fa-lock"></i> INGRESAR</button>
+                            <hr>
+
+                            <div class="registration">
+                                Todavía no tenes una cuenta?<br/>
+                                <a href="{{ path('registrar') }}">Registrate</a>
+                            </div>
                         </div>
                     </form>
                 </div>
-            </div>        
+            </div>
         </body>
+        {% block javascripts %}
+            {% javascripts
+                'bundles/back/js/jquery-2.2.3.min.js'  
+                'bundles/back/js/bootstrap.min.js'      
+                'bundles/back/js/jquery.backstretch.min.js'  
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            <script>
+                $.backstretch("{{ asset('bundles/back/images/login.jpg') }}", {speed: 500});
+            </script>
+            {% endjavascripts %}
+        {% endblock %}
     </html>
 {% endblock fos_user_content %}

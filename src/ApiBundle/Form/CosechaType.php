@@ -21,9 +21,7 @@ class CosechaType extends AbstractType {
         ;
         
         $transformer = new DateTimeToStringTransformer(null, null, 'Y-m-d');
-        $builder->add($builder->create('fecha', TextType::class)
-            ->addModelTransformer($transformer)
-        );
+        $builder->add($builder->create('fecha', TextType::class)->addModelTransformer($transformer));
     }
 
     public function configureOptions(OptionsResolver $resolver) {

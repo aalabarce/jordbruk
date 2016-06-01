@@ -1,10 +1,53 @@
-{{ form_start(form) }}
+{% extends '::base.html.twig' %}
 
-    {{ form_row(form.nombre) }}
-    {{ form_row(form.apellido) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword) }}
+{% block body %}
+    <body class="login">
+        <div id="login-page">
+            <div class="container">
+                <form class="form-login" method="post">
+                    <h2 class="form-login-heading">registrate</h2>
+                    <div class="login-wrap">
+                        {{ form_start(form) }}
+                        
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            {{ form_widget(form.nombre, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
+                            <label>Apellido</label>
+                            {{ form_widget(form.apellido, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
+                            <label>Usuario</label>
+                            {{ form_widget(form.username, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            {{ form_widget(form.plainPassword, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
 
-    <button type="submit">Registrar</button>
-{{ form_end(form) }}
+                        <button class="btn btn-success btn-block" type="submit">Registrar</button>
+
+                        {{ form_end(form) }}                           
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts    
+        'bundles/back/js/jquery.backstretch.min.js'  
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    <script>
+        $.backstretch("{{ asset('bundles/back/images/login.jpg') }}", {speed: 500});
+    </script>
+    {% endjavascripts %}
+{% endblock %}
