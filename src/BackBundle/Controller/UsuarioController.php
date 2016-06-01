@@ -4,6 +4,7 @@ namespace BackBundle\Controller;
 
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ApiBundle\Entity\Usuario;
 use ApiBundle\Form\UsuarioType;
@@ -30,6 +31,10 @@ class UsuarioController extends BaseController
             $this->getDoctrine()->getManager()->persist($usuario);
             $this->getDoctrine()->getManager()->flush();
 
+            $token = new UsernamePasswordToken($usuario, null, 'main', $usuario->getRoles());
+            $this->get('security.token_storage')->setToken($token);
+            $this->get('session')->set('_security_main', serialize($token));
+        
             return $this->redirectToRoute('home');
         }
         
