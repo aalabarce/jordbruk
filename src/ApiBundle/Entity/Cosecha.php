@@ -12,6 +12,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 /**
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\CosechaRepository")
  * @ORM\Table(name="Cosecha")
+ * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("all")
  */
 class Cosecha extends BaseEntitySoftDelete {

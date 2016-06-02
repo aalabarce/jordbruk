@@ -12,6 +12,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 /**
  * @ORM\Entity
  * @ORM\Table(name="Lote")
+ * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("all")
  */
 class Lote extends BaseEntitySoftDelete {
