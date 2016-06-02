@@ -97,5 +97,19 @@ class SiembraController extends BaseController {
             'form' => $form->createView(),
         ));
     }
-    
+       
+    /**
+     * @Route("/delete/{id}", name="siembra_delete")
+     */
+    public function deleteAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $siembra = $em->getRepository('ApiBundle:Siembra')->find($id);
+        if (!$siembra)
+            throw $this->createNotFoundException('Unable to find entity');
+
+        $em->remove($siembra);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('siembra'));
+    }
 }

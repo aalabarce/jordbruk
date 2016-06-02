@@ -29,6 +29,7 @@
                                                 <td>{{lote.descripcion}}</td>
                                                 <td>
                                                     <a class="btn btn-primary btn-xs" href="{{url('lote_edit', { 'id': lote.id })}}"><i class="fa fa-pencil"></i></a>
+                                                    <a class="btn btn-danger btn-xs" href="{{url('lote_delete', { 'id': lote.id })}}"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
                                         {% endfor %}

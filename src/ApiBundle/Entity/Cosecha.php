@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\CosechaRepository")
  * @ORM\Table(name="Cosecha")
  * @ORM\HasLifecycleCallbacks()
+ * @GEDMO\SoftDeleteable(fieldName="deletedAt")
  * @ExclusionPolicy("all")
  */
 class Cosecha extends BaseEntitySoftDelete {

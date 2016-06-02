@@ -99,4 +99,19 @@ class CosechaController extends BaseController {
             'form' => $form->createView(),
         ));
     }
+    
+     /**
+     * @Route("/delete/{id}", name="cosecha_delete")
+     */
+    public function deleteAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $cosecha = $em->getRepository('ApiBundle:Cosecha')->find($id);
+        if (!$cosecha)
+            throw $this->createNotFoundException('Unable to find entity');
+
+        $em->remove($cosecha);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('cosecha'));
+    }
 }

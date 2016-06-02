@@ -41,6 +41,7 @@
                                                 <td>{{siembra.descripcion}}</td>
                                                 <td>
                                                     <a class="btn btn-primary btn-xs" href="{{url('siembra_edit', { 'id': siembra.id })}}"><i class="fa fa-pencil"></i></a>
+                                                    <a class="btn btn-danger btn-xs" href="{{url('siembra_delete', { 'id': siembra.id })}}"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
                                         {% endfor %}

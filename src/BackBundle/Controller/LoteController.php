@@ -99,4 +99,19 @@ class LoteController extends BaseController {
             'form' => $form->createView(),
         ));
     }
+    
+    /**
+     * @Route("/delete/{id}", name="lote_delete")
+     */
+    public function deleteAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $lote = $em->getRepository('ApiBundle:Lote')->find($id);
+        if (!$lote)
+            throw $this->createNotFoundException('Unable to find entity');
+
+        $em->remove($lote);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('lote'));
+    }
 }

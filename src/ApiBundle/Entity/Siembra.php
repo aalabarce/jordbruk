@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\SiembraRepository")
  * @ORM\Table(name="Siembra")
  * @ORM\HasLifecycleCallbacks()
+ * @GEDMO\SoftDeleteable(fieldName="deletedAt")
  * @ExclusionPolicy("all")
  */
 class Siembra extends BaseEntitySoftDelete {
