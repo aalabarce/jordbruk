@@ -15,14 +15,6 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
  * @ExclusionPolicy("all")
  */
 class Lote extends BaseEntitySoftDelete {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @Expose
-     * @Groups({"Lote", "Siembra"})
-     */
-    protected $id;
     
     /**
      * @ORM\Column(type="string")
@@ -62,15 +54,7 @@ class Lote extends BaseEntitySoftDelete {
         return $this->nombre;
     }
 
-
-    function getId() {
-        return $this->id;
-    }
-
-    function setId($id) {
-        $this->id = $id;
-    }
-    
+   
     function getNombre() {
         return $this->nombre;
     }

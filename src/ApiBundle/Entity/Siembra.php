@@ -15,14 +15,6 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
  * @ExclusionPolicy("all")
  */
 class Siembra extends BaseEntitySoftDelete {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @Expose
-     * @Groups({"Siembra", "Cosecha"})
-     */
-    protected $id;
     
     /**
      * @ORM\Column(type="string")
@@ -99,14 +91,6 @@ class Siembra extends BaseEntitySoftDelete {
         return $this->nombre;
     }
     
-    
-    function getId() {
-        return $this->id;
-    }
-
-    function setId($id) {
-        $this->id = $id;
-    }
     
     function getNombre() {
         return $this->nombre;

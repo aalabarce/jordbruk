@@ -15,14 +15,6 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
  * @ExclusionPolicy("all")
  */
 class Cosecha extends BaseEntitySoftDelete {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @Expose
-     * @Groups({"Cosecha"})
-     */
-    protected $id;
 
     /**
      * @ORM\Column(type="date")
@@ -58,15 +50,7 @@ class Cosecha extends BaseEntitySoftDelete {
      * @Groups({"Cosecha"})
      */
     protected $descripcion;
-    
 
-    function getId() {
-        return $this->id;
-    }
-
-    function setId($id) {
-        $this->id = $id;
-    }
     
     function getFecha() {
         return $this->fecha;
