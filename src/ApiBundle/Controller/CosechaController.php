@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\View;
 use ApiBundle\Entity\Cosecha;
 use ApiBundle\Form\CosechaType;
@@ -16,7 +17,7 @@ class CosechaController extends FOSRestController {
 
     /**
      * @ApiDoc(
-     *  description="Crear uns cosecha",
+     *  description="Crear una cosecha",
      *  resource=true,
      *  input={"class"="ApiBundle\Form\CosechaType"},
      *  output={"class"="ApiBundle\Entity\Cosecha", "groups"={"Cosecha"}}
@@ -68,7 +69,7 @@ class CosechaController extends FOSRestController {
      *  description="Eliminar una cosecha",
      *  resource=true
      * )
-     * @Post("/delete/{id}", name="api_cosecha_delete")
+     * @Delete("/{id}", name="api_cosecha_delete")
      */
     public function deleteAction($id) {
         $em = $this->getDoctrine()->getManager();

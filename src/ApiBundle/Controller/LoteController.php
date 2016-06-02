@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\View;
 use ApiBundle\Entity\Lote;
 use ApiBundle\Form\LoteType;
@@ -70,7 +71,7 @@ class LoteController extends FOSRestController {
      *  description="Eliminar un lote",
      *  resource=true
      * )
-     * @Post("/delete/{id}", name="api_lote_delete")
+     * @Delete("/{id}", name="api_lote_delete")
      */
     public function deleteAction($id) {
         $em = $this->getDoctrine()->getManager();

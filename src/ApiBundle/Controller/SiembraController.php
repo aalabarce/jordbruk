@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\View;
 use ApiBundle\Entity\Siembra;
 use ApiBundle\Form\SiembraType;
@@ -68,7 +69,7 @@ class SiembraController extends FOSRestController {
      *  description="Eliminar una siembra",
      *  resource=true
      * )
-     * @Post("/delete/{id}", name="api_siembra_delete")
+     * @Delete("/{id}", name="api_siembra_delete")
      */
     public function deleteAction($id) {
         $em = $this->getDoctrine()->getManager();
