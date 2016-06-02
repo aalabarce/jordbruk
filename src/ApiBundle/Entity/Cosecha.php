@@ -3,6 +3,8 @@
 namespace ApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as GEDMO;
+use Resources\Entity\BaseEntitySoftDelete;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -12,7 +14,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
  * @ORM\Table(name="Cosecha")
  * @ExclusionPolicy("all")
  */
-class Cosecha {
+class Cosecha extends BaseEntitySoftDelete {
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

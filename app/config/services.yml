@@ -1,2 +1,10 @@
 services:
-    
+    fos_user.doctrine_registry:
+        alias: doctrine
+        
+    gedmo.listener.softdeleteable:
+        class: Gedmo\SoftDeleteable\SoftDeleteableListener
+        tags:
+        - { name: doctrine.event_subscriber, connection: default }
+        calls:
+        - [ setAnnotationReader, [ '@annotation_reader' ] ]

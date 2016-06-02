@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="RefreshToken")
  */
 class RefreshToken extends BaseRefreshToken
 {
