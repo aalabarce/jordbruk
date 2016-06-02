@@ -67,6 +67,22 @@ class LoteController extends FOSRestController {
 
     /**
      * @ApiDoc(
+     *  description="Eliminar un lote",
+     *  resource=true
+     * )
+     * @Post("/delete/{id}", name="api_lote_delete")
+     */
+    public function deleteAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $lote = $em->getRepository('ApiBundle:Lote')->find($id);
+        $em->remove($lote);
+        $em->flush();
+        
+        return "ok";
+    }
+    
+    /**
+     * @ApiDoc(
      *  description="Obtener lotes",
      *  resource=true,
      *  output={"class"="ApiBundle\Entity\Lote", "groups"={"Lote"}}

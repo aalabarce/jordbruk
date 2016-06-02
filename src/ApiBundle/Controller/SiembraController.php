@@ -16,7 +16,7 @@ class SiembraController extends FOSRestController {
 
     /**
      * @ApiDoc(
-     *  description="Crear un siembra",
+     *  description="Crear una siembra",
      *  resource=true,
      *  input={"class"="ApiBundle\Form\SiembraType"},
      *  output={"class"="ApiBundle\Entity\Siembra", "groups"={"Siembra"}}
@@ -41,7 +41,7 @@ class SiembraController extends FOSRestController {
 
     /**
      * @ApiDoc(
-     *  description="Editar un siembra",
+     *  description="Editar una siembra",
      *  resource=true,
      *  input={"class"="ApiBundle\Form\SiembraType"},
      *  output={"class"="ApiBundle\Entity\Siembra", "groups"={"Siembra"}}
@@ -50,7 +50,7 @@ class SiembraController extends FOSRestController {
      * @Post("/editar/{id}", name="api_siembra_edit")
      */
     public function editAction(Request $request, $id) {
-        $siembra= $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->find($id);
+        $siembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->find($id);
         $form = $this->createForm(SiembraType::class, $siembra);
         $form->submit($request->request->all());
         
@@ -61,6 +61,22 @@ class SiembraController extends FOSRestController {
         } else {
             return $form;
         }
+    }
+
+    /**
+     * @ApiDoc(
+     *  description="Eliminar una siembra",
+     *  resource=true
+     * )
+     * @Post("/delete/{id}", name="api_siembra_delete")
+     */
+    public function deleteAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $siembra = $em->getRepository('ApiBundle:Siembra')->find($id);
+        $em->remove($siembra);
+        $em->flush();
+        
+        return "ok";
     }
 
     /**

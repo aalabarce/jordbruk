@@ -16,7 +16,7 @@ class CosechaController extends FOSRestController {
 
     /**
      * @ApiDoc(
-     *  description="Crear un cosecha",
+     *  description="Crear uns cosecha",
      *  resource=true,
      *  input={"class"="ApiBundle\Form\CosechaType"},
      *  output={"class"="ApiBundle\Entity\Cosecha", "groups"={"Cosecha"}}
@@ -41,7 +41,7 @@ class CosechaController extends FOSRestController {
 
     /**
      * @ApiDoc(
-     *  description="Editar un cosecha",
+     *  description="Editar una cosecha",
      *  resource=true,
      *  input={"class"="ApiBundle\Form\CosechaType"},
      *  output={"class"="ApiBundle\Entity\Cosecha", "groups"={"Cosecha"}}
@@ -62,7 +62,23 @@ class CosechaController extends FOSRestController {
             return $form;
         }
     }
-
+    
+    /**
+     * @ApiDoc(
+     *  description="Eliminar una cosecha",
+     *  resource=true
+     * )
+     * @Post("/delete/{id}", name="api_cosecha_delete")
+     */
+    public function deleteAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $cosecha = $em->getRepository('ApiBundle:Cosecha')->find($id);
+        $em->remove($cosecha);
+        $em->flush();
+        
+        return "ok";
+    }
+    
     /**
      * @ApiDoc(
      *  description="Obtener cosechas",
