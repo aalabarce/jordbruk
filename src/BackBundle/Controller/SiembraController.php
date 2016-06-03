@@ -17,7 +17,7 @@ class SiembraController extends BaseController {
      * @Route("/", name="siembra")
      */
     public function indexAction() {
-        $usuario = $this->container->get('security.token_storage')->getToken()->getUser();
+        $usuario = $this->getUser();
         $siembras = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getPorUsuario($usuario->getId());
         
         return $this->render('BackBundle:Siembra:index.html.twig', array(

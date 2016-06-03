@@ -90,7 +90,6 @@ class SiembraController extends FOSRestController {
      * @Get("", name="api_siembra_obtener")
      */
     public function obtenerAction() {
-        $usuario = $this->container->get('security.token_storage')->getToken()->getUser();
-        return $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getPorUsuario($usuario);
+        return $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getPorUsuario($this->getUser());
     }
 }

@@ -2,3 +2,15 @@ services:
     fos_oauth_server.controller.token:
         class: ApiBundle\Controller\TokenController
         arguments: ["@fos_oauth_server.server", "@doctrine.orm.entity_manager"]
+        
+    form.type.siembra_type:
+        class: ApiBundle\Form\SiembraType
+        tags:
+          - {name: form.type, alias: siembra_type}
+        arguments: ["@service_container"]
+        
+    form.type.cosecha_type:
+        class: ApiBundle\Form\CosechaType
+        tags:
+          - {name: form.type, alias: cosecha_type}
+        arguments: ["@service_container"]

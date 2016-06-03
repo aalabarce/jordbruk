@@ -17,7 +17,7 @@ class LoteController extends BaseController {
      * @Route("/", name="lote")
      */
     public function indexAction() {
-        $usuario = $this->container->get('security.token_storage')->getToken()->getUser();
+        $usuario = $this->getUser();
         $lotes = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->findBy(array('usuario' => $usuario->getId()));
         
         return $this->render('BackBundle:Lote:index.html.twig', array(

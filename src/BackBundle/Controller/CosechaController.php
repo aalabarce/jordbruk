@@ -17,7 +17,7 @@ class CosechaController extends BaseController {
      * @Route("/", name="cosecha")
      */
     public function indexAction() {
-        $usuario = $this->container->get('security.token_storage')->getToken()->getUser();
+        $usuario = $this->getUser();
         $cosechas = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getPorUsuario($usuario->getId());
         
         return $this->render('BackBundle:Cosecha:index.html.twig', array(

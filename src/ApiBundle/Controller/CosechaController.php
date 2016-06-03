@@ -90,7 +90,6 @@ class CosechaController extends FOSRestController {
      * @Get("", name="api_cosecha_obtener")
      */
     public function obtenerAction() {
-        $usuario = $this->container->get('security.token_storage')->getToken()->getUser();
-        return $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getPorUsuario($usuario);
+        return $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getPorUsuario($this->getUser());
     }
 }

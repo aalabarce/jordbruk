@@ -40,7 +40,7 @@ class Siembra extends BaseEntitySoftDelete {
     protected $cultivo;
     
     /**
-     * @ORM\OneToOne(targetEntity="ApiBundle\Entity\Lote")
+     * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Lote")
      * @Expose
      * @Groups({"Siembra"})
      */

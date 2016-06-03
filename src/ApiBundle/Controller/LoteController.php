@@ -31,7 +31,7 @@ class LoteController extends FOSRestController {
         $form->submit($request->request->all());
         
         if ($form->isValid()) {
-            $usuario = $this->container->get('security.token_storage')->getToken()->getUser();
+            $usuario = $this->getUser();
             $lote->setUsuario($usuario);
             $this->getDoctrine()->getManager()->persist($lote);
             $this->getDoctrine()->getManager()->flush();
@@ -92,7 +92,6 @@ class LoteController extends FOSRestController {
      * @Get("", name="api_lote_obtener")
      */
     public function obtenerAction() {
-        $usuario = $this->container->get('security.token_storage')->getToken()->getUser();
-        return $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->findBy(array("usuario" => $usuario->getId()));
+        return $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->findBy(array("usuario" => $this->getUser()->getId()));
     }
 }
