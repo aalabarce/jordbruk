@@ -22,7 +22,7 @@
                                 </thead>
                                 <tbody>
                                     {% if cosechas %}
-                                        {% for cosecha in cosechas %}
+                                        {% for cosecha in cosechas|reverse %}
                                             <tr>
                                                 <td>{{cosecha.siembra}}</td>
                                                 <td>{{cosecha.fecha|date('d-m-Y')}}</td>

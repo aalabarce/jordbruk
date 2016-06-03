@@ -21,7 +21,7 @@
                                 </thead>
                                 <tbody>
                                     {% if lotes %}
-                                        {% for lote in lotes %}
+                                        {% for lote in lotes|reverse %}
                                             <tr>
                                                 <td>{{lote.nombre}}</td>
                                                 <td>{{lote.superficie}}</td>

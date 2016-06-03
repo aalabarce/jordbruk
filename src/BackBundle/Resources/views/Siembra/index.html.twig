@@ -27,7 +27,7 @@
                                 </thead>
                                 <tbody>
                                     {% if siembras %}
-                                        {% for siembra in siembras %}
+                                        {% for siembra in siembras|reverse %}
                                             <tr>
                                                 <td>{{siembra.nombre}}</td>
                                                 <td>{{siembra.fecha|date('d-m-Y')}}</td>
