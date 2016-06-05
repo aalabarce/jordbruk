@@ -9,11 +9,12 @@
                     <div class="form-panel">
                         <a href="{{url('cosecha_new')}}" class="btn btn-danger">Nuevo</a>
                         <form id="siembra_busqueda" action="{{url('cosecha')}}">
-                            <input class="input-xs form-control" value="{{busqueda}}" name="busqueda">
+                            <input class="filtro form-control" value="{{busqueda}}" name="busqueda">
                             <label>Desde:</label>
-                            <input class="form-control fecha" value="{{fechaDesde}}" name="fechaDesde">
+                            <input disabled="disabled" class="filtro form-control fecha" value="{{fechaDesde}}" name="fechaDesde">
                             <label>Hasta:</label>
-                            <input class="form-control fecha" value="{{fechaHasta}}" name="fechaHasta">
+                            <input class="filtro form-control fecha" value="{{fechaHasta}}" name="fechaHasta">
+                            <a id="limpiar" class="btn btn-default pull-right">Limpiar</a>
                             <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-search"></i> Buscar</button>
                         </form>
                         <div class="table-responsive">
