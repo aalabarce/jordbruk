@@ -91,7 +91,8 @@ class LoteController extends FOSRestController {
      * @View(serializerGroups={"Lote"})
      * @Get("", name="api_lote_obtener")
      */
-    public function obtenerAction() {
-        return $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->findBy(array("usuario" => $this->getUser()->getId()));
+    public function obtenerAction(Request $request) {
+        $busqueda = $request->get("busqueda");
+        return $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->getBuscados($this->getUser()->getId(), $busqueda);
     }
 }

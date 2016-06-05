@@ -89,7 +89,13 @@ class CosechaController extends FOSRestController {
      * @View(serializerGroups={"Cosecha"})
      * @Get("", name="api_cosecha_obtener")
      */
-    public function obtenerAction() {
-        return $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getBuscados($this->getUser());
+    public function obtenerAction(Request $request) {
+        $usuario = $this->getUser();
+        $busqueda = $request->get("busqueda");
+        $fechaDesde = $request->get("fechaDesde");
+        $fechaHasta = $request->get("fechaHasta");
+        $cosechas = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getBuscados($usuario->getId(), $busqueda, $fechaDesde, $fechaHasta);
+        
+        return $cosechas;
     }
 }

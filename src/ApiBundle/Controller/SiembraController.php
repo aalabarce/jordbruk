@@ -89,7 +89,18 @@ class SiembraController extends FOSRestController {
      * @View(serializerGroups={"Siembra"})
      * @Get("", name="api_siembra_obtener")
      */
-    public function obtenerAction() {
-        return $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getBuscados($this->getUser());
+    public function obtenerAction(Request $request) {
+        $usuario = $this->getUser();
+        $busqueda = $request->get("busqueda");
+        $fechaDesde = $request->get("fechaDesde");
+        $fechaHasta = $request->get("fechaHasta");
+        $lote = $request->get("lote");
+        $fertilizado = $request->get("fertilizado");
+        $fumigado = $request->get("fumigado");
+        $arado = $request->get("arado");
+        
+        $siembras = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getBuscados($usuario->getId(), $busqueda, $fechaDesde, $fechaHasta, $fertilizado, $fumigado, $arado, $lote);
+        
+        return $siembras;
     }
 }

@@ -5,14 +5,21 @@ namespace Resources\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping\PrePersist;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
-
+/**
+ * @ExclusionPolicy("all")
+ */
 Abstract class BaseEntity {
 
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
+     * @Groups({"Lote", "Siembra", "Cosecha"})
      */
     protected $id;
 
