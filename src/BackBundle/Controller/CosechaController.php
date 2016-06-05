@@ -16,12 +16,18 @@ class CosechaController extends BaseController {
     /**
      * @Route("/", name="cosecha")
      */
-    public function indexAction() {
+    public function indexAction(Request $request) {
         $usuario = $this->getUser();
-        $cosechas = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getPorUsuario($usuario->getId());
+        $busqueda = $request->get("busqueda");
+        $fechaDesde = $request->get("fechaDesde");
+        $fechaHasta = $request->get("fechaHasta");
+        $cosechas = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getBuscados($usuario->getId(), $busqueda, $fechaDesde, $fechaHasta);
         
         return $this->render('BackBundle:Cosecha:index.html.twig', array(
             'cosechas' => $cosechas,
+            'busqueda' => $busqueda,
+            'fechaDesde' => $fechaDesde,
+            'fechaHasta' => $fechaHasta
         ));
     }
 

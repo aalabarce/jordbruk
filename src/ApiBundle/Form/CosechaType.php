@@ -21,6 +21,7 @@ class CosechaType extends AbstractType {
     
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $usuario = $this->container->get('security.token_storage')->getToken()->getUser();
+        $entity = $builder->getData();
         
         $builder
             ->add('fecha', TextType::class, array("description" => "Fecha de cosecha", 'constraints' => new NotBlank()))
@@ -29,11 +30,25 @@ class CosechaType extends AbstractType {
                 "description" => "Siembra",
                 'constraints' => new NotBlank(),
                 'class' => 'ApiBundle:Siembra',
-                'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($usuario) {
-                    return $er->createQueryBuilder('s')
-                            ->innerJoin('s.lote', 'l')
-                            ->where('l.usuario = :usuario')
-                            ->setParameter("usuario", $usuario->getId());
+                'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($usuario, $entity) {
+                    $qb2 = $er->createQueryBuilder('s2')->select('s2.id')
+                        ->innerJoin('ApiBundle:Cosecha', 'c', 'WITH', 'c.siembra = s2.id');
+                
+                    if($entity->getId()) {                        
+                        $qb2->where("c.id != :cosecha");
+                    }
+                
+                    $qb = $er->createQueryBuilder('s');
+                        $qb->innerJoin('s.lote', 'l')
+                        ->where('l.usuario = :usuario')
+                        ->andWhere($qb->expr()->notIn('s.id', $qb2->getDQL()))                    
+                        ->setParameter("usuario", $usuario->getId());
+                    
+                    if($entity->getId()) {                        
+                        $qb->setParameter("cosecha", $entity->getId());
+                    }
+                    
+                    return $qb;
                 },
                 'choice_label' => 'nombre'))
             ->add('rinde', null, array("description" => "Rinde", 'constraints' => new NotBlank()))
@@ -41,7 +56,7 @@ class CosechaType extends AbstractType {
             ->add('descripcion', null, array("description" => "Descripcion"))
         ;
         
-        $transformer = new DateTimeToStringTransformer(null, null, 'Y-m-d');
+        $transformer = new DateTimeToStringTransformer(null, null, 'd-m-Y');
         $builder->add($builder->create('fecha', TextType::class)->addModelTransformer($transformer));
     }
 

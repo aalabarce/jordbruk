@@ -16,12 +16,35 @@ class SiembraController extends BaseController {
     /**
      * @Route("/", name="siembra")
      */
-    public function indexAction() {
+    public function indexAction(Request $request) {
         $usuario = $this->getUser();
-        $siembras = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getPorUsuario($usuario->getId());
+        $busqueda = $request->get("busqueda");
+        $fechaDesde = $request->get("fechaDesde");
+        $fechaHasta = $request->get("fechaHasta");
+        $lote = $request->get("loteId");
+        if($request->get("acciones")) {
+            $fumigado = in_array("fumigado", $request->get("acciones")) ? true : false;
+            $fertilizado = in_array("fertilizado", $request->get("acciones")) ? true : false;
+            $arado = in_array("arado", $request->get("acciones")) ? true : false;
+        } else {
+            $fumigado = null;
+            $fertilizado = null;
+            $arado = null;
+        }
+        
+        $siembras = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getBuscados($usuario->getId(), $busqueda, $fechaDesde, $fechaHasta, $fertilizado, $fumigado, $arado, $lote);
+        $lotes = $usuario->getLotes();
         
         return $this->render('BackBundle:Siembra:index.html.twig', array(
             'siembras' => $siembras,
+            'busqueda' => $busqueda,
+            'fechaDesde' => $fechaDesde,
+            'fechaHasta' => $fechaHasta,
+            'fumigado' => $fumigado,
+            'fertilizado' => $fertilizado,
+            'arado' => $arado,
+            'lotes' => $lotes,
+            'loteId' => $lote
         ));
     }
 

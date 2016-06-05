@@ -7,6 +7,7 @@
         {% block stylesheets %}
             {% stylesheets 
                 'bundles/back/css/bootstrap.min.css'
+                'bundles/back/css/bootstrap-datepicker.min.css'
                 'bundles/back/css/style.css'
                 output='css/*.css'
             %}
@@ -22,7 +23,10 @@
     {% block javascripts %}
         {% javascripts
             'bundles/back/js/jquery-2.2.3.min.js'  
-            'bundles/back/js/bootstrap.min.js'      
+            'bundles/back/js/bootstrap.min.js'
+            'bundles/back/js/bootstrap-datepicker.min.js'
+            'bundles/back/js/bootstrap-datepicker.es.min.js'
+            'bundles/back/js/Datepicker.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>

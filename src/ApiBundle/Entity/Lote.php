@@ -10,7 +10,7 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ApiBundle\Repository\LoteRepository")
  * @ORM\Table(name="Lote")
  * @ORM\HasLifecycleCallbacks()
  * @GEDMO\SoftDeleteable(fieldName="deletedAt")

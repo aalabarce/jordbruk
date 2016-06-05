@@ -6,8 +6,12 @@
             <h3><i class="fa fa-angle-right"></i> Administrar Lotes</h3>
             <div class="row mt">
                 <div class="col-lg-12">
+                    <a href="{{url('lote_new')}}" class="btn btn-danger pull-right">Nuevo</a>
+                    <form id="lote_busqueda" action="{{url('lote')}}">
+                        <input class="input-xs form-control" value="{{busqueda}}" name="busqueda">
+                        <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-search"></i> Buscar</button>
+                    </form>
                     <div class="form-panel">
-                        <a href="{{url('lote_new')}}" class="btn btn-danger">Nuevo</a>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>

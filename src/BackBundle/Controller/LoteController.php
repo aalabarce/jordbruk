@@ -16,15 +16,17 @@ class LoteController extends BaseController {
     /**
      * @Route("/", name="lote")
      */
-    public function indexAction() {
+    public function indexAction(Request $request) {
         $usuario = $this->getUser();
-        $lotes = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->findBy(array('usuario' => $usuario->getId()));
+        $busqueda = $request->get("busqueda");
+        $lotes = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->getBuscados($usuario->getId(), $busqueda);
         
         return $this->render('BackBundle:Lote:index.html.twig', array(
             'lotes' => $lotes,
+            'busqueda' => $busqueda
         ));
     }
-
+    
     /**
      * @Route("/new", name="lote_new")
      */
