@@ -6,13 +6,24 @@
             <h3><i class="fa fa-angle-right"></i> Administrar Lotes</h3>
             <div class="row mt">
                 <div class="col-lg-12">
-                    <a href="{{url('lote_new')}}" class="btn btn-danger pull-right">Nuevo</a>
-                    <form id="lote_busqueda" action="{{url('lote')}}">
-                        <input class="filtro form-control" value="{{busqueda}}" name="busqueda">
-                        <a id="limpiar" class="btn btn-default pull-right">Limpiar</a>
-                        <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-search"></i> Buscar</button>
-                    </form>
                     <div class="form-panel">
+                        <div class="row">
+                            <div class="form-group col-lg-12">
+                                <a href="{{url('lote_new')}}" class="btn btn-danger pull-right">Nuevo</a>
+                            </div>
+                        </div>
+                        <form id="lote_busqueda" action="{{url('lote')}}">
+                            <div class="row">
+                                <div class="form-group col-lg-3">
+                                    <label>Buscar:</label>
+                                    <input class="filtro form-control" value="{{busqueda}}" name="busqueda">
+                                </div>
+                                <div class="form-group col-lg-9" style="margin-top: 22px;">
+                                    <button type="submit" class="btn btn-danger"><i class="fa fa-search"></i> Buscar</button>
+                                    <a id="limpiar" style="margin-left: 10px;" class="btn btn-default">Limpiar</a>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
