@@ -47,6 +47,20 @@ class Usuario extends BaseUser {
      */
     protected $siembras;
     
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Expose
+     * @Groups({"Usuario"})
+     */
+    protected $ciudad;
+    
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Expose
+     * @Groups({"Usuario"})
+     */
+    protected $provincia;
+    
     
     public function __construct() {
         parent::__construct();
@@ -93,4 +107,22 @@ class Usuario extends BaseUser {
     function setSiembras($siembras) {
         $this->siembras = $siembras;
     }
+    
+    function getCiudad() {
+        return $this->ciudad;
+    }
+
+    function setCiudad($ciudad) {
+        $this->ciudad = $ciudad;
+    }
+
+    function getProvincia() {
+        return $this->provincia;
+    }
+
+    function setProvincia($provincia) {
+        $this->provincia = $provincia;
+    }
+
+
 }
