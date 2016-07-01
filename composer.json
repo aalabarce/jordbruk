@@ -33,6 +33,7 @@
         "jms/serializer-bundle": "^1.1",
         "friendsofsymfony/rest-bundle": "^1.7",
         "friendsofsymfony/oauth-server-bundle": "dev-master",
+        "gedmo/doctrine-extensions": "dev-master",
         "nelmio/api-doc-bundle": "^2.12"
     },
     "require-dev": {
