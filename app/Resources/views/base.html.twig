@@ -3,7 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Jordbruk{% endblock %}</title>
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% set image = 'bundles/back/images/planta.png' %}
+        <link rel="icon"  href="{{ asset(image) }}" />
         {% block stylesheets %}
             {% stylesheets 
                 'bundles/back/css/bootstrap.min.css'
