@@ -32,6 +32,8 @@
                                         <th><strong>Superficie</strong></th>
                                         <th><strong>Suelo</strong></th>
                                         <th><strong>Descripción</strong></th>
+                                        <th><strong>Provincia</strong></th>
+                                        <th><strong>Localidad</strong></th>
                                         <th class="col-sm-1"><strong>Acciones</strong></th>
                                     </tr>
                                 </thead>
@@ -43,6 +45,8 @@
                                                 <td>{{lote.superficie}}</td>
                                                 <td>{{lote.suelo}}</td>
                                                 <td>{{lote.descripcion}}</td>
+                                                <td>{{lote.provincia.nombre}}</td>
+                                                <td>{{lote.localidad.nombre}}</td>
                                                 <td>
                                                     <a class="btn btn-primary btn-xs" href="{{url('lote_edit', { 'id': lote.id })}}"><i class="fa fa-pencil"></i></a>
                                                     <a class="btn btn-danger btn-xs" href="{{url('lote_delete', { 'id': lote.id })}}"><i class="fa fa-trash-o"></i></a>

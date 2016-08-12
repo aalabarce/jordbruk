@@ -15,6 +15,8 @@ class LoteType extends AbstractType {
             ->add('superficie', null, array("description" => "Superficie", 'constraints' => new NotBlank()))
             ->add('suelo', null, array("description" => "Suelo", 'constraints' => new NotBlank()))
             ->add('descripcion', null, array("description" => "Descripcion"))
+            ->add('localidad', null, array("description" => "Localidad del lote", 'constraints' => new NotBlank()))
+            ->add('provincia', null, array("description" => "Provincia del lote", 'constraints' => new NotBlank()))
         ;
     }
 

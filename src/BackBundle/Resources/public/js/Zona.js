@@ -4,6 +4,8 @@ Zona = function () {
 
 Zona.prototype.init = function () {
     Zona.vaciarLocalidades();
+    var provincia = $(".provincia").val();
+    var localidad = $(".localidad").val();
     $(".provincia option:first").text("Seleccione una provincia");
     this.initCargarLocalidades();
 };
