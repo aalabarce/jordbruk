@@ -50,6 +50,20 @@ class Lote extends BaseEntitySoftDelete {
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Usuario", inversedBy="lotes")
      */
     protected $usuario;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Provincia")
+     * @Expose
+     * @Groups({"Lote"})
+     */
+    protected $provincia;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Localidad")
+     * @Expose
+     * @Groups({"Lote"})
+     */
+    protected $localidad;
 
     
     public function __toString() {
@@ -95,5 +109,21 @@ class Lote extends BaseEntitySoftDelete {
 
     function setUsuario($usuario) {
         $this->usuario = $usuario;
+    }
+    
+    function getProvincia() {
+        return $this->provincia;
+    }
+
+    function setProvincia($provincia) {
+        $this->provincia = $provincia;
+    }
+
+    function getLocalidad() {
+        return $this->localidad;
+    }
+
+    function setLocalidad($localidad) {
+        $this->localidad = $localidad;
     }
 }

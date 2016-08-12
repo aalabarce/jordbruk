@@ -48,18 +48,18 @@ class Usuario extends BaseUser {
     protected $siembras;
     
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @Expose
-     * @Groups({"Usuario"})
-     */
-    protected $ciudad;
-    
-    /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Provincia")
      * @Expose
      * @Groups({"Usuario"})
      */
     protected $provincia;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Localidad")
+     * @Expose
+     * @Groups({"Usuario"})
+     */
+    protected $localidad;
     
     
     public function __construct() {
@@ -107,14 +107,6 @@ class Usuario extends BaseUser {
     function setSiembras($siembras) {
         $this->siembras = $siembras;
     }
-    
-    function getCiudad() {
-        return $this->ciudad;
-    }
-
-    function setCiudad($ciudad) {
-        $this->ciudad = $ciudad;
-    }
 
     function getProvincia() {
         return $this->provincia;
@@ -123,6 +115,12 @@ class Usuario extends BaseUser {
     function setProvincia($provincia) {
         $this->provincia = $provincia;
     }
+    
+    function getLocalidad() {
+        return $this->localidad;
+    }
 
-
+    function setLocalidad($localidad) {
+        $this->localidad = $localidad;
+    }
 }

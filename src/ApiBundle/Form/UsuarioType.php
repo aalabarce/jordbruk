@@ -16,7 +16,7 @@ class UsuarioType extends AbstractType {
             ->add('email', null, array("description" => "Email del usuario", 'constraints' => new NotBlank()))
             ->add('nombre', null, array("description" => "Nombre del usuario", 'constraints' => new NotBlank()))
             ->add('apellido', null, array("description" => "Apellido del usuario", 'constraints' => new NotBlank()))
-            ->add('ciudad', null, array("description" => "Ciudad del usuario", 'constraints' => new NotBlank()))
+            ->add('localidad', null, array("description" => "Localidad del usuario", 'constraints' => new NotBlank()))
             ->add('provincia', null, array("description" => "Provincia del usuario", 'constraints' => new NotBlank()))
         ;
     }
