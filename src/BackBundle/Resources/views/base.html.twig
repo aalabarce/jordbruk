@@ -13,44 +13,47 @@
                 </ul>
             </div>
         </header>
-
         <aside>
             <div id="sidebar"  class="nav-collapse ">
                 <ul class="sidebar-menu" id="nav-accordion">
                     {% set image = 'bundles/back/images/planta.png' %}
                     <p class="centered"><img src="{{ asset(image) }}" width="60"></p>
                     <h5 class="centered">{{ app.user.nombre }} {{ app.user.apellido }}</h5>
-                    <li class="mt">
+                    <li>
                         <a id="home" href="{{ url('home') }}">
                             <span>Principal</span>
                         </a>
                     </li>
-                    <li class="sub-menu">
-                        <a id="datos" href="#">
-                            <span>Mis datos</span>
+                    <li>
+                        <a id="lote" href="{{ url('lote') }}">
+                            <span>Lotes</span>
                         </a>
-                        <ul class="sub">
-                            <li id="lote"><a href="{{ url('lote') }}">Lotes</a></li>
-                            <li id="siembra"><a href="{{ url('siembra') }}">Siembras</a></li>
-                            <li id="cosecha"><a href="{{ url('cosecha') }}">Cosechas</a></li>
-                        </ul>
                     </li>
-                    <li><a id="rna" href="#">RNA</a></li>
+                    <li>
+                        <a id="siembra" href="{{ url('siembra') }}">
+                            <span>Siembras</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="cosecha" href="{{ url('cosecha') }}">
+                            <span>Cosechas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="rna" href="#">
+                            <span>RNA</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
-        </aside>
-        
-        {% block main %}
-        {% endblock %}                
+        </aside>        
+        {% block main %}{% endblock %}                
     </section>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts    
-        "bundles/back/js/jquery.dcjqaccordion.2.7.js"
-        "bundles/back/js/jquery.scrollTo.min.js"
-        "bundles/back/js/common-scripts.js"
+    {% javascripts
         "bundles/back/js/Menu.js"
     %}
     <script type="text/javascript" src="{{ asset_url }}" ></script>

@@ -7,6 +7,8 @@ use FOS\UserBundle\Model\User as BaseUser;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\ExclusionPolicy;
+use Symfony\Component\Validator\Validation; 
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -60,6 +62,11 @@ class Usuario extends BaseUser {
      * @Groups({"Usuario"})
      */
     protected $localidad;
+    
+    /**
+     * @Assert\Regex(pattern="/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{6,10}/")
+     */
+    protected $plainPassword;
     
     
     public function __construct() {
