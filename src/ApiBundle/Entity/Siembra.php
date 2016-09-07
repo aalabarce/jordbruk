@@ -33,7 +33,7 @@ class Siembra extends BaseEntitySoftDelete {
     protected $fecha;
     
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Cultivo")
      * @Expose
      * @Groups({"Siembra"})
      */
