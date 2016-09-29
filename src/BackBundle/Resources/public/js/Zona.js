@@ -46,8 +46,7 @@ Zona.cargarLocalidades = function (localidad) {
                 }
             }
         }
-    });
-    
+    });    
 };
 
 Zona.vaciarLocalidades = function () {
