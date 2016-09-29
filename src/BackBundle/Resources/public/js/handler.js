@@ -891,10 +891,7 @@ function findLotsFromSameRegion(requestedLot) {
 
 function filterCropsBySeason(crops, month) {
     return crops.filter(cropProfit => {
-    console.log(cropProfit.crop);
-        console.log(seasons);
         const cropData = find(seasons, cropSeason => cropSeason.crop === cropProfit.crop);
-        console.log(cropData);
         return cropData ? includes(cropData.months, month) : false;
     });
 }
@@ -917,6 +914,7 @@ function getBestOption(lotId, shouldRotate, month) {
         url: Routing.generate('get_lotes'),
         success: function (data) {
             window.lots = data;
+            console.log(data);
         }
     });
     $.ajax({
@@ -926,6 +924,7 @@ function getBestOption(lotId, shouldRotate, month) {
         url: Routing.generate('get_siembras'),
         success: function (data) {
             window.harvests  = data;
+            console.log(data);
         }
     });    
     
@@ -959,11 +958,19 @@ function getBestOption(lotId, shouldRotate, month) {
     const orderedCropProfits = _.sortBy(cropProfits, ['profit']).reverse();
 
     if (_.isEmpty(orderedCropProfits)) {
-        return {
-            crop: _.maxBy(filterCropsBySeason(prices, month), cropPrice => cropPrice.price).crop,
-            history: false,
-            message: 'El resultado se basa en los precios de los granos en el mercado y en el mes de siembra especificado.'
-        };
+        const result = _.maxBy(filterCropsBySeason(prices, month), cropPrice => cropPrice.price);
+        if(result) {
+            return {
+                crop: result.crop,
+                history: false,
+                message: 'El resultado se basa en los precios de los granos en el mercado y en el mes de siembra especificado.'
+            };
+        } else {
+            return {
+                history: false,
+                message: 'No hay resultado.'
+            };            
+        }
     } else {
         if (shouldRotate) {
             const result = head(applyRotation(filterCropsBySeason(orderedCropProfits, month), lotId));

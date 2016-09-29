@@ -4,32 +4,12 @@ RNA = function () {
 
 RNA.prototype.init = function() {
     this.initConsultarRed();
-//    
-//    $.ajax({
-//        type: 'GET',
-//        dataType: "JSON",
-//        url: Routing.generate('get_lotes'),
-//        success: function (data) {
-//            lots = data;
-//            console.log(data);
-//        }
-//    });
-//    
-//    $.ajax({
-//        type: 'GET',
-//        dataType: "JSON",
-//        url: Routing.generate('get_siembras'),
-//        success: function (data) {
-//            harvests = data;
-//            console.log(data);
-//        }
-//    });
 };
 
 RNA.prototype.initConsultarRed = function () {
     $('#consultar').click(function () {
-        $body = $("body");
-        $body.addClass("loading");
+        $("#consultar").addClass('disabled');
+        $("#loader").show();
         
         var lote = $('select[name=lote]').val();
         var rotacion = $('#rotacion:checkbox:checked').length > 0;
@@ -41,8 +21,9 @@ RNA.prototype.initConsultarRed = function () {
             return new Promise((resolve) => setTimeout(resolve, time));
         }
         sleep(10000).then(() => {
-            $body.removeClass("loading"); 
             $('#respuesta').text(respuesta.message);
+            $("#consultar").removeClass('disabled');
+            $("#loader").hide();
         });
     });
 };

@@ -72,6 +72,7 @@ class SiembraRepository extends EntityRepository {
             ->innerJoin("l.usuario","u")
             ->where($qb->expr()->eq("u.id", ":usuario"))
             ->setParameter('usuario', $usuario);
-        return $qb->getQuery()->getResult();
+        
+        return $qb->getQuery()->getArrayResult();
     }
 }
