@@ -33,7 +33,7 @@ class Lote extends BaseEntitySoftDelete {
     protected $superficie;
     
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Suelo")
      * @Expose
      * @Groups({"Lote"})
      */

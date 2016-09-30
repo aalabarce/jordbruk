@@ -15,13 +15,26 @@ RNA.prototype.initConsultarRed = function () {
         var rotacion = $('#rotacion:checkbox:checked').length > 0;
         var mes = $("#mes").val();
 
-        var respuesta = getBestOption(lote, rotacion, mes);
+        var datos = getBestOption(lote, rotacion, mes);
+        if(datos.crop) {
+            var respuesta = datos.crop;
+        } else {
+            var respuesta = datos.error;
+        }
+        if(datos.profit) {
+            var ganancia = "La ganancia seria: $" + datos.profit;
+        } else {
+            respuesta = datos.error;
+            var ganancia = "";
+        }
         
         function sleep (time) {
             return new Promise((resolve) => setTimeout(resolve, time));
         }
+        
         sleep(10000).then(() => {
-            $('#respuesta').text(respuesta.message);
+            $('#respuesta').text(respuesta);
+            $('#ganancia').text(ganancia);
             $("#consultar").removeClass('disabled');
             $("#loader").hide();
         });

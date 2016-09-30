@@ -14,7 +14,7 @@
                                 <div class="col-sm-3">
                                     <select name="lote" id="lote" class="form-control">
                                         {% for lote in lotes %}
-                                            <option value="{{lote.id}}">{{lote.nombre}}</option>
+                                            <option value="{{lote.id -2}}">{{lote.nombre}}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -47,6 +47,7 @@
                                 </div>
                             </div>
                             <p id="respuesta"></p>
+                            <p id="ganancia"></p>
                         </div>
                     </div>
                 </div>

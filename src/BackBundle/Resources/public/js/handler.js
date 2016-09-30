@@ -1,18 +1,3 @@
-//const find = require('lodash/find');
-//const head = require('lodash/head');
-//const map = require('lodash/map');
-//const meanBy = require('lodash/meanBy');
-//const includes = require('lodash/includes');
-//const isEmpty = require('lodash/isEmpty');
-//const maxBy = require('lodash/maxBy');
-//const sortBy = require('lodash/sortBy');
-//const groupBy = require('lodash/groupBy');
-
-// TODO replace with real DB data
-//const lots = require('../data/lots');
-//const harvests = require('../data/harvests');
-
-
 const prices = [
     { crop: 'Arroz',    price: 153 },
     { crop: 'Avena',    price: 100 },
@@ -891,8 +876,8 @@ function findLotsFromSameRegion(requestedLot) {
 
 function filterCropsBySeason(crops, month) {
     return crops.filter(cropProfit => {
-        const cropData = find(seasons, cropSeason => cropSeason.crop === cropProfit.crop);
-        return cropData ? includes(cropData.months, month) : false;
+        const cropData = _.find(seasons, cropSeason => cropSeason.crop === cropProfit.crop);
+        return cropData ? _.includes(cropData.months, month) : false;
     });
 }
 
@@ -902,11 +887,14 @@ function dateSort(harvest) {
 
 function applyRotation(cropProfits, lotId) {
     const plantedHarvests = harvests.filter(harvest => harvest.sowing.lot.id === lotId);
-    const orderedPlantedHarvests = sortBy(plantedHarvests, dateSort).reverse();
-    return cropProfits.filter(cropProfit => cropProfit.crop !== head(orderedPlantedHarvests).sowing.crop);
+    const orderedPlantedHarvests = _.sortBy(plantedHarvests, dateSort).reverse();
+    return cropProfits.filter(cropProfit => cropProfit.crop !== _.head(orderedPlantedHarvests).sowing.crop);
 }
 
 function getBestOption(lotId, shouldRotate, month) {
+    lotId = parseInt(lotId, 10);
+    month = parseInt(month, 10);
+
     $.ajax({
         type: 'GET',
         async: false,
@@ -923,7 +911,17 @@ function getBestOption(lotId, shouldRotate, month) {
         dataType: "JSON",
         url: Routing.generate('get_siembras'),
         success: function (data) {
-            window.harvests  = data;
+            window.sowings  = data;
+            console.log(data);
+        }
+    });    
+    $.ajax({
+        type: 'GET',
+        async: false,
+        dataType: "JSON",
+        url: Routing.generate('get_cosechas'),
+        success: function (data) {
+            window.cosechas  = data;
             console.log(data);
         }
     });    
@@ -931,9 +929,10 @@ function getBestOption(lotId, shouldRotate, month) {
     
 //    const lots = window.lots;
 //    const harvests = window.harvests;
+//    const cosechas = window.cosechas;
     
 
-    const requestedLot = find(lots, lot => lot.id === lotId);
+    const requestedLot = _.find(lots, lot => lot.id === lotId);
     const similarLotIds = findLotsFromSameRegion(requestedLot).map(lot => lot.id);
     const similarHarvests = harvests.filter(harvest => _.includes(similarLotIds, harvest.sowing.lot.id));
     const harvestsPerCrop = _.groupBy(similarHarvests, harvest => harvest.sowing.crop);
@@ -942,13 +941,13 @@ function getBestOption(lotId, shouldRotate, month) {
     const cropAverages = _.map(harvestsPerCrop, (harvests, crop) => {
         return {
             crop,
-            average: meanBy(harvests, harvest => harvest.average)
+            average: _.meanBy(harvests, harvest => harvest.average)
         };
     });
 
     // transform average in profit
     const cropProfits = cropAverages.map(cropAverage => {
-        const price = find(prices, price => price.crop === cropAverage.crop).price;
+        const price = _.find(prices, price => price.crop === cropAverage.crop).price;
         return {
             crop: cropAverage.crop,
             profit: cropAverage.average * requestedLot.surface * price / 1000
@@ -973,7 +972,7 @@ function getBestOption(lotId, shouldRotate, month) {
         }
     } else {
         if (shouldRotate) {
-            const result = head(applyRotation(filterCropsBySeason(orderedCropProfits, month), lotId));
+            const result = _.head(applyRotation(filterCropsBySeason(orderedCropProfits, month), lotId));
             if (result) {
                 return {
                     crop: result.crop,
@@ -982,7 +981,7 @@ function getBestOption(lotId, shouldRotate, month) {
                     message: 'El resultado se basa en el precio actual de los granos, los rindes registrados de la zona del lote y la superficie del campo.'
                 };
             } else {
-                const bestCrop = maxBy(filterCropsBySeason(prices, month), cropPrice => cropPrice.price);
+                const bestCrop = _.maxBy(filterCropsBySeason(prices, month), cropPrice => cropPrice.price);
                 return {
                     crop: bestCrop ? bestCrop.crop : undefined,
                     history: false,
