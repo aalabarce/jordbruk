@@ -902,36 +902,38 @@ function getBestOption(lotId, shouldRotate, month) {
         url: Routing.generate('get_lotes'),
         success: function (data) {
             window.lots = data;
-            console.log(data);
         }
     });
+//    const lots = window.lots;
+    
     $.ajax({
         type: 'GET',
         async: false,
         dataType: "JSON",
         url: Routing.generate('get_siembras'),
         success: function (data) {
-            window.sowings  = data;
-            console.log(data);
+            window.sowings = _.map(data, (sowing) => {
+                sowing.lot = lots.filter(lot => lot.id === sowing.lot)[0];
+                return sowing;
+            });
         }
     });    
+//    const sowings = window.sowings;
+    
     $.ajax({
         type: 'GET',
         async: false,
         dataType: "JSON",
         url: Routing.generate('get_cosechas'),
         success: function (data) {
-            window.cosechas  = data;
-            console.log(data);
+            window.harvests = _.map(data, (harvest) => {
+                harvest.sowing = sowings.filter(sowing => sowing.id === harvest.sowing)[0];
+                return harvest;
+            });
         }
     });    
-    
-    
-//    const lots = window.lots;
 //    const harvests = window.harvests;
-//    const cosechas = window.cosechas;
     
-
     const requestedLot = _.find(lots, lot => lot.id === lotId);
     const similarLotIds = findLotsFromSameRegion(requestedLot).map(lot => lot.id);
     const similarHarvests = harvests.filter(harvest => _.includes(similarLotIds, harvest.sowing.lot.id));

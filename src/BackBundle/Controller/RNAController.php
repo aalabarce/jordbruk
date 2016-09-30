@@ -17,11 +17,32 @@ class RNAController extends Controller {
     }
     
     /**
+     * @Route("/get_lotes", name="get_lotes", options={"expose"=true})
+     */
+    public function lotesAction() {
+        $lotes = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->getPorUsuario($this->getUser()->getId());
+        
+        $arrayLotes = [];
+        foreach($lotes as $lote) {
+            $nuevoLote = [];
+            $nuevoLote['id']= $lote->getId();
+            $nuevoLote['number']= $lote->getId();
+            $nuevoLote['surface']= $lote->getSuperficie();
+            $nuevoLote['soil']= $lote->getSuelo()->getNombre();
+            $nuevoLote['locality']= $lote->getLocalidad()->getNombre();
+            $nuevoLote['province']= $lote->getProvincia()->getNombre();
+            
+            $arrayLotes[] = $nuevoLote;
+        }
+        
+        return new Response(json_encode($arrayLotes));
+    }
+    
+    /**
      * @Route("/get_siembras", name="get_siembras", options={"expose"=true})
      */
     public function siembrasAction() {
-        $em = $this->getDoctrine()->getManager();
-        $siembras = $em->getRepository('ApiBundle:Siembra')->getPorUsuario($this->getUser()->getId());
+        $siembras = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getPorUsuario($this->getUser()->getId());
 
         $arraySiembras = [];
         foreach($siembras as $siembra) {
@@ -32,39 +53,17 @@ class RNAController extends Controller {
             $nuevaSiembra["date"]["month"] = $siembra->getFecha()->format("m");
             $nuevaSiembra["date"]["year"] = $siembra->getFecha()->format("y");
             $nuevaSiembra["lot"] = $siembra->getLote()->getId();
+            $nuevaSiembra["crop"] = $siembra->getCultivo()->getNombre();
             $nuevaSiembra["water"] = $siembra->getAguaRecibida();
             $nuevaSiembra["plowed"] = $siembra->getArado();
             $nuevaSiembra["fertilized"] = $siembra->getFertilizado();
             $nuevaSiembra["fumigated"] = $siembra->getFumigado();
             $nuevaSiembra["cost"] = $siembra->getCosto();
             
-            $arraySiembras = $nuevaSiembra;
+            $arraySiembras[] = $nuevaSiembra;
         }
         
         return new Response(json_encode($arraySiembras));
-    }
-    
-    /**
-     * @Route("/get_lotes", name="get_lotes", options={"expose"=true})
-     */
-    public function lotesAction() {
-        $em = $this->getDoctrine()->getManager();
-        $lotes = $em->getRepository('ApiBundle:Lote')->getPorUsuario($this->getUser()->getId());
-
-        $arrayLotes = [];
-        foreach($lotes as $lote) {
-            $nuevoLote = [];
-            $nuevolote['id']= $lote->getId();
-            $nuevolote['number']= $lote->getId();
-            $nuevolote['surface']= $lote->getSuperficie();
-            $nuevolote['soil']= $lote->getSuelo()->getNombre();
-            $nuevolote['locality']= $lote->getLocalidad()->getNombre();
-            $nuevolote['province']= $lote->getProvincia()->getNombre();
-            
-            $arrayLotes[] = $nuevoLote;
-        }
-        
-        return new Response(json_encode($arrayLotes));
     }
     
     /**
@@ -74,7 +73,7 @@ class RNAController extends Controller {
         $cosechas = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getPorUsuario($this->getUser()->getId());
 
         $arrayCosechas = [];
-        foreach($cosechas as $cosecha) {
+        foreach($cosechas as $cosecha) {;
             $nuevoCosecha = [];
             $nuevoCosecha['id']= $cosecha->getId();
             $nuevoCosecha["date"] = [];
