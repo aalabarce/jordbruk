@@ -75,4 +75,5 @@ class SiembraRepository extends EntityRepository {
         
         return $qb->getQuery()->getResult();
     }
+
 }

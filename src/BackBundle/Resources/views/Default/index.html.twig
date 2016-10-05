@@ -1,17 +1,18 @@
 {% extends 'BackBundle::base.html.twig' %}
 
+
 {% block main %}
-    {#<section id="main-content">
-        <section class="wrapper">
-            <div class="row mt">
-                <div class="col-lg-12">
-                    <div class="form-panel">
-                        Aguante Jordbruk carajo!
-                    </div>
-                </div>
-            </div>
-        </section>
-    </section>#}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script src="http://code.highcharts.com/4.1.8/highcharts.js"></script>
+    <script src="http://code.highcharts.com/4.1.8/modules/exporting.js"></script>
+    <script type="text/javascript">
+        {{ chart(cultivos) }}
+        {{ chart(economia) }}
+        {{ chart(promedios) }}
+        {{ chart(lotes) }}
+    </script>
+
     <section id="main-content">
         <section class="wrapper">
             <h3><i class="fa fa-angle-right"></i> Reportes</h3>
@@ -22,7 +23,7 @@
                         <div class="content-panel">
                             <h4><i class="fa fa-angle-right"></i> Reporte 1</h4>
                             <div class="panel-body text-center">
-                                <canvas id="doughnut" height="300" width="400"></canvas>
+                                <div id="cultivos" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
                             </div>
                         </div>
                     </div>
@@ -30,7 +31,7 @@
                         <div class="content-panel">
                             <h4><i class="fa fa-angle-right"></i> Reporte 2</h4>
                             <div class="panel-body text-center">
-                                <canvas id="line" height="300" width="400"></canvas>
+                                <div id="economia" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
                             </div>
                         </div>
                     </div>
@@ -40,7 +41,7 @@
                         <div class="content-panel">
                             <h4><i class="fa fa-angle-right"></i> Reporte 3</h4>
                             <div class="panel-body text-center">
-                                <canvas id="polarArea" height="300" width="400"></canvas>
+                                <div id="promedios" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
                             </div>
                         </div>
                     </div>
@@ -48,7 +49,7 @@
                         <div class="content-panel">
                             <h4><i class="fa fa-angle-right"></i> Reporte 4</h4>
                             <div class="panel-body text-center">
-                                <canvas id="pie" height="300" width="400"></canvas>
+                                <div id="lotes" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
                             </div>
                         </div>
                     </div>
@@ -58,14 +59,3 @@
     </section>
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    {% javascripts
-        "bundles/back/js/Chart.js"
-        "bundles/back/js/chartjs-conf.js"
-    %}
-    <script type="text/javascript" src="{{ asset_url }}" ></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
-    {% endjavascripts %}
-{% endblock %}
