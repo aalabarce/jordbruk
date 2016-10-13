@@ -42,7 +42,7 @@ class RNAController extends Controller {
      * @Route("/get_siembras", name="get_siembras", options={"expose"=true})
      */
     public function siembrasAction() {
-        $siembras = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getPorUsuario($this->getUser()->getId());
+        $siembras = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->findAll();
 
         $arraySiembras = [];
         foreach($siembras as $siembra) {
@@ -70,7 +70,7 @@ class RNAController extends Controller {
      * @Route("/get_cosechas", name="get_cosechas", options={"expose"=true})
      */
     public function cosechasAction() {
-        $cosechas = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getPorUsuario($this->getUser()->getId());
+        $cosechas = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->findAll();
 
         $arrayCosechas = [];
         foreach($cosechas as $cosecha) {;
