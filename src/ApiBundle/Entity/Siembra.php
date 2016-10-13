@@ -28,14 +28,14 @@ class Siembra extends BaseEntitySoftDelete {
     /**
      * @ORM\Column(type="date")
      * @Expose
-     * @Groups({"Siembra"})
+     * @Groups({"Siembra", "Cosecha"})
      */
     protected $fecha;
     
     /**
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Cultivo")
      * @Expose
-     * @Groups({"Siembra"})
+     * @Groups({"Siembra", "Cosecha"})
      */
     protected $cultivo;
     
@@ -49,42 +49,42 @@ class Siembra extends BaseEntitySoftDelete {
     /**
      * @ORM\Column(type="integer")
      * @Expose
-     * @Groups({"Siembra"})
+     * @Groups({"Siembra", "Cosecha"})
      */
     protected $aguaRecibida;
 
     /**
      * @ORM\Column(type="boolean")
      * @Expose
-     * @Groups({"Siembra"})
+     * @Groups({"Siembra", "Cosecha"})
      */
     protected $fertilizado;
 
     /**
      * @ORM\Column(type="boolean")
      * @Expose
-     * @Groups({"Siembra"})
+     * @Groups({"Siembra", "Cosecha"})
      */
     protected $fumigado;
 
     /**
      * @ORM\Column(type="boolean")
      * @Expose
-     * @Groups({"Siembra"})
+     * @Groups({"Siembra", "Cosecha"})
      */
     protected $arado;
 
     /**
      * @ORM\Column(type="integer")
      * @Expose
-     * @Groups({"Siembra"})
+     * @Groups({"Siembra", "Cosecha"})
      */
     protected $costo;
         
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Expose
-     * @Groups({"Siembra"})
+     * @Groups({"Siembra", "Cosecha"})
      */
     protected $descripcion;
     
