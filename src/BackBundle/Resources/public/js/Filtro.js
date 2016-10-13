@@ -5,8 +5,8 @@ Filtro = function () {
 Filtro.prototype.init = function() {    
     $("#limpiar").click(function() {
         $(".filtro").val("");
-        $(".filtro").prop( "checked", false );;
-  });
+        $(".filtro").prop( "checked", false );
+    });
 };
 
 $(document).ready(function(){

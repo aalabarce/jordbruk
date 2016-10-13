@@ -4,6 +4,7 @@ namespace BackBundle\Controller;
 
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ApiBundle\Entity\Siembra;
 use ApiBundle\Form\SiembraType;
@@ -122,7 +123,7 @@ class SiembraController extends BaseController {
     }
        
     /**
-     * @Route("/delete/{id}", name="siembra_delete")
+     * @Route("/delete/{id}", name="siembra_delete", options={"expose"=true})
      */
     public function deleteAction($id) {
         $em = $this->getDoctrine()->getManager();
@@ -133,6 +134,6 @@ class SiembraController extends BaseController {
         $em->remove($siembra);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('siembra'));
+        return new Response(200);
     }
 }

@@ -75,7 +75,7 @@
                                 <tbody>
                                     {% if siembras %}
                                         {% for siembra in siembras|reverse %}
-                                            <tr>
+                                            <tr data-id="{{siembra.id}}">
                                                 <td>{{siembra.nombre}}</td>
                                                 <td>{{siembra.fecha|date('d-m-Y')}}</td>
                                                 <td>{{siembra.cultivo}}</td>
@@ -88,7 +88,7 @@
                                                 <td>{{siembra.descripcion}}</td>
                                                 <td>
                                                     <a class="btn btn-primary btn-xs" href="{{url('siembra_edit', { 'id': siembra.id })}}"><i class="fa fa-pencil"></i></a>
-                                                    <a class="btn btn-danger btn-xs" href="{{url('siembra_delete', { 'id': siembra.id })}}"><i class="fa fa-trash-o"></i></a>
+                                                    <a class="btn btn-danger btn-xs confirm-delete" data-id="{{siembra.id}}"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -115,12 +115,32 @@
             </div>
         </section>
     </section>
+                                    
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background:#fff">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Eliminar</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Si elimina la siembra, perdera todas las cosechas asociadas a la misma.</p> 
+                    <p>¿Esta seguro que quiere eliminarla?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary borrar">Sí</button>
+                    <button type="button" data-dismiss="modal" class="btn">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     {% javascripts
         "bundles/back/js/Datepicker.js"
+        "bundles/back/js/Siembra.js"
     %}
     <script type="text/javascript" src="{{ asset_url }}" ></script>
     {% endjavascripts %}

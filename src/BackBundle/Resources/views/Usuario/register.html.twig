@@ -11,7 +11,7 @@
                         
                         <div class="form-group">
                             <label>Nombre</label>
-                            {{ form_widget(form.nombre, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_widget(form.nombre, { 'attr': {'class': 'form-control', 'autofocus':'true'} }) }}
                         </div>
                         <div class="form-group">
                             <label>Apellido</label>
@@ -26,8 +26,12 @@
                             {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
                         </div>
                         <div class="form-group">
+                            <label>Telefono</label>
+                            {{ form_widget(form.telefono, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
                             <label>Contraseña</label>
-                            {{ form_widget(form.plainPassword, { 'attr': {'class': 'form-control contraseña'} }) }}
+                            {{ form_widget(form.plainPassword, { 'attr': {'class': 'form-control contraseña', 'pattern':'[a-zA-Z0-9]{8,}'} }) }}
                         </div>
                         <div class="form-group">
                             <label>Provincia</label>

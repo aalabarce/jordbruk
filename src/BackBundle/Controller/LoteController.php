@@ -4,6 +4,7 @@ namespace BackBundle\Controller;
 
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ApiBundle\Entity\Lote;
 use ApiBundle\Form\LoteType;
@@ -103,7 +104,7 @@ class LoteController extends BaseController {
     }
     
     /**
-     * @Route("/delete/{id}", name="lote_delete")
+     * @Route("/delete/{id}", name="lote_delete", options={"expose"=true})
      */
     public function deleteAction($id) {
         $em = $this->getDoctrine()->getManager();
@@ -114,6 +115,6 @@ class LoteController extends BaseController {
         $em->remove($lote);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('lote'));
+        return new Response(200);
     }
 }

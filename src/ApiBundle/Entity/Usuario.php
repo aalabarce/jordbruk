@@ -26,14 +26,21 @@ class Usuario extends BaseUser {
     protected $id;
     
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      * @Expose
      * @Groups({"Usuario"})
      */
     protected $nombre;
-
+    
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Expose
+     * @Groups({"Usuario"})
+     */
+    protected $telefono;
+
+    /**
+     * @ORM\Column(type="string")
      * @Expose
      * @Groups({"Usuario"})
      */
@@ -64,7 +71,7 @@ class Usuario extends BaseUser {
     protected $localidad;
     
     /**
-     * @Assert\Regex(pattern="/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{6,10}/")
+     * @Assert\Length(min = 8, minMessage = "Debe tener minimo 8 caracteres")
      */
     protected $plainPassword;
     
@@ -97,6 +104,14 @@ class Usuario extends BaseUser {
 
     function setApellido($apellido) {
         $this->apellido = $apellido;
+    }
+    
+    function getTelefono() {
+        return $this->telefono;
+    }
+
+    function setTelefono($telefono) {
+        $this->telefono = $telefono;
     }
     
     function getLotes() {
