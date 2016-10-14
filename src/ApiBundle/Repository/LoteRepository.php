@@ -11,6 +11,7 @@ class LoteRepository extends EntityRepository {
         
         $qb->select('l')
             ->innerJoin("l.usuario","u")
+            ->innerJoin("l.suelo","s")
             ->where($qb->expr()->eq("u.id", ":usuario"))
             ->setParameter('usuario', $usuario);
         
@@ -18,7 +19,7 @@ class LoteRepository extends EntityRepository {
             $qb->andWhere($qb->expr()->orX(
                 "l.nombre LIKE :busqueda", 
                 "l.superficie LIKE :busqueda", 
-                "l.suelo LIKE :busqueda", 
+                "s.nombre LIKE :busqueda", 
                 "l.descripcion LIKE :busqueda"
             ));
             $qb->setParameter('busqueda', '%'.$busqueda.'%');

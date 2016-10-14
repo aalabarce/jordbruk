@@ -12,13 +12,14 @@ class SiembraRepository extends EntityRepository {
         $qb->select('s')
             ->innerJoin("s.lote","l")
             ->innerJoin("l.usuario","u")
+            ->innerJoin("s.cultivo","c")
             ->where($qb->expr()->eq("u.id", ":usuario"))
             ->setParameter('usuario', $usuario);
         
         if ($busqueda) {
             $qb->andWhere($qb->expr()->orX(
                 "s.nombre LIKE :busqueda", 
-                "s.cultivo LIKE :busqueda",
+                "c.nombre LIKE :busqueda",
                 "l.nombre LIKE :busqueda",
                 "s.aguaRecibida LIKE :busqueda",
                 "s.costo LIKE :busqueda",
