@@ -51,7 +51,7 @@ class UsuarioController extends FOSRestController {
      * @Get("", name="api_usuario_obtener")
      */
     public function obtenerAction() {
-        return $this->getDoctrine()->getManager()->getRepository('ApiBundle:Usuario')->findAll();
+        return $this->getUser();
     }
 
 

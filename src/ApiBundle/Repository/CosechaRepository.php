@@ -55,4 +55,64 @@ class CosechaRepository extends EntityRepository {
         
         return $qb->getQuery()->getResult();
     }
+    
+    public function get5MayorRinde($usuario) {
+        $qb = $this->createQueryBuilder('c');
+        
+        $qb->select('c')
+            ->innerJoin("c.siembra","s")
+            ->innerJoin("s.lote","l")
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->setParameter('usuario', $usuario)
+            ->orderBy('c.rinde', 'DESC')
+            ->setMaxResults(5);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function get5MenorRinde($usuario) {
+        $qb = $this->createQueryBuilder('c');
+        
+        $qb->select('c')
+            ->innerJoin("c.siembra","s")
+            ->innerJoin("s.lote","l")
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->setParameter('usuario', $usuario)
+            ->orderBy('c.rinde', 'ASC')
+            ->setMaxResults(5);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function get5MayorBeneficio($usuario) {
+        $qb = $this->createQueryBuilder('c');
+        
+        $qb->select('c')
+            ->innerJoin("c.siembra","s")
+            ->innerJoin("s.lote","l")
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->setParameter('usuario', $usuario)
+            ->orderBy('c.beneficio', 'DESC')
+            ->setMaxResults(5);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function get5MenorBeneficio($usuario) {
+        $qb = $this->createQueryBuilder('c');
+        
+        $qb->select('c')
+            ->innerJoin("c.siembra","s")
+            ->innerJoin("s.lote","l")
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->setParameter('usuario', $usuario)
+            ->orderBy('c.beneficio', 'ASC')
+            ->setMaxResults(5);
+        
+        return $qb->getQuery()->getResult();
+    }
 }
