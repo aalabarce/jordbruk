@@ -33,7 +33,6 @@ class Localidad {
     /**
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Provincia")
      * @Expose
-     * @Groups({"Lote","Usuario"})
      */
     protected $provincia;
 

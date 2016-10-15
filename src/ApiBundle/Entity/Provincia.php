@@ -19,14 +19,14 @@ class Provincia {
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      * @Expose
-     * @Groups({"Lote","Usuario"})
+     * @Groups({"Provincia", "Lote", "Usuario"})
      */
     protected $id;
     
     /**
      * @ORM\Column(type="string")
      * @Expose
-     * @Groups({"Lote","Usuario"})
+     * @Groups({"Provincia"})
      */
     protected $nombre;
     
