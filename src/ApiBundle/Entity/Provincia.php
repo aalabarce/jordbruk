@@ -26,7 +26,7 @@ class Provincia {
     /**
      * @ORM\Column(type="string")
      * @Expose
-     * @Groups({"Provincia"})
+     * @Groups({"Provincia", "Lote", "Usuario"})
      */
     protected $nombre;
     

@@ -38,4 +38,36 @@ class LoteRepository extends EntityRepository {
 
         return $qb->getQuery()->getResult();
     }
+        
+    public function getSueloTotalPorSiembra($usuario) {
+        $sql = "SELECT count(s.id) AS cantidad, l.nombre AS lote 
+            FROM Lote l
+            JOIN Siembra s ON s.lote_id = l.id
+            JOIN Usuario u ON l.usuario_id = u.id
+            WHERE u.id == $usuario
+            GROUP BY l.nombre;";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('cantidad', 'cantidad');
+        $rsm->addScalarResult('nombre', 'nombre');
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        
+        return $query->getSingleScalarResult();
+    }
+        
+    public function getSueloPresentePorSiembra($usuario) {
+        $sql = "SELECT count(s.id) AS cantidad, l.nombre AS lote 
+            FROM Lote l
+            JOIN Siembra s ON s.lote_id = l.id
+            JOIN Usuario u ON l.usuario_id = u.id
+            WHERE u.id == $usuario AND s.fecha > DATE_ADD(CURRENT_DATE(), '-90', 'day')
+            GROUP BY l.nombre;";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('cantidad', 'cantidad');
+        $rsm->addScalarResult('nombre', 'nombre');
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        
+        return $query->getSingleScalarResult();
+    }
 }
