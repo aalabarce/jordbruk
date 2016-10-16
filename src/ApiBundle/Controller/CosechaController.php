@@ -28,6 +28,16 @@ class CosechaController extends FOSRestController {
     public function newAction(Request $request) {
         $cosecha = new Cosecha();
         $form = $this->createForm(CosechaType::class, $cosecha);
+        
+        $fecha = $request->request->get('fecha');
+        if(strlen($fecha) > 10) {
+           $y = substr($fecha, 0, 4);
+           $m = substr($fecha, 5, 2);
+           $d = substr($fecha, 8, 2);
+           $fechaFormateada = "$d-$m-$y";
+           $request->request->set('fecha', $fechaFormateada);
+        }
+        
         $form->submit($request->request->all());
         
         if ($form->isValid()) {
@@ -53,6 +63,16 @@ class CosechaController extends FOSRestController {
     public function editAction(Request $request, $id) {
         $cosecha = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->find($id);
         $form = $this->createForm(CosechaType::class, $cosecha);
+        
+        $fecha = $request->request->get('fecha');
+        if(strlen($fecha) > 10) {
+           $y = substr($fecha, 0, 4);
+           $m = substr($fecha, 5, 2);
+           $d = substr($fecha, 8, 2);
+           $fechaFormateada = "$d-$m-$y";
+           $request->request->set('fecha', $fechaFormateada);
+        }
+        
         $form->submit($request->request->all());
         
         if ($form->isValid()) {

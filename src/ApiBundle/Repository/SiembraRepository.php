@@ -76,4 +76,36 @@ class SiembraRepository extends EntityRepository {
         
         return $qb->getQuery()->getResult();
     }
+    
+    public function getPerdidas($usuario) {
+        $sqb = $this->createQueryBuilder('c')
+                ->select('s2.id')
+                ->innerJoin('ApiBundle:Cosecha', 'c', 'WITH', 'c.siembra = s2.id');
+        
+        $qb = $this->createQueryBuilder('s');
+        $qb->select('s')
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->andWhere($qb->expr()->notIn('s.id', $sqb->getDQL()))
+            ->andWhere("s.fecha < DATE_ADD(CURRENT_DATE(), '-90', 'day')")
+            ->setParameter('usuario', $usuario);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function getSinCosechar($usuario) {
+        $sqb = $this->createQueryBuilder('c')
+                ->select('s2.id')
+                ->innerJoin('ApiBundle:Cosecha', 'c', 'WITH', 'c.siembra = s2.id');
+        
+        $qb = $this->createQueryBuilder('s');
+        $qb->select('s')
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->andWhere($qb->expr()->notIn('s.id', $sqb->getDQL()))
+            ->andWhere("s.fecha > DATE_ADD(CURRENT_DATE(), '-90', 'day')")
+            ->setParameter('usuario', $usuario);
+        
+        return $qb->getQuery()->getResult();
+    }
 }
