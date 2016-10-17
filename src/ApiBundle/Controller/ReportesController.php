@@ -78,7 +78,7 @@ class ReportesController extends FOSRestController {
      *  output={"class"="ApiBundle\Entity\Siembra", "groups"={"Siembra"}}
      * )
      * @View(serializerGroups={"Siembra"})
-     * @Get("/_sin_cosechar", name="sin_cosechar")
+     * @Get("/sin_cosechar", name="sin_cosechar")
      */
     public function getSinCosecharAction() {
         $siembras = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getSinCosechar($this->getUser()->getId());
@@ -100,4 +100,31 @@ class ReportesController extends FOSRestController {
         
         return $siembras;
     }
+
+    /**
+     * @ApiDoc(
+     *  description="Terreno cutivado con cada cultivo",
+     *  resource=true,
+     * )
+     * @View(serializerGroups={"Siembra"})
+     * @Get("/terreno_cultivado", name="terreno_cultivado")
+     */
+    public function getTerrenoCultivadoAction() {
+        $totales = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->getSueloTotalPorSiembra($this->getUser()->getId());
+        $arrayTotales = [];
+        foreach($totales as $cultivo) {
+            $arrayTotales[$cultivo["cultivo"]] = (int)$cultivo["cantidad"];       
+        }
+        
+        $presentes = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->getSueloPresentePorSiembra($this->getUser()->getId());
+        $arrayPresentes = [];
+        foreach($presentes as $cultivo) {
+            $arrayPresentes[$cultivo["cultivo"]] = (int)$cultivo["cantidad"];       
+        }
+        $array = [];
+        $array["all"] = $arrayTotales;
+        $array["present"] = $arrayPresentes;
+        return $array;
+    }
+
 }

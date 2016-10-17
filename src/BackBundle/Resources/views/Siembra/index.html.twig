@@ -59,7 +59,6 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th><strong>Nombre</strong></th>
                                         <th><strong>Fecha</strong></th>
                                         <th><strong>Cultivo</strong></th>
                                         <th><strong>Lote</strong></th>
@@ -76,7 +75,6 @@
                                     {% if siembras %}
                                         {% for siembra in siembras|reverse %}
                                             <tr data-id="{{siembra.id}}">
-                                                <td>{{siembra.nombre}}</td>
                                                 <td>{{siembra.fecha|date('d-m-Y')}}</td>
                                                 <td>{{siembra.cultivo}}</td>
                                                 <td>{{siembra.lote}}</td>

@@ -3,6 +3,7 @@
 namespace ApiBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 class LoteRepository extends EntityRepository {
 
@@ -40,34 +41,36 @@ class LoteRepository extends EntityRepository {
     }
         
     public function getSueloTotalPorSiembra($usuario) {
-        $sql = "SELECT count(s.id) AS cantidad, l.nombre AS lote 
+        $sql = "SELECT SUM(l.superficie) AS cantidad, c.nombre AS cultivo 
             FROM Lote l
-            JOIN Siembra s ON s.lote_id = l.id
             JOIN Usuario u ON l.usuario_id = u.id
-            WHERE u.id == $usuario
-            GROUP BY l.nombre;";
+            JOIN Siembra s ON s.lote_id = l.id
+            JOIN Cultivo c ON s.cultivo_id = c.id
+            WHERE u.id = $usuario
+            GROUP BY c.nombre;";
         
         $rsm = new ResultSetMapping;
         $rsm->addScalarResult('cantidad', 'cantidad');
-        $rsm->addScalarResult('nombre', 'nombre');
+        $rsm->addScalarResult('cultivo', 'cultivo');
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
         
-        return $query->getSingleScalarResult();
+        return $query->getScalarResult();
     }
         
     public function getSueloPresentePorSiembra($usuario) {
-        $sql = "SELECT count(s.id) AS cantidad, l.nombre AS lote 
+        $sql = "SELECT SUM(l.superficie) AS cantidad, c.nombre AS cultivo
             FROM Lote l
-            JOIN Siembra s ON s.lote_id = l.id
             JOIN Usuario u ON l.usuario_id = u.id
-            WHERE u.id == $usuario AND s.fecha > DATE_ADD(CURRENT_DATE(), '-90', 'day')
-            GROUP BY l.nombre;";
+            JOIN Siembra s ON s.lote_id = l.id
+            JOIN Cultivo c ON s.cultivo_id = c.id
+            WHERE u.id = $usuario AND DATEDIFF(s.fecha, CURRENT_DATE()) < -90
+            GROUP BY c.nombre;";
         
         $rsm = new ResultSetMapping;
         $rsm->addScalarResult('cantidad', 'cantidad');
-        $rsm->addScalarResult('nombre', 'nombre');
+        $rsm->addScalarResult('cultivo', 'cultivo');
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
         
-        return $query->getSingleScalarResult();
+        return $query->getScalarResult();
     }
 }

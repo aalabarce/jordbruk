@@ -78,12 +78,13 @@ class SiembraRepository extends EntityRepository {
     }
     
     public function getPerdidas($usuario) {
-        $sqb = $this->createQueryBuilder('c')
+        $sqb = $this->createQueryBuilder('s2')
                 ->select('s2.id')
                 ->innerJoin('ApiBundle:Cosecha', 'c', 'WITH', 'c.siembra = s2.id');
         
         $qb = $this->createQueryBuilder('s');
         $qb->select('s')
+            ->innerJoin("s.lote","l")
             ->innerJoin("l.usuario","u")
             ->where($qb->expr()->eq("u.id", ":usuario"))
             ->andWhere($qb->expr()->notIn('s.id', $sqb->getDQL()))
@@ -94,12 +95,13 @@ class SiembraRepository extends EntityRepository {
     }
     
     public function getSinCosechar($usuario) {
-        $sqb = $this->createQueryBuilder('c')
+        $sqb = $this->createQueryBuilder('s2')
                 ->select('s2.id')
                 ->innerJoin('ApiBundle:Cosecha', 'c', 'WITH', 'c.siembra = s2.id');
         
         $qb = $this->createQueryBuilder('s');
         $qb->select('s')
+            ->innerJoin("s.lote","l")
             ->innerJoin("l.usuario","u")
             ->where($qb->expr()->eq("u.id", ":usuario"))
             ->andWhere($qb->expr()->notIn('s.id', $sqb->getDQL()))
