@@ -3,6 +3,7 @@
 namespace ApiBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 class CosechaRepository extends EntityRepository {
 
@@ -114,5 +115,24 @@ class CosechaRepository extends EntityRepository {
             ->setMaxResults(5);
         
         return $qb->getQuery()->getResult();
+    }
+           
+    public function getRindePromedioAnual($usuario) {
+        $sql = "SELECT EXTRACT(YEAR FROM s.fecha) AS year, AVG(co.rinde) AS cantidad, c.nombre AS cultivo
+            FROM Cosecha co
+            JOIN Siembra s ON s.id = co.siembra_id            
+            JOIN Lote l ON s.lote_id = l.id
+            JOIN Cultivo c ON s.cultivo_id = c.id
+            JOIN Usuario u ON l.usuario_id = u.id            
+            WHERE u.id = $usuario
+            GROUP BY EXTRACT(YEAR FROM s.fecha), c.nombre;";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('year', 'year');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+        $rsm->addScalarResult('cultivo', 'cultivo');
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        
+        return $query->getScalarResult();
     }
 }

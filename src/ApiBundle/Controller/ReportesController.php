@@ -106,24 +106,57 @@ class ReportesController extends FOSRestController {
      *  description="Terreno cutivado con cada cultivo",
      *  resource=true,
      * )
-     * @View(serializerGroups={"Siembra"})
      * @Get("/terreno_cultivado", name="terreno_cultivado")
      */
     public function getTerrenoCultivadoAction() {
+        $array = [];
+        
         $totales = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->getSueloTotalPorSiembra($this->getUser()->getId());
         $arrayTotales = [];
         foreach($totales as $cultivo) {
             $arrayTotales[$cultivo["cultivo"]] = (int)$cultivo["cantidad"];       
         }
+        $array["all"] = $arrayTotales;
         
         $presentes = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->getSueloPresentePorSiembra($this->getUser()->getId());
         $arrayPresentes = [];
         foreach($presentes as $cultivo) {
             $arrayPresentes[$cultivo["cultivo"]] = (int)$cultivo["cantidad"];       
         }
-        $array = [];
-        $array["all"] = $arrayTotales;
         $array["present"] = $arrayPresentes;
+        
+        return $array;
+    }
+    /**
+     * @ApiDoc(
+     *  description="Terreno cutivado con cada cultivo",
+     *  resource=true,
+     * )
+     * @Get("/rinde_promedio_anual", name="rinde_promedio_anual")
+     */
+    public function getRindePromedioAnualAction() {
+        $promedios = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getRindePromedioAnual($this->getUser()->getId());        
+        $aux = [];
+        foreach($promedios as $promedio) {
+            if(array_key_exists($promedio["year"], $aux)) {
+                $aux[$promedio["year"]]["average"] = (int)$promedio["cantidad"];
+                $aux[$promedio["year"]]["crop"] = $promedio["cultivo"];
+            } else {
+                $aux[$promedio["year"]] = [];
+                $aux[$promedio["year"]]["average"] = (int)$promedio["cantidad"];
+                $aux[$promedio["year"]]["crop"] = $promedio["cultivo"];
+            }
+        }
+        $arrayPromedios = [];
+        foreach($aux as $key => $datos) {
+            $aux2 = [];
+            $aux2["year"] = (int)$key;
+            $aux2["data"] = $datos;
+            $arrayPromedios[] = $aux2;
+        }
+        $array = [];
+        $array["data"] = $arrayPromedios;
+        
         return $array;
     }
 
