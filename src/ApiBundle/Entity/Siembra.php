@@ -83,9 +83,10 @@ class Siembra extends BaseEntitySoftDelete {
     
         
     public function __toString() {
-        $lote= $this->lote->getNombre();
+        $lote = $this->lote->getNombre();
         $cultivo = $this->cultivo->getNombre();
-        return "$lote - $cultivo";
+        $fecha = $this->fecha->format('d-m-Y');
+        return "$lote - $cultivo ($fecha)";
     }
     
 
