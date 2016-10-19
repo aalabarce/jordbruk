@@ -27,7 +27,7 @@ class CosechaRepository extends EntityRepository {
             $qb->setParameter('busqueda', '%'.$busqueda.'%');
         }
         
-            if ($fechaDesde) {
+        if ($fechaDesde) {
             $dateDesde = new \DateTime($fechaDesde);
 
             $qb->andWhere($qb->expr()->gte('c.fecha', ':desde'));
@@ -40,6 +40,8 @@ class CosechaRepository extends EntityRepository {
             $qb->andWhere($qb->expr()->lte('c.fecha', ':hasta'));
             $qb->setParameter('hasta', $dateHasta);
         }
+        
+        $qb->orderBy('c.fecha', 'ASC');
         
         return $qb->getQuery()->getResult();
     }

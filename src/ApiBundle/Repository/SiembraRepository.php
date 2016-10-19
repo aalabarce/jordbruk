@@ -62,6 +62,8 @@ class SiembraRepository extends EntityRepository {
             $qb->setParameter('lote', $lote);
         }
         
+        $qb->orderBy('s.fecha', 'ASC');
+        
         return $qb->getQuery()->getResult();
     }
     
