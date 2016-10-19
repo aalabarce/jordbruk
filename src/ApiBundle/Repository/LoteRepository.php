@@ -39,6 +39,19 @@ class LoteRepository extends EntityRepository {
 
         return $qb->getQuery()->getResult();
     }
+    
+    public function getPorNombre($nombre, $usuario) {
+        $qb = $this->createQueryBuilder('l');
+        
+        $qb->select('l')
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->andWhere($qb->expr()->eq("l.nombre", ":nombre"))
+            ->setParameter('nombre', $nombre)
+            ->setParameter('usuario', $usuario);
+
+        return $qb->getQuery()->getResult();
+    }
         
     public function getSueloTotalPorSiembra($usuario) {
         $sql = "SELECT SUM(l.superficie) AS cantidad, c.nombre AS cultivo 

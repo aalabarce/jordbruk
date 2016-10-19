@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -26,6 +27,9 @@ class LoteController extends FOSRestController {
      * @Post("", name="api_lote_new")
      */
     public function newAction(Request $request) {
+        if($this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->getPorNombre($request->request->get('nombre'), $this->getUser()->getId()))
+            throw new BadRequestHttpException("Ya existe un lote con ese nombre");
+
         $lote = new Lote();
         $form = $this->createForm(LoteType::class, $lote);
         $form->submit($request->request->all());
@@ -50,7 +54,7 @@ class LoteController extends FOSRestController {
      *  output={"class"="ApiBundle\Entity\Lote", "groups"={"Lote"}}
      * )
      * @View(serializerGroups={"Lote"})
-     * @Post("/editar/{id}", name="api_lote_edit")
+     * @Put("/{id}", name="api_lote_edit")
      */
     public function editAction(Request $request, $id) {
         $lote = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->find($id);

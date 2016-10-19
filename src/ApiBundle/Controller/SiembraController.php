@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -62,7 +63,7 @@ class SiembraController extends FOSRestController {
      *  output={"class"="ApiBundle\Entity\Siembra", "groups"={"Siembra"}}
      * )
      * @View(serializerGroups={"Siembra"})
-     * @Post("/editar/{id}", name="api_siembra_edit")
+     * @Put("/{id}", name="api_siembra_edit")
      */
     public function editAction(Request $request, $id) {
         $siembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->find($id);
