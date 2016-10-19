@@ -7,7 +7,11 @@ Zona.prototype.init = function () {
     Zona.vaciarLocalidades();
     if (localidad)
         Zona.cargarLocalidades(localidad);
-    $(".provincia option:first").text("Seleccione una provincia");
+    
+    if($(".provincia option[value='']"))
+        $(".provincia option[value='']").remove();
+    $('.provincia').prepend(new Option("Seleccione una provincia", ""));
+    $('.provincia').find("option:eq(0)").prop('selected', true);
     this.initCargarLocalidades();
 };
 

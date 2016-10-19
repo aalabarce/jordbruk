@@ -70,6 +70,11 @@ class SiembraController extends BaseController {
         $form = $this->createForm(SiembraType::class, $siembra);
         $form->handleRequest($request);
         
+        $ultimaSiembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getUltimasSiembra($request->request->get('lote'));
+        if($ultimaSiembra && date_diff(new \DateTime($request->request->get('fecha')), $ultimaSiembra[0]->getFecha())->format("%d") < 90) {
+            throw new BadRequestHttpException("Este lote ya esta sembrado");
+        }
+        
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->persist($siembra);
             $this->getDoctrine()->getManager()->flush();

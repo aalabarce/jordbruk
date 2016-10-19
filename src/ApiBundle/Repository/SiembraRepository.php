@@ -65,6 +65,18 @@ class SiembraRepository extends EntityRepository {
         return $qb->getQuery()->getResult();
     }
     
+    public function getUltimasSiembra($lote) {
+        $qb = $this->createQueryBuilder('s');
+        
+        $qb->select('s')
+            ->innerJoin("s.lote","l")
+            ->where($qb->expr()->eq("l.id", ":lote"))
+            ->setParameter('lote', $lote)
+            ->orderBy("s.fecha", "DESC");
+        
+        return $qb->getQuery()->getResult();
+    }
+
     public function getPorUsuario($usuario) {
         $qb = $this->createQueryBuilder('s');
         

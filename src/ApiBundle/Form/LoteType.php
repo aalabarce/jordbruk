@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class LoteType extends AbstractType {
 
@@ -17,6 +18,15 @@ class LoteType extends AbstractType {
             ->add('descripcion', null, array("description" => "Descripcion"))
             ->add('localidad', null, array("description" => "Localidad del lote", 'constraints' => new NotBlank()))
             ->add('provincia', null, array("description" => "Provincia del lote", 'constraints' => new NotBlank()))
+            ->add('provincia', EntityType::class , array(
+                "description" => "Lote",
+                'constraints' => new NotBlank(),
+                'class' => 'ApiBundle:Provincia',
+                'query_builder' => function (\Doctrine\ORM\EntityRepository $er) {
+                    return $er->createQueryBuilder('p')
+                            ->where('p.id in (2,3,4,7,8,10,19,22)');
+                },
+                'choice_label' => 'nombre'))
         ;
     }
 
