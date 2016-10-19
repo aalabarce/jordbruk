@@ -134,6 +134,23 @@ class CosechaRepository extends EntityRepository {
         return $qb->getQuery()->getResult();
     }
            
+    public function getPerdidas($usuario) {
+        $sqb = $this->createQueryBuilder('c2')
+                ->select('c2.id')
+                ->innerJoin('ApiBundle:Cosecha', 'c', 'WITH', 'c.siembra = s2.id');
+        
+        $qb = $this->createQueryBuilder('s');
+        $qb->select('s')
+            ->innerJoin("s.lote","l")
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->andWhere($qb->expr()->notIn('s.id', $sqb->getDQL()))
+            ->andWhere("s.fecha < DATE_ADD(CURRENT_DATE(), '-90', 'day')")
+            ->setParameter('usuario', $usuario);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
     public function getRindePromedioAnual($usuario) {
         $sql = "SELECT EXTRACT(YEAR FROM s.fecha) AS year, AVG(co.rinde) AS cantidad, c.nombre AS cultivo
             FROM Cosecha co
