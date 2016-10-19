@@ -1,17 +1,7 @@
 {% extends 'BackBundle::base.html.twig' %}
 
 {% block main %}
-    {#<section id="main-content">
-        <section class="wrapper">
-            <div class="row mt">
-                <div class="col-lg-12">
-                    <div class="form-panel">
-                        Aguante Jordbruk carajo!
-                    </div>
-                </div>
-            </div>
-        </section>
-    </section>#}
+    <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
     <section id="main-content">
         <section class="wrapper">
             <h3><i class="fa fa-angle-right"></i> Reportes</h3>
@@ -20,9 +10,9 @@
                 <div class="row mt">
                     <div class="col-lg-6">
                         <div class="content-panel">
-                            <h4><i class="fa fa-angle-right"></i> Reporte 1</h4>
+                            <h4><i class="fa fa-angle-right"></i> Rinde promedio anual</h4>
                             <div class="panel-body text-center">
-                                <canvas id="doughnut" height="300" width="400"></canvas>
+                                <div id="hero-graph" class="graph"></div>
                             </div>
                         </div>
                     </div>
@@ -30,7 +20,7 @@
                         <div class="content-panel">
                             <h4><i class="fa fa-angle-right"></i> Reporte 2</h4>
                             <div class="panel-body text-center">
-                                <canvas id="line" height="300" width="400"></canvas>
+                                <div id="hero-bar" class="graph"></div>
                             </div>
                         </div>
                     </div>
@@ -38,17 +28,17 @@
                 <div class="row mt">
                     <div class="col-lg-6">
                         <div class="content-panel">
-                            <h4><i class="fa fa-angle-right"></i> Reporte 3</h4>
+                            <h4><i class="fa fa-angle-right"></i> Terreno cultivado actual</h4>
                             <div class="panel-body text-center">
-                                <canvas id="polarArea" height="300" width="400"></canvas>
+                                <div id="hero-donut" class="graph"></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="content-panel">
-                            <h4><i class="fa fa-angle-right"></i> Reporte 4</h4>
+                            <h4><i class="fa fa-angle-right"></i> Terreno cultivado historico</h4>
                             <div class="panel-body text-center">
-                                <canvas id="pie" height="300" width="400"></canvas>
+                                <div id="hero-donut" class="graph"></div>
                             </div>
                         </div>
                     </div>
@@ -60,12 +50,11 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts
-        "bundles/back/js/Chart.js"
-        "bundles/back/js/chartjs-conf.js"
+    {% javascripts 
+        "bundles/back/js/morris-conf.js"
     %}
-    <script type="text/javascript" src="{{ asset_url }}" ></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
     {% endjavascripts %}
 {% endblock %}
