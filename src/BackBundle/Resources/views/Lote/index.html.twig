@@ -40,7 +40,7 @@
                                 <tbody>
                                     {% if lotes %}
                                         {% for lote in lotes|reverse %}
-                                            <tr>
+                                            <tr data-id="{{lote.id}}">
                                                 <td>{{lote.nombre}}</td>
                                                 <td>{{lote.superficie}}</td>
                                                 <td>{{lote.suelo}}</td>
@@ -49,7 +49,7 @@
                                                 <td>{{lote.localidad.nombre}}</td>
                                                 <td>
                                                     <a class="btn btn-primary btn-xs" href="{{url('lote_edit', { 'id': lote.id })}}"><i class="fa fa-pencil"></i></a>
-                                                    <a class="btn btn-danger btn-xs" href="{{url('lote_delete', { 'id': lote.id })}}"><i class="fa fa-trash-o"></i></a>
+                                                    <a class="btn btn-danger btn-xs confirm-delete" data-id="{{lote.id}}"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -70,4 +70,32 @@
             </div>
         </section>
     </section>
+
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background:#fff">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Eliminar</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Si elimina el lote, perdera todas las siembras y cosechas asociadas a la misma.</p> 
+                    <p>¿Esta seguro que lo quiere eliminar?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary borrar">Sí</button>
+                    <button type="button" data-dismiss="modal" class="btn">No</button>
+                </div>
+            </div>
+        </div>
+    </div>                       
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        "bundles/back/js/Lote.js"
+    %}
+    <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
 {% endblock %}

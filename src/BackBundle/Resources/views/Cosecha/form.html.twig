@@ -1,9 +1,9 @@
 {{ form_start(form) }}
 
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Siembra</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Lote</label>
     <div class="col-sm-3">
-        {{ form_widget(form.siembra, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_widget(form.siembra, { 'attr': {'class': 'form-control', 'autofocus':'true'} }) }}
     </div>
 </div>
     
@@ -15,14 +15,14 @@
 </div>
     
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Rinde</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Rinde (Kg/ha)</label>
     <div class="col-sm-3">
         {{ form_widget(form.rinde, { 'attr': {'class': 'form-control'} }) }}
     </div>
 </div>
     
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Beneficio</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Beneficio ($)</label>
     <div class="col-sm-3">
         {{ form_widget(form.beneficio, { 'attr': {'class': 'form-control'} }) }}
     </div>

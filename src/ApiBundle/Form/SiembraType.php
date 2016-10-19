@@ -23,7 +23,6 @@ class SiembraType extends AbstractType {
         $usuario = $this->container->get('security.token_storage')->getToken()->getUser();
                 
         $builder
-            ->add('nombre', null, array("description" => "Nombre identificador", 'constraints' => new NotBlank()))
             ->add('fecha', TextType::class, array("description" => "Fecha de siembra", 'constraints' => new NotBlank()))
             ->add('cultivo', null, array("description" => "Cultivo", 'constraints' => new NotBlank()))
             ->add('lote', EntityType::class , array(

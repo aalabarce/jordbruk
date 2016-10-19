@@ -24,6 +24,13 @@ class Cultivo extends BaseEntitySoftDelete {
      * @Groups({"Cultivo"})
      */
     protected $nombre;
+    
+    /**
+     * @ORM\Column(type="string")
+     * @Expose
+     * @Groups({"Cultivo"})
+     */
+    protected $precio;
    
     
     public function __toString() {
@@ -37,4 +44,13 @@ class Cultivo extends BaseEntitySoftDelete {
     function setNombre($nombre) {
         $this->nombre = $nombre;
     }
+    
+    function getPrecio() {
+        return $this->precio;
+    }
+
+    function setPrecio($precio) {
+        $this->precio = $precio;
+    }
+
 }

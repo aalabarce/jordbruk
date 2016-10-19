@@ -49,8 +49,7 @@ class CosechaType extends AbstractType {
                     }
                     
                     return $qb;
-                },
-                'choice_label' => 'nombre'))
+                }))
             ->add('rinde', null, array("description" => "Rinde", 'constraints' => new NotBlank()))
             ->add('beneficio', null, array("description" => "Beneficio", 'constraints' => new NotBlank()))
             ->add('descripcion', null, array("description" => "Descripcion"))

@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -28,6 +29,20 @@ class SiembraController extends FOSRestController {
     public function newAction(Request $request) {
         $siembra = new Siembra();
         $form = $this->createForm(SiembraType::class, $siembra);
+        $ultimaSiembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getUltimasSiembra($request->request->get('lote'));
+        $fecha = $request->request->get('fecha');
+        if($ultimaSiembra && date_diff(new \DateTime($fecha), $ultimaSiembra[0]->getFecha())->format("%d") < 90) {
+            throw new BadRequestHttpException("Este lote ya esta sembrado");
+        }
+
+        if(strlen($fecha) > 10) {
+           $y = substr($fecha, 0, 4);
+           $m = substr($fecha, 5, 2);
+           $d = substr($fecha, 8, 2);
+           $fechaFormateada = "$d-$m-$y";
+           $request->request->set('fecha', $fechaFormateada);
+        }
+            
         $form->submit($request->request->all());
         
         if ($form->isValid()) {
@@ -48,11 +63,21 @@ class SiembraController extends FOSRestController {
      *  output={"class"="ApiBundle\Entity\Siembra", "groups"={"Siembra"}}
      * )
      * @View(serializerGroups={"Siembra"})
-     * @Post("/editar/{id}", name="api_siembra_edit")
+     * @Put("/{id}", name="api_siembra_edit")
      */
     public function editAction(Request $request, $id) {
         $siembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->find($id);
         $form = $this->createForm(SiembraType::class, $siembra);
+        
+        $fecha = $request->request->get('fecha');
+        if(strlen($fecha) > 10) {
+           $y = substr($fecha, 0, 4);
+           $m = substr($fecha, 5, 2);
+           $d = substr($fecha, 8, 2);
+           $fechaFormateada = "$d-$m-$y";
+           $request->request->set('fecha', $fechaFormateada);
+        }
+        
         $form->submit($request->request->all());
         
         if ($form->isValid()) {

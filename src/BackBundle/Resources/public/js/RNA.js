@@ -32,7 +32,7 @@ RNA.prototype.initConsultarRed = function () {
             return new Promise((resolve) => setTimeout(resolve, time));
         }
         
-        sleep(10000).then(() => {
+        sleep(1000).then(() => {
             $('#respuesta').text(respuesta);
             $('#ganancia').text(ganancia);
             $("#consultar").removeClass('disabled');

@@ -3,10 +3,11 @@
 {% block body %}
     <section id="container" >
         <header class="header black-bg">
-            <div class="sidebar-toggle-box">
-                <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-            </div>
-            <a href="{{ url('home') }}" class="logo"><b>Jordbruk</b></a>
+            <a href="{{ url('home') }}" class="logo">
+                {% set image = 'bundles/back/images/planta.png' %}
+                <img src="{{ asset(image) }}" width="40">
+                <b>SmartAgro</b>
+            </a>
             <div class="top-menu">
                 <ul class="nav pull-right top-menu">
                     <li><a class="logout" href="{{ url('fos_user_security_logout') }}">Logout</a></li>

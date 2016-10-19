@@ -19,7 +19,7 @@ Abstract class BaseEntity {
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      * @Expose
-     * @Groups({"Lote", "Siembra", "Cosecha"})
+     * @Groups({"Lote", "Siembra", "Cosecha", "Cultivo"})
      */
     protected $id;
 

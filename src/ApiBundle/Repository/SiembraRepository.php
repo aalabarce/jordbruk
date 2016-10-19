@@ -12,13 +12,14 @@ class SiembraRepository extends EntityRepository {
         $qb->select('s')
             ->innerJoin("s.lote","l")
             ->innerJoin("l.usuario","u")
+            ->innerJoin("s.cultivo","c")
             ->where($qb->expr()->eq("u.id", ":usuario"))
             ->setParameter('usuario', $usuario);
         
         if ($busqueda) {
             $qb->andWhere($qb->expr()->orX(
                 "s.nombre LIKE :busqueda", 
-                "s.cultivo LIKE :busqueda",
+                "c.nombre LIKE :busqueda",
                 "l.nombre LIKE :busqueda",
                 "s.aguaRecibida LIKE :busqueda",
                 "s.costo LIKE :busqueda",
@@ -61,9 +62,23 @@ class SiembraRepository extends EntityRepository {
             $qb->setParameter('lote', $lote);
         }
         
+        $qb->orderBy('s.fecha', 'ASC');
+        
         return $qb->getQuery()->getResult();
     }
     
+    public function getUltimasSiembra($lote) {
+        $qb = $this->createQueryBuilder('s');
+        
+        $qb->select('s')
+            ->innerJoin("s.lote","l")
+            ->where($qb->expr()->eq("l.id", ":lote"))
+            ->setParameter('lote', $lote)
+            ->orderBy("s.fecha", "DESC");
+        
+        return $qb->getQuery()->getResult();
+    }
+
     public function getPorUsuario($usuario) {
         $qb = $this->createQueryBuilder('s');
         
@@ -71,6 +86,40 @@ class SiembraRepository extends EntityRepository {
             ->innerJoin("s.lote","l")
             ->innerJoin("l.usuario","u")
             ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->setParameter('usuario', $usuario);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function getPerdidas($usuario) {
+        $sqb = $this->createQueryBuilder('s2')
+                ->select('s2.id')
+                ->innerJoin('ApiBundle:Cosecha', 'c', 'WITH', 'c.siembra = s2.id');
+        
+        $qb = $this->createQueryBuilder('s');
+        $qb->select('s')
+            ->innerJoin("s.lote","l")
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->andWhere($qb->expr()->notIn('s.id', $sqb->getDQL()))
+            ->andWhere("s.fecha < DATE_ADD(CURRENT_DATE(), '-90', 'day')")
+            ->setParameter('usuario', $usuario);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function getSinCosechar($usuario) {
+        $sqb = $this->createQueryBuilder('s2')
+                ->select('s2.id')
+                ->innerJoin('ApiBundle:Cosecha', 'c', 'WITH', 'c.siembra = s2.id');
+        
+        $qb = $this->createQueryBuilder('s');
+        $qb->select('s')
+            ->innerJoin("s.lote","l")
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->andWhere($qb->expr()->notIn('s.id', $sqb->getDQL()))
+            ->andWhere("s.fecha > DATE_ADD(CURRENT_DATE(), '-90', 'day')")
             ->setParameter('usuario', $usuario);
         
         return $qb->getQuery()->getResult();

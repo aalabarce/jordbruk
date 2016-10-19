@@ -1,12 +1,5 @@
 {{ form_start(form) }}
-          			
-<div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Nombre</label>
-    <div class="col-sm-3">
-        {{ form_widget(form.nombre, { 'attr': {'class': 'form-control'} }) }}
-    </div>
-</div>
-    
+
 <div class="row form-group">
     <label class="col-sm-1 col-md-offset-3 control-label">Fecha</label>
     <div class="col-sm-3">
@@ -29,7 +22,7 @@
 </div>
     
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Agua recibida</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Agua recibida (mm)</label>
     <div class="col-sm-3">
         {{ form_widget(form.aguaRecibida, { 'attr': {'class': 'form-control'} }) }}
     </div>
@@ -57,7 +50,7 @@
 </div>
 
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Costo</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Costo ($)</label>
     <div class="col-sm-3">
         {{ form_widget(form.costo, { 'attr': {'class': 'form-control'} }) }}
     </div>

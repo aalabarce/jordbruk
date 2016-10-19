@@ -21,7 +21,7 @@ class Lote extends BaseEntitySoftDelete {
     /**
      * @ORM\Column(type="string")
      * @Expose
-     * @Groups({"Lote", "Siembra"})
+     * @Groups({"Lote"})
      */
     protected $nombre;
     

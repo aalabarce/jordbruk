@@ -19,13 +19,6 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 class Siembra extends BaseEntitySoftDelete {
     
     /**
-     * @ORM\Column(type="string")
-     * @Expose
-     * @Groups({"Siembra", "Cosecha"})
-     */
-    protected $nombre;
-    
-    /**
      * @ORM\Column(type="date")
      * @Expose
      * @Groups({"Siembra"})
@@ -90,17 +83,12 @@ class Siembra extends BaseEntitySoftDelete {
     
         
     public function __toString() {
-        return $this->nombre;
+        $lote = $this->lote->getNombre();
+        $cultivo = $this->cultivo->getNombre();
+        $fecha = $this->fecha->format('d-m-Y');
+        return "$lote - $cultivo ($fecha)";
     }
     
-    
-    function getNombre() {
-        return $this->nombre;
-    }
-
-    function setNombre($nombre) {
-        $this->nombre = $nombre;
-    }
 
     function getFecha() {
         return $this->fecha;

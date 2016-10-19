@@ -17,3 +17,18 @@ api_cosecha:
     type: rest
     prefix: cosecha
     resource: ApiBundle\Controller\CosechaController
+
+api_cultivo:
+    type: rest
+    prefix: cultivo
+    resource: ApiBundle\Controller\CultivoController
+
+api_provincia:
+    type: rest
+    prefix: provincia
+    resource: ApiBundle\Controller\ProvinciaController
+
+api_reportes:
+    type: rest
+    prefix: reportes
+    resource: ApiBundle\Controller\ReportesController

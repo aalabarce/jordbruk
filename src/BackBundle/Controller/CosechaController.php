@@ -4,6 +4,7 @@ namespace BackBundle\Controller;
 
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ApiBundle\Entity\Cosecha;
 use ApiBundle\Form\CosechaType;
@@ -107,7 +108,7 @@ class CosechaController extends BaseController {
     }
     
      /**
-     * @Route("/delete/{id}", name="cosecha_delete")
+     * @Route("/delete/{id}", name="cosecha_delete", options={"expose"=true})
      */
     public function deleteAction($id) {
         $em = $this->getDoctrine()->getManager();
@@ -118,6 +119,6 @@ class CosechaController extends BaseController {
         $em->remove($cosecha);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('cosecha'));
+        return new Response(200);
     }
 }

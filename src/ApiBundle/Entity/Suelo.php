@@ -21,7 +21,7 @@ class Suelo extends BaseEntitySoftDelete {
     /**
      * @ORM\Column(type="string")
      * @Expose
-     * @Groups({"Suelo"})
+     * @Groups({"Suelo","Lote"})
      */
     protected $nombre;
    

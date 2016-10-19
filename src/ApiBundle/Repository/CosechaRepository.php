@@ -3,6 +3,7 @@
 namespace ApiBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 class CosechaRepository extends EntityRepository {
 
@@ -26,7 +27,7 @@ class CosechaRepository extends EntityRepository {
             $qb->setParameter('busqueda', '%'.$busqueda.'%');
         }
         
-            if ($fechaDesde) {
+        if ($fechaDesde) {
             $dateDesde = new \DateTime($fechaDesde);
 
             $qb->andWhere($qb->expr()->gte('c.fecha', ':desde'));
@@ -39,6 +40,8 @@ class CosechaRepository extends EntityRepository {
             $qb->andWhere($qb->expr()->lte('c.fecha', ':hasta'));
             $qb->setParameter('hasta', $dateHasta);
         }
+        
+        $qb->orderBy('c.fecha', 'ASC');
         
         return $qb->getQuery()->getResult();
     }
@@ -54,5 +57,116 @@ class CosechaRepository extends EntityRepository {
             ->setParameter('usuario', $usuario);
         
         return $qb->getQuery()->getResult();
+    }
+    
+    public function getPorSiembra($siembra, $usuario) {
+        $qb = $this->createQueryBuilder('c');
+        
+        $qb->select('c')
+            ->innerJoin("c.siembra","s")
+            ->innerJoin("s.lote","l")
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->where($qb->expr()->eq("s.id", ":siembra"))
+            ->setParameter('siembra', $siembra)
+            ->setParameter('usuario', $usuario);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function get5MayorRinde($usuario) {
+        $qb = $this->createQueryBuilder('c');
+        
+        $qb->select('c')
+            ->innerJoin("c.siembra","s")
+            ->innerJoin("s.lote","l")
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->setParameter('usuario', $usuario)
+            ->orderBy('c.rinde', 'DESC')
+            ->setMaxResults(5);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function get5MenorRinde($usuario) {
+        $qb = $this->createQueryBuilder('c');
+        
+        $qb->select('c')
+            ->innerJoin("c.siembra","s")
+            ->innerJoin("s.lote","l")
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->setParameter('usuario', $usuario)
+            ->orderBy('c.rinde', 'ASC')
+            ->setMaxResults(5);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function get5MayorBeneficio($usuario) {
+        $qb = $this->createQueryBuilder('c');
+        
+        $qb->select('c')
+            ->innerJoin("c.siembra","s")
+            ->innerJoin("s.lote","l")
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->setParameter('usuario', $usuario)
+            ->orderBy('c.beneficio', 'DESC')
+            ->setMaxResults(5);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function get5MenorBeneficio($usuario) {
+        $qb = $this->createQueryBuilder('c');
+        
+        $qb->select('c')
+            ->innerJoin("c.siembra","s")
+            ->innerJoin("s.lote","l")
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->setParameter('usuario', $usuario)
+            ->orderBy('c.beneficio', 'ASC')
+            ->setMaxResults(5);
+        
+        return $qb->getQuery()->getResult();
+    }
+           
+    public function getPerdidas($usuario) {
+        $sqb = $this->createQueryBuilder('c2')
+                ->select('c2.id')
+                ->innerJoin('ApiBundle:Cosecha', 'c', 'WITH', 'c.siembra = s2.id');
+        
+        $qb = $this->createQueryBuilder('s');
+        $qb->select('s')
+            ->innerJoin("s.lote","l")
+            ->innerJoin("l.usuario","u")
+            ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->andWhere($qb->expr()->notIn('s.id', $sqb->getDQL()))
+            ->andWhere("s.fecha < DATE_ADD(CURRENT_DATE(), '-90', 'day')")
+            ->setParameter('usuario', $usuario);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function getRindePromedioAnual($usuario) {
+        $sql = "SELECT EXTRACT(YEAR FROM s.fecha) AS year, AVG(co.rinde) AS cantidad, c.nombre AS cultivo
+            FROM Cosecha co
+            JOIN Siembra s ON s.id = co.siembra_id            
+            JOIN Lote l ON s.lote_id = l.id
+            JOIN Cultivo c ON s.cultivo_id = c.id
+            JOIN Usuario u ON l.usuario_id = u.id            
+            WHERE u.id = $usuario
+            GROUP BY EXTRACT(YEAR FROM s.fecha), c.nombre;";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('year', 'year');
+        $rsm->addScalarResult('cantidad', 'cantidad');
+        $rsm->addScalarResult('cultivo', 'cultivo');
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        
+        return $query->getScalarResult();
     }
 }
