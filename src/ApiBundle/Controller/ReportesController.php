@@ -127,6 +127,7 @@ class ReportesController extends FOSRestController {
         
         return $array;
     }
+    
     /**
      * @ApiDoc(
      *  description="Terreno cutivado con cada cultivo",
@@ -158,6 +159,19 @@ class ReportesController extends FOSRestController {
         $array["data"] = $arrayPromedios;
         
         return $array;
+    }
+    
+    /**
+     * @ApiDoc(
+     *  description="Terreno cutivado con cada cultivo",
+     *  resource=true,
+     * )
+     * @Get("/rinde_promedio_anual", name="rinde_promedio_anual")
+     */
+    public function getUltimas4PorLoteAction() {
+        $datos = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getUltimas4PorLote($this->getUser()->getId());        
+     
+        return $datos;
     }
 
 }

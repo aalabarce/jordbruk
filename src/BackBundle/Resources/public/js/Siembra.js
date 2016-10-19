@@ -13,7 +13,7 @@ Siembra.prototype.init = function() {
         $.ajax({
             type: 'GET',
             dataType: "JSON",
-            url: Routing.generate('siembra_delete')+'/'+id,
+            url: '/siembra/delete/'+id,
             success: function (data) {
                 $('tr[data-id='+id+']').remove();
                 $('#myModal').modal('hide');

@@ -13,7 +13,7 @@ Cosecha.prototype.init = function() {
         $.ajax({
             type: 'GET',
             dataType: "JSON",
-            url: Routing.generate('cosecha_delete')+'/'+id,
+            url: '/cosecha/delete/'+id,
             success: function (data) {
                 $('tr[data-id='+id+']').remove();
                 $('#myModal').modal('hide');

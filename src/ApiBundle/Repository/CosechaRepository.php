@@ -134,21 +134,28 @@ class CosechaRepository extends EntityRepository {
         return $qb->getQuery()->getResult();
     }
            
-    public function getPerdidas($usuario) {
-        $sqb = $this->createQueryBuilder('c2')
-                ->select('c2.id')
-                ->innerJoin('ApiBundle:Cosecha', 'c', 'WITH', 'c.siembra = s2.id');
+    public function getUltimas4PorLote($usuario) {
+        $sql = "SELECT c.id AS cosecha, c.beneficio AS beneficio, c.rinde AS rinde, l.id AS lote
+            FROM Cosecha c
+            JOIN Siembra s ON s.id = c.siembra_id            
+            JOIN Lote l ON s.lote_id = l.id
+            WHERE c.id in (
+                    SELECT LIMIT 4 c2.id 
+                    FROM Cosecha c2 
+                    JOIN Siembra s2 ON s2.id = c2.siembra_id            
+                    JOIN Lote l2 ON s2.lote_id = l2.id 
+                    WHERE l.id = l2.id 
+                    ORDER BY c2.fecha DESC)
+                AND u.id = $usuario;";
         
-        $qb = $this->createQueryBuilder('s');
-        $qb->select('s')
-            ->innerJoin("s.lote","l")
-            ->innerJoin("l.usuario","u")
-            ->where($qb->expr()->eq("u.id", ":usuario"))
-            ->andWhere($qb->expr()->notIn('s.id', $sqb->getDQL()))
-            ->andWhere("s.fecha < DATE_ADD(CURRENT_DATE(), '-90', 'day')")
-            ->setParameter('usuario', $usuario);
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('cosecha', 'cosecha');
+        $rsm->addScalarResult('beneficio', 'beneficio');
+        $rsm->addScalarResult('rinde', 'rinde');
+        $rsm->addScalarResult('lote', 'lote');
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
         
-        return $qb->getQuery()->getResult();
+        return $query->getScalarResult();
     }
     
     public function getRindePromedioAnual($usuario) {
