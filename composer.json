@@ -34,8 +34,7 @@
         "friendsofsymfony/rest-bundle": "^1.7",
         "friendsofsymfony/oauth-server-bundle": "dev-master",
         "gedmo/doctrine-extensions": "dev-master",
-        "nelmio/api-doc-bundle": "^2.12",
-        "ob/highcharts-bundle": "^1.5"
+        "nelmio/api-doc-bundle": "^2.12"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
