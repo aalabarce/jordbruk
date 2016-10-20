@@ -24,6 +24,9 @@
                             <input type="text" class="form-control" value="{{ last_username }}" placeholder="Usuario" name="_username" required="required"/>
                             <br>
                             <input type="password" class="form-control" placeholder="Contraseña" name="_password" required="required"/>
+                            {% if error %}
+                                <span class="form-error alert-danger">Usuario o contraseña incorrecto</span>
+                            {% endif %}
                             <div style="margin-top:10px; display:block;">
                                 {#<label class="checkbox">
                                     <span class="pull-right">
@@ -34,9 +37,6 @@
                                     <input type="checkbox" id="recordame" name="_remember_me" value="on"/> Recordame
                                 </label>
                             </div>
-                            {% if error %}
-                                <div>Usuario o contraseña incorrecto</div>
-                            {% endif %}
                             <br>
                             <br>
                             <button class="btn btn-success btn-block" type="submit"><i class="fa fa-lock"></i> INGRESAR</button>
