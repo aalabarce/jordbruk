@@ -5,15 +5,14 @@ Zona = function () {
 Zona.prototype.init = function () {
     var localidad = $(".localidad").val();
     var provincia = $(".provincia").val();
-//    alert(localidad);
-//    alert(provincia);
+
     Zona.vaciarLocalidades();
     if (localidad)
         Zona.cargarLocalidades(localidad);
     
     if($(".provincia option[value='']"))
         $(".provincia option[value='']").remove();
-    $('.provincia').prepend(new Option("Seleccione una provincia", ""));
+
     if (provincia) 
         $(".provincia").val(provincia);
     else
