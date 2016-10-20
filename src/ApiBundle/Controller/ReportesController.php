@@ -140,12 +140,16 @@ class ReportesController extends FOSRestController {
         $aux = [];
         foreach($promedios as $promedio) {
             if(array_key_exists($promedio["year"], $aux)) {
-                $aux[$promedio["year"]]["average"] = (int)$promedio["cantidad"];
-                $aux[$promedio["year"]]["crop"] = $promedio["cultivo"];
+                $datos = [];
+                $datos["cultivo"] = $promedio["cultivo"];
+                $datos["cantidad"] = (int)$promedio["cantidad"];
+                $aux[$promedio["year"]][] = $datos;
             } else {
+                $datos = [];
+                $datos["cultivo"] = $promedio["cultivo"];
+                $datos["cantidad"] = (int)$promedio["cantidad"];
                 $aux[$promedio["year"]] = [];
-                $aux[$promedio["year"]]["average"] = (int)$promedio["cantidad"];
-                $aux[$promedio["year"]]["crop"] = $promedio["cultivo"];
+                $aux[$promedio["year"]][] = $datos;
             }
         }
         $arrayPromedios = [];
@@ -163,10 +167,10 @@ class ReportesController extends FOSRestController {
     
     /**
      * @ApiDoc(
-     *  description="Terreno cutivado con cada cultivo",
+     *  description="Ultimos 4 cosechas de cada lote",
      *  resource=true,
      * )
-     * @Get("/rinde_promedio_anual", name="rinde_promedio_anual")
+     * @Get("/cosechas_por_lotes", name="cosechas_por_lotes")
      */
     public function getUltimas4PorLoteAction() {
         $datos = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getUltimas4PorLote($this->getUser()->getId());        

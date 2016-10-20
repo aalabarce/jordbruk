@@ -8,11 +8,6 @@
                 <img src="{{ asset(image) }}" width="40">
                 <b>SmartAgro</b>
             </a>
-            <div class="top-menu">
-                <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="{{ url('fos_user_security_logout') }}">Logout</a></li>
-                </ul>
-            </div>
         </header>
         <aside>
             <div id="sidebar"  class="nav-collapse ">
@@ -43,6 +38,11 @@
                     <li>
                         <a id="rna" href="{{ url('rna') }}">
                             <span>RNA</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="logout" href="{{ url('fos_user_security_logout') }}">
+                            <span>Salir</span>
                         </a>
                     </li>
                 </ul>

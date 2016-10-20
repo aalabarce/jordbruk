@@ -107,7 +107,7 @@ class CosechaController extends BaseController {
         ));
     }
     
-     /**
+    /**
      * @Route("/delete/{id}", name="cosecha_delete", options={"expose"=true})
      */
     public function deleteAction($id) {
