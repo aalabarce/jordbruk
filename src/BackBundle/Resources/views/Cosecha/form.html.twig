@@ -4,7 +4,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Lote</label>
     <div class="col-sm-3">
         {{ form_widget(form.siembra, { 'attr': {'class': 'form-control', 'autofocus':'true'} }) }}        
-        <span class="help-block">{{ form_errors(form.siembra) }}</span>
+        <span class="form-error">{{ form_errors(form.siembra) }}</span>
     </div>
 </div>
     
@@ -12,7 +12,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Fecha</label>
     <div class="col-sm-3">
         {{ form_widget(form.fecha, { 'attr': { 'class': 'form-control fecha', 'placeholder': "DD-MM-AAAA", 'autocomplete': "off"} }) }}
-        <span class="help-block">{{ form_errors(form.fecha) }}</span>
+        <span class="form-error">{{ form_errors(form.fecha) }}</span>
     </div>
 </div>
     
@@ -20,7 +20,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Rinde (Kg/ha)</label>
     <div class="col-sm-3">
         {{ form_widget(form.rinde, { 'attr': {'class': 'form-control'} }) }}
-        <span class="help-block">{{ form_errors(form.rinde) }}</span>
+        <span class="form-error">{{ form_errors(form.rinde) }}</span>
     </div>
 </div>
     
@@ -28,7 +28,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Beneficio ($)</label>
     <div class="col-sm-3">
         {{ form_widget(form.beneficio, { 'attr': {'class': 'form-control'} }) }}
-        <span class="help-block">{{ form_errors(form.beneficio) }}</span>
+        <span class="form-error">{{ form_errors(form.beneficio) }}</span>
     </div>
 </div>
     

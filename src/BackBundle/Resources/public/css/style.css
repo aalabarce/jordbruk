@@ -2240,3 +2240,7 @@ label {
     border-bottom: 3px double #d4d4d4;
     margin-bottom: 5px;
 }
+
+.form-error {
+    color:red;
+}
