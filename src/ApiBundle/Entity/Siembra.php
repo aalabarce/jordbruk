@@ -78,6 +78,7 @@ class Siembra extends BaseEntitySoftDelete {
      * @Expose
      * @Groups({"Siembra"})
      * @Assert\NotBlank(message="Este campo es obligatorio.")
+     * @Assert\Range(min = 1, minMessage = "El costo debe ser mayor a 0.")
      */
     protected $costo;
         

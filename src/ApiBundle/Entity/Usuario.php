@@ -77,7 +77,7 @@ class Usuario extends BaseUser {
     protected $localidad;
     
     /**
-     * @Assert\Length(min = 8, minMessage = "Debe tener minimo 8 caracteres")
+     * @Assert\Length(min = 8, minMessage = "La contraseña debe tener al menos 8 caracteres")
      * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $plainPassword;

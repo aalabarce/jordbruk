@@ -404,8 +404,8 @@ ul.sidebar-menu li a.active i {
 }
 
 .black-bg {
-    background: #5cb85c;
-    border-bottom: 1px solid #5cb85c;
+    background: #43591d;
+    border-bottom: 1px solid #43591d;
 }
 
 .wrapper {
@@ -1927,7 +1927,7 @@ label {
 	margin: 0;
 	padding: 25px 20px;
 	text-align: center;
-	background: #5cb85c;
+	background: #43591d;
 	border-radius: 5px 5px 0 0;
 	-webkit-border-radius: 5px 5px 0 0;
 	color: #fff;
