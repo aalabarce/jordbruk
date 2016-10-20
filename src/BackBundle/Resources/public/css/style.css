@@ -223,7 +223,7 @@ ul.top-menu > li > .logout {
     width: 210px;
     height: 100%;
     position: fixed;
-    background: #424a5d;
+    background: #8bb837;
 }
 
 #sidebar h5 {
@@ -286,7 +286,7 @@ ul.sidebar-menu {
 }
 
 ul.sidebar-menu li ul.sub li{
-    background: #424a5d;
+    background: #8bb837;
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
@@ -341,7 +341,7 @@ ul.sidebar-menu li a span{
 }
 
 ul.sidebar-menu li a{
-    color: #aeb2b7;
+    color: white;
     text-decoration: none;
     display: block;
     padding: 15px 0 15px 10px;
@@ -355,8 +355,7 @@ ul.sidebar-menu li a{
 }
 
 ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-    background: #68dff0;
-    color: #fff;
+    color: #43591d;
     display: block;
 
     -webkit-transition: all 0.3s ease;
@@ -373,11 +372,11 @@ ul.sidebar-menu li a i {
 }
 
 ul.sidebar-menu li a:hover i, ul.sidebar-menu li a:focus i {
-    color: #fff;
+    color: #43591d;
 }
 
 ul.sidebar-menu li a.active i {
-    color: #fff;
+    color: #43591d;
 }
 
 
@@ -2244,8 +2243,8 @@ label {
 .form-error {
     display: block;
     color: red;
-    width: 22.35em;
-    text-align: center;
+/*    width: 22.35em;
+    text-align: center;*/
     margin: 0;
     margin-top: 1em;
 }
