@@ -60,7 +60,7 @@ class LoteController extends BaseController {
 
         return $this->render('BackBundle:Lote:new.html.twig', array(
             'lote' => $lote,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ));
     }
     

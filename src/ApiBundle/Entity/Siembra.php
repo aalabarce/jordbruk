@@ -8,6 +8,8 @@ use Resources\Entity\BaseEntitySoftDelete;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\ExclusionPolicy;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\SiembraRepository")
@@ -22,6 +24,7 @@ class Siembra extends BaseEntitySoftDelete {
      * @ORM\Column(type="date")
      * @Expose
      * @Groups({"Siembra"})
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $fecha;
     
@@ -29,6 +32,7 @@ class Siembra extends BaseEntitySoftDelete {
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Cultivo")
      * @Expose
      * @Groups({"Siembra"})
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $cultivo;
     
@@ -36,6 +40,7 @@ class Siembra extends BaseEntitySoftDelete {
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Lote")
      * @Expose
      * @Groups({"Siembra"})
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $lote;
 
@@ -43,6 +48,7 @@ class Siembra extends BaseEntitySoftDelete {
      * @ORM\Column(type="integer")
      * @Expose
      * @Groups({"Siembra"})
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $aguaRecibida;
 
@@ -71,6 +77,7 @@ class Siembra extends BaseEntitySoftDelete {
      * @ORM\Column(type="integer")
      * @Expose
      * @Groups({"Siembra"})
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $costo;
         

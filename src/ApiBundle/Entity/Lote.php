@@ -8,6 +8,8 @@ use Resources\Entity\BaseEntitySoftDelete;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\ExclusionPolicy;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\LoteRepository")
@@ -22,6 +24,9 @@ class Lote extends BaseEntitySoftDelete {
      * @ORM\Column(type="string")
      * @Expose
      * @Groups({"Lote"})
+     * @Assert\NotBlank(
+     *     message="Este campo es obligatorio."
+     * )
      */
     protected $nombre;
     
@@ -29,6 +34,9 @@ class Lote extends BaseEntitySoftDelete {
      * @ORM\Column(type="integer")
      * @Expose
      * @Groups({"Lote"})
+     * @Assert\NotBlank(
+     *     message="Este campo es obligatorio."
+     * )
      */
     protected $superficie;
     
@@ -36,6 +44,9 @@ class Lote extends BaseEntitySoftDelete {
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Suelo")
      * @Expose
      * @Groups({"Lote"})
+     * @Assert\NotBlank(
+     *     message="Este campo es obligatorio."
+     * )
      */
     protected $suelo;
         
@@ -55,6 +66,9 @@ class Lote extends BaseEntitySoftDelete {
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Provincia")
      * @Expose
      * @Groups({"Lote"})
+     * @Assert\NotBlank(
+     *     message="Este campo es obligatorio."
+     * )
      */
     protected $provincia;
     
@@ -62,9 +76,12 @@ class Lote extends BaseEntitySoftDelete {
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Localidad")
      * @Expose
      * @Groups({"Lote"})
+     * @Assert\NotBlank(
+     *     message="Este campo es obligatorio."
+     * )
      */
     protected $localidad;
-
+    
     
     public function __toString() {
         return $this->nombre;

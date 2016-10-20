@@ -24,11 +24,9 @@ class CosechaType extends AbstractType {
         $entity = $builder->getData();
         
         $builder
-            ->add('fecha', TextType::class, array("description" => "Fecha de cosecha", 'constraints' => new NotBlank()))
-            ->add('siembra', null, array("description" => "Siembra", 'constraints' => new NotBlank()))
+            ->add('fecha', TextType::class, array("description" => "Fecha de cosecha"))
             ->add('siembra', EntityType::class , array(
                 "description" => "Siembra",
-                'constraints' => new NotBlank(),
                 'class' => 'ApiBundle:Siembra',
                 'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($usuario, $entity) {
                     $qb2 = $er->createQueryBuilder('s2')->select('s2.id')
@@ -50,8 +48,8 @@ class CosechaType extends AbstractType {
                     
                     return $qb;
                 }))
-            ->add('rinde', null, array("description" => "Rinde", 'constraints' => new NotBlank()))
-            ->add('beneficio', null, array("description" => "Beneficio", 'constraints' => new NotBlank()))
+            ->add('rinde', null, array("description" => "Rinde"))
+            ->add('beneficio', null, array("description" => "Beneficio"))
             ->add('descripcion', null, array("description" => "Descripcion"))
         ;
         

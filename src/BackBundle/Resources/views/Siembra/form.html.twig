@@ -4,6 +4,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Fecha</label>
     <div class="col-sm-3">
         {{ form_widget(form.fecha, { 'attr': {'class': 'form-control fecha', 'placeholder': "DD-MM-AAAA", 'autocomplete': "off"} }) }}
+        <span class="help-block">{{ form_errors(form.fecha) }}</span>
     </div>
 </div>
     
@@ -11,6 +12,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Cultivo</label>
     <div class="col-sm-3">
         {{ form_widget(form.cultivo, { 'attr': {'class': 'form-control'} }) }}
+        <span class="help-block">{{ form_errors(form.cultivo) }}</span>
     </div>
 </div>
     
@@ -18,6 +20,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Lote</label>
     <div class="col-sm-3">
         {{ form_widget(form.lote, { 'attr': {'class': 'form-control'} }) }}
+        <span class="help-block">{{ form_errors(form.lote) }}</span>
     </div>
 </div>
     
@@ -25,6 +28,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Agua recibida (mm)</label>
     <div class="col-sm-3">
         {{ form_widget(form.aguaRecibida, { 'attr': {'class': 'form-control'} }) }}
+        <span class="help-block">{{ form_errors(form.aguaRecibida) }}</span>
     </div>
 </div>
     
@@ -53,6 +57,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Costo ($)</label>
     <div class="col-sm-3">
         {{ form_widget(form.costo, { 'attr': {'class': 'form-control'} }) }}
+        <span class="help-block">{{ form_errors(form.costo) }}</span>
     </div>
 </div>
     

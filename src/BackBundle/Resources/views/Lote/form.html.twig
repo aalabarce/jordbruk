@@ -4,6 +4,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Nombre</label>
     <div class="col-sm-3">
         {{ form_widget(form.nombre, { 'attr': {'class': 'form-control', 'autofocus':'true'} }) }}
+        <span class="help-block">{{ form_errors(form.nombre) }}</span>
     </div>
 </div>
     
@@ -11,6 +12,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Superficie (ha)</label>
     <div class="col-sm-3">
         {{ form_widget(form.superficie, { 'attr': {'class': 'form-control'} }) }}
+        <span class="help-block">{{ form_errors(form.superficie) }}</span>
     </div>
 </div>
     
@@ -18,6 +20,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Suelo</label>
     <div class="col-sm-3">
         {{ form_widget(form.suelo, { 'attr': {'class': 'form-control'} }) }}
+        <span class="help-block">{{ form_errors(form.suelo) }}</span>
     </div>
 </div>
     
@@ -32,6 +35,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Provincia</label>
     <div class="col-sm-3">
         {{ form_widget(form.provincia, { 'attr': {'class': 'form-control provincia'} }) }}
+        <span class="help-block">{{ form_errors(form.provincia) }}</span>
     </div>
 </div>
 
@@ -39,6 +43,7 @@
     <label class="col-sm-1 col-md-offset-3 control-label">Localidad</label>
     <div class="col-sm-3">
         {{ form_widget(form.localidad, { 'attr': {'class': 'form-control localidad'} }) }}
+        <span class="help-block">{{ form_errors(form.localidad) }}</span>
     </div>
 </div>
 
@@ -48,5 +53,5 @@
         <a class="btn btn-danger" href="{{url('lote')}}">Cancelar</a>
     </div>
 </div>
-        
+
 {{ form_end(form) }}

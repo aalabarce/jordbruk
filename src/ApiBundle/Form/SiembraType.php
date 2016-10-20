@@ -23,11 +23,10 @@ class SiembraType extends AbstractType {
         $usuario = $this->container->get('security.token_storage')->getToken()->getUser();
                 
         $builder
-            ->add('fecha', TextType::class, array("description" => "Fecha de siembra", 'constraints' => new NotBlank()))
-            ->add('cultivo', null, array("description" => "Cultivo", 'constraints' => new NotBlank()))
+            ->add('fecha', TextType::class, array("description" => "Fecha de siembra"))
+            ->add('cultivo', null, array("description" => "Cultivo"))
             ->add('lote', EntityType::class , array(
                 "description" => "Lote",
-                'constraints' => new NotBlank(),
                 'class' => 'ApiBundle:Lote',
                 'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($usuario) {
                     return $er->createQueryBuilder('l')
@@ -35,11 +34,11 @@ class SiembraType extends AbstractType {
                             ->setParameter("usuario", $usuario->getId());
                 },
                 'choice_label' => 'nombre'))
-            ->add('aguaRecibida', null, array("description" => "Cantidad de agua recibida", 'constraints' => new NotBlank()))
+            ->add('aguaRecibida', null, array("description" => "Cantidad de agua recibida"))
             ->add('fertilizado', null, array("description" => "Si el campo fue fertilizado o no"))
             ->add('fumigado', null, array("description" => "Si el campo fue fumigado o no"))
             ->add('arado', null, array("description" => "Si el campo fue arado o no"))
-            ->add('costo', null, array("description" => "Costo", 'constraints' => new NotBlank()))
+            ->add('costo', null, array("description" => "Costo"))
             ->add('descripcion', null, array("description" => "Descripcion"))
         ;
         

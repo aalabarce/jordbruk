@@ -9,6 +9,8 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use Symfony\Component\Validator\Validation; 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @ORM\Entity
@@ -29,6 +31,7 @@ class Usuario extends BaseUser {
      * @ORM\Column(type="string")
      * @Expose
      * @Groups({"Usuario"})
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $nombre;
     
@@ -43,6 +46,7 @@ class Usuario extends BaseUser {
      * @ORM\Column(type="string")
      * @Expose
      * @Groups({"Usuario"})
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $apellido;
     
@@ -60,6 +64,7 @@ class Usuario extends BaseUser {
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Provincia")
      * @Expose
      * @Groups({"Usuario"})
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $provincia;
     
@@ -67,15 +72,22 @@ class Usuario extends BaseUser {
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Localidad")
      * @Expose
      * @Groups({"Usuario"})
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $localidad;
     
     /**
      * @Assert\Length(min = 8, minMessage = "Debe tener minimo 8 caracteres")
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $plainPassword;
     
     
+     public static function loadValidatorMetadata(ClassMetadata $metadata) {
+        $metadata->addPropertyConstraint('username', new NotBlank(array('message' => 'Este campo es obligatorio.')));
+        $metadata->addPropertyConstraint('email', new NotBlank(array('message' => 'Este campo es obligatorio.')));
+     }        
+        
     public function __construct() {
         parent::__construct();
         $this->roles = array("ROLE_USER");

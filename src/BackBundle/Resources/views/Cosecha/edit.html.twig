@@ -7,7 +7,7 @@
             <div class="row mt">
                 <div class="col-lg-12">
                     <div class="form-panel">
-                        <form action="{{url('cosecha_update', { 'id': cosecha.id })}}" method="post">                
+                        <form action="{{url('cosecha_update', { 'id': cosecha.id })}}" method="post" novalidate>                
                             {% include 'BackBundle:Cosecha:form.html.twig' with {'form':form } %}                
                         </form>
                     </div>

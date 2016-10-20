@@ -4,6 +4,9 @@ Zona = function () {
 
 Zona.prototype.init = function () {
     var localidad = $(".localidad").val();
+    var provincia = $(".provincia").val();
+//    alert(localidad);
+//    alert(provincia);
     Zona.vaciarLocalidades();
     if (localidad)
         Zona.cargarLocalidades(localidad);
@@ -11,7 +14,11 @@ Zona.prototype.init = function () {
     if($(".provincia option[value='']"))
         $(".provincia option[value='']").remove();
     $('.provincia').prepend(new Option("Seleccione una provincia", ""));
-    $('.provincia').find("option:eq(0)").prop('selected', true);
+    if (provincia) 
+        $(".provincia").val(provincia);
+    else
+        $('.provincia').find("option:eq(0)").prop('selected', true);
+    
     this.initCargarLocalidades();
 };
 
