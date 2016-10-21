@@ -24,9 +24,7 @@ class Lote extends BaseEntitySoftDelete {
      * @ORM\Column(type="string")
      * @Expose
      * @Groups({"Lote"})
-     * @Assert\NotBlank(
-     *     message="Este campo es obligatorio."
-     * )
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $nombre;
     
@@ -34,9 +32,7 @@ class Lote extends BaseEntitySoftDelete {
      * @ORM\Column(type="integer")
      * @Expose
      * @Groups({"Lote"})
-     * @Assert\NotBlank(
-     *     message="Este campo es obligatorio."
-     * )
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $superficie;
     
@@ -44,9 +40,7 @@ class Lote extends BaseEntitySoftDelete {
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Suelo")
      * @Expose
      * @Groups({"Lote"})
-     * @Assert\NotBlank(
-     *     message="Este campo es obligatorio."
-     * )
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $suelo;
         
@@ -66,9 +60,7 @@ class Lote extends BaseEntitySoftDelete {
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Provincia")
      * @Expose
      * @Groups({"Lote"})
-     * @Assert\NotBlank(
-     *     message="Este campo es obligatorio."
-     * )
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $provincia;
     
@@ -76,9 +68,7 @@ class Lote extends BaseEntitySoftDelete {
      * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Localidad")
      * @Expose
      * @Groups({"Lote"})
-     * @Assert\NotBlank(
-     *     message="Este campo es obligatorio."
-     * )
+     * @Assert\NotBlank(message="Este campo es obligatorio.")
      */
     protected $localidad;
     

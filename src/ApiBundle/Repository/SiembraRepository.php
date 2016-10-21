@@ -18,7 +18,6 @@ class SiembraRepository extends EntityRepository {
         
         if ($busqueda) {
             $qb->andWhere($qb->expr()->orX(
-                "s.nombre LIKE :busqueda", 
                 "c.nombre LIKE :busqueda",
                 "l.nombre LIKE :busqueda",
                 "s.aguaRecibida LIKE :busqueda",

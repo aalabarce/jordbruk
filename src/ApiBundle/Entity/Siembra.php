@@ -37,7 +37,7 @@ class Siembra extends BaseEntitySoftDelete {
     protected $cultivo;
     
     /**
-     * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Lote")
+     * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Lote", cascade={"remove"})
      * @Expose
      * @Groups({"Siembra"})
      * @Assert\NotBlank(message="Este campo es obligatorio.")

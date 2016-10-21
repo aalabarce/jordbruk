@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
 
 /**
  * @ORM\Entity
@@ -39,6 +40,7 @@ class Usuario extends BaseUser {
      * @ORM\Column(type="string", nullable=true)
      * @Expose
      * @Groups({"Usuario"})
+     * @Assert\Type(type="integer", message="Ingrese un telefono valido.")
      */
     protected $telefono;
 
@@ -86,6 +88,7 @@ class Usuario extends BaseUser {
      public static function loadValidatorMetadata(ClassMetadata $metadata) {
         $metadata->addPropertyConstraint('username', new NotBlank(array('message' => 'Este campo es obligatorio.')));
         $metadata->addPropertyConstraint('email', new NotBlank(array('message' => 'Este campo es obligatorio.')));
+        $metadata->addPropertyConstraint('email', new Email(array('message' => 'Ingrese un email correcto.')));
      }        
         
     public function __construct() {

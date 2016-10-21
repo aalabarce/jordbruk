@@ -19,7 +19,6 @@ class CosechaRepository extends EntityRepository {
         
         if ($busqueda) {
             $qb->andWhere($qb->expr()->orX(
-                "s.nombre LIKE :busqueda", 
                 "c.beneficio LIKE :busqueda",
                 "c.rinde LIKE :busqueda",
                 "c.descripcion LIKE :busqueda"
