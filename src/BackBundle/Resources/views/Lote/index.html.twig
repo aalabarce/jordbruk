@@ -44,7 +44,7 @@
                                                 <td>{{lote.nombre}}</td>
                                                 <td>{{lote.superficie}} ha</td>
                                                 <td>{{lote.suelo}}</td>
-                                                <td>{{lote.descripcion}}</td>
+                                                <td>{% if lote.descripcion %}{{lote.descripcion}}{% else %}-{% endif %}</td>
                                                 <td>{{lote.provincia.nombre}}</td>
                                                 <td>{{lote.localidad.nombre}}</td>
                                                 <td>
