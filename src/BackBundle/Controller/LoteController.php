@@ -111,6 +111,14 @@ class LoteController extends BaseController {
         $lote = $em->getRepository('ApiBundle:Lote')->find($id);
         if (!$lote)
             throw $this->createNotFoundException('Unable to find entity');
+        
+        foreach($em->getRepository('ApiBundle:Cosecha')->getPorLote($id) as $cosecha) {
+            $em->remove($cosecha);
+        }
+        
+        foreach($em->getRepository('ApiBundle:Siembra')->findBy(array("lote" => $id)) as $siembras) {
+            $em->remove($siembras);
+        }
 
         $em->remove($lote);
         $em->flush();

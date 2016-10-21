@@ -143,7 +143,11 @@ class SiembraController extends BaseController {
         $siembra = $em->getRepository('ApiBundle:Siembra')->find($id);
         if (!$siembra)
             throw $this->createNotFoundException('Unable to find entity');
-
+        
+        foreach($em->getRepository('ApiBundle:Cosecha')->findBy(array("siembra" => $id)) as $cosecha) {
+            $em->remove($cosecha);
+        }
+        
         $em->remove($siembra);
         $em->flush();
 

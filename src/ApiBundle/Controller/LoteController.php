@@ -80,6 +80,12 @@ class LoteController extends FOSRestController {
     public function deleteAction($id) {
         $em = $this->getDoctrine()->getManager();
         $lote = $em->getRepository('ApiBundle:Lote')->find($id);
+        foreach($em->getRepository('ApiBundle:Cosecha')->getPorLote($id) as $cosecha) {
+            $em->remove($cosecha);
+        }        
+        foreach($em->getRepository('ApiBundle:Siembra')->findBy(array("lote" => $id)) as $siembras) {
+            $em->remove($siembras);
+        }
         $em->remove($lote);
         $em->flush();
         

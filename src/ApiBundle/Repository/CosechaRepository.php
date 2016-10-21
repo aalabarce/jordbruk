@@ -73,6 +73,18 @@ class CosechaRepository extends EntityRepository {
         return $qb->getQuery()->getResult();
     }
     
+    public function getPorLote($lote) {
+        $qb = $this->createQueryBuilder('c');
+        
+        $qb->select('c')
+            ->innerJoin("c.siembra","s")
+            ->innerJoin("s.lote","l")
+            ->where($qb->expr()->eq("l.id", ":lote"))
+            ->setParameter('lote', $lote);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
     public function get5MayorRinde($usuario) {
         $qb = $this->createQueryBuilder('c');
         

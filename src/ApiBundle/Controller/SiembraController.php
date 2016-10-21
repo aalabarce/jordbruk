@@ -105,6 +105,9 @@ class SiembraController extends FOSRestController {
     public function deleteAction($id) {
         $em = $this->getDoctrine()->getManager();
         $siembra = $em->getRepository('ApiBundle:Siembra')->find($id);
+        foreach($em->getRepository('ApiBundle:Cosecha')->findBy(array("siembra" => $id)) as $cosecha) {
+            $em->remove($cosecha);
+        }
         $em->remove($siembra);
         $em->flush();
         
