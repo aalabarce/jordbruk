@@ -8,7 +8,9 @@ var Script = function () {
                 Morris.Donut({
                     element: 'historico',
                     data: data.historico,
-                    colors: ['blue', 'yellow', 'grey', 'red', 'pink', 'violet'],
+//                    colors: ['#5fb677','#91c470','#bed57e','#c5c68a','#dddd95'],
+                    colors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0'],
+//                    colors: ['#1792a4','#44b4c4','#80c9c6','#a3d5d1','#c8e5e3'],
                     formatter: function (y) {
                         return y + " ha";
                     }
@@ -17,7 +19,9 @@ var Script = function () {
                 Morris.Donut({
                     element: 'actual',
                     data: data.actual,
-                    colors: ['blue', 'yellow', 'grey', 'red', 'pink', 'violet'],
+//                    colors: ['#5fb677','#91c470','#bed57e','#c5c68a','#dddd95'],
+                    colors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0'],
+//                    colors: ['#1792a4','#44b4c4','#80c9c6','#a3d5d1','#c8e5e3'],
                     formatter: function (y) {
                         return y + " ha";
                     }
@@ -36,7 +40,9 @@ var Script = function () {
                     xkey: 'y',
                     ykeys: data["cultivos"],
                     labels: data["cultivos"],
-                    lineColors: ['blue', 'yellow', 'grey', 'red', 'pink', 'violet']
+//                    lineColors: ['#5fb677','#91c470','#bed57e','#c5c68a','#dddd95']
+                    lineColors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0']
+//                    lineColors: ['#1792a4','#44b4c4','#80c9c6','#a3d5d1','#c8e5e3']
                 });
             }
         });
