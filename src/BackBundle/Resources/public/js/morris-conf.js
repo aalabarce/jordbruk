@@ -10,7 +10,7 @@ var Script = function () {
                     data: data.historico,
                     colors: ['blue', 'yellow', 'grey', 'red', 'pink', 'violet'],
                     formatter: function (y) {
-                        return y + " has";
+                        return y + " ha";
                     }
                 });
 
@@ -19,7 +19,7 @@ var Script = function () {
                     data: data.actual,
                     colors: ['blue', 'yellow', 'grey', 'red', 'pink', 'violet'],
                     formatter: function (y) {
-                        return y + " has";
+                        return y + " ha";
                     }
                 });
             }

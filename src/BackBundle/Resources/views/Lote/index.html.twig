@@ -42,14 +42,14 @@
                                         {% for lote in lotes|reverse %}
                                             <tr data-id="{{lote.id}}">
                                                 <td>{{lote.nombre}}</td>
-                                                <td>{{lote.superficie}}</td>
+                                                <td>{{lote.superficie}} ha</td>
                                                 <td>{{lote.suelo}}</td>
                                                 <td>{{lote.descripcion}}</td>
                                                 <td>{{lote.provincia.nombre}}</td>
                                                 <td>{{lote.localidad.nombre}}</td>
                                                 <td>
-                                                    <a class="btn btn-primary btn-xs" href="{{url('lote_edit', { 'id': lote.id })}}"><i class="fa fa-pencil"></i></a>
-                                                    <a class="btn btn-danger btn-xs confirm-delete" data-id="{{lote.id}}"><i class="fa fa-trash-o"></i></a>
+                                                    <a class="btn btn-primary btn-xs" href="{{url('lote_edit', { 'id': lote.id })}}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil"></i></a>
+                                                    <a class="btn btn-danger btn-xs confirm-delete" data-id="{{lote.id}}" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
                                         {% endfor %}

@@ -78,15 +78,15 @@
                                                 <td>{{siembra.fecha|date('d-m-Y')}}</td>
                                                 <td>{{siembra.cultivo}}</td>
                                                 <td>{{siembra.lote}}</td>
-                                                <td>{{siembra.aguaRecibida}}</td>
+                                                <td>{{siembra.aguaRecibida}} mm</td>
                                                 <td>{{siembra.fertilizado ? "Si" : "No"}}</td>
                                                 <td>{{siembra.fumigado ? "Si" : "No"}}</td>
                                                 <td>{{siembra.arado ? "Si" : "No"}}</td>
-                                                <td>{{siembra.costo}}</td>
+                                                <td>${{siembra.costo}}</td>
                                                 <td>{{siembra.descripcion}}</td>
                                                 <td>
-                                                    <a class="btn btn-primary btn-xs" href="{{url('siembra_edit', { 'id': siembra.id })}}"><i class="fa fa-pencil"></i></a>
-                                                    <a class="btn btn-danger btn-xs confirm-delete" data-id="{{siembra.id}}"><i class="fa fa-trash-o"></i></a>
+                                                    <a class="btn btn-primary btn-xs" href="{{url('siembra_edit', { 'id': siembra.id })}}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil"></i></a>
+                                                    <a class="btn btn-danger btn-xs confirm-delete" data-id="{{siembra.id}}" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
                                         {% endfor %}

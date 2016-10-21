@@ -50,12 +50,12 @@
                                             <tr data-id="{{cosecha.id}}">
                                                 <td>{{cosecha.siembra}}</td>
                                                 <td>{{cosecha.fecha|date('d-m-Y')}}</td>
-                                                <td>{{cosecha.rinde}}</td>
-                                                <td>{{cosecha.beneficio}}</td>
+                                                <td>{{cosecha.rinde}} kg/ha</td>
+                                                <td>${{cosecha.beneficio}}</td>
                                                 <td>{{cosecha.descripcion}}</td>
                                                 <td>
-                                                    <a class="btn btn-primary btn-xs" href="{{url('cosecha_edit', { 'id': cosecha.id })}}"><i class="fa fa-pencil"></i></a>
-                                                    <a class="btn btn-danger btn-xs confirm-delete" data-id="{{cosecha.id}}"><i class="fa fa-trash-o"></i></a>
+                                                    <a class="btn btn-primary btn-xs" href="{{url('cosecha_edit', { 'id': cosecha.id })}}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil"></i></a>
+                                                    <a class="btn btn-danger btn-xs confirm-delete" data-id="{{cosecha.id}}" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
