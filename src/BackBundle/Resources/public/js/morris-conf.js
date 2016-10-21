@@ -40,6 +40,30 @@ var Script = function () {
                 });
             }
         });
+
+        $.ajax({
+            type: 'GET',
+            dataType: "JSON",
+            url: '/beneficios_anuales',
+            success: function (data) {
+                Morris.Bar({
+                    element: 'beneficios',
+                    data: data,
+                    xkey: 'year',
+                    ykeys: ['beneficio'],
+                    labels: ['Beneficio'],
+                    barRatio: 0.4,
+                    xLabelAngle: 35,
+                    hideHover: 'auto',
+                    barColors: ['#ac92ec']
+                });
+                
+                if (!data.length) {
+                    $("#graficos").hide();
+                    $("#mensaje").show();
+                }
+            }
+        });
     });
 }();
 
