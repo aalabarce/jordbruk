@@ -79,9 +79,9 @@
                                                 <td>{{siembra.cultivo}}</td>
                                                 <td>{{siembra.lote}}</td>
                                                 <td>{{siembra.aguaRecibida}} mm</td>
-                                                <td>{{siembra.fertilizado ? "Si" : "No"}}</td>
-                                                <td>{{siembra.fumigado ? "Si" : "No"}}</td>
-                                                <td>{{siembra.arado ? "Si" : "No"}}</td>
+                                                <td>{% if siembra.fertilizado %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-remove"></i> {% endif %}</td>
+                                                <td>{% if siembra.fumigado %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-remove"></i>{% endif %}</td>
+                                                <td>{% if siembra.arado %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-remove"></i>{% endif %}</td>
                                                 <td>${{siembra.costo}}</td>
                                                 <td>{% if siembra.descripcion %}{{siembra.descripcion}}{% else %}-{% endif %}</td>
                                                 <td>
