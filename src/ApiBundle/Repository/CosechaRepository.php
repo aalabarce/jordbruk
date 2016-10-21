@@ -151,7 +151,7 @@ class CosechaRepository extends EntityRepository {
             JOIN Siembra s ON s.id = c.siembra_id
             JOIN Lote l ON s.lote_id = l.id
             JOIN Usuario u ON l.usuario_id = u.id
-            WHERE u.id = $usuario;";
+            WHERE u.id = $usuario AND c.deletedAt is null;";
         
         $rsm = new ResultSetMapping;
         $rsm->addScalarResult('cosecha', 'cosecha');
@@ -171,7 +171,7 @@ class CosechaRepository extends EntityRepository {
             JOIN Lote l ON s.lote_id = l.id
             JOIN Cultivo c ON s.cultivo_id = c.id
             JOIN Usuario u ON l.usuario_id = u.id            
-            WHERE u.id = $usuario
+            WHERE u.id = $usuario AND co.deletedAt is null
             GROUP BY EXTRACT(YEAR FROM s.fecha), c.nombre;";
         
         $rsm = new ResultSetMapping;
@@ -188,7 +188,7 @@ class CosechaRepository extends EntityRepository {
             JOIN Siembra s ON s.id = co.siembra_id            
             JOIN Lote l ON s.lote_id = l.id
             JOIN Usuario u ON l.usuario_id = u.id            
-            WHERE u.id = $usuario
+            WHERE u.id = $usuario AND co.deletedAt is null
             GROUP BY EXTRACT(YEAR FROM s.fecha);";
         
         $rsm = new ResultSetMapping;
