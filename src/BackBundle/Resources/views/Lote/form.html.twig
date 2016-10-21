@@ -1,7 +1,7 @@
 {{ form_start(form) }}
 
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Nombre</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Nombre*</label>
     <div class="col-sm-3">
         {{ form_widget(form.nombre, { 'attr': {'class': 'form-control', 'autofocus':'true'} }) }}
         <span class="form-error">{{ form_errors(form.nombre) }}</span>
@@ -9,7 +9,7 @@
 </div>
     
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Superficie (ha)</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Superficie* (ha)</label>
     <div class="col-sm-3">
         {{ form_widget(form.superficie, { 'attr': {'class': 'form-control'} }) }}
         <span class="form-error">{{ form_errors(form.superficie) }}</span>
@@ -17,7 +17,7 @@
 </div>
     
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Suelo</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Suelo*</label>
     <div class="col-sm-3">
         {{ form_widget(form.suelo, { 'attr': {'class': 'form-control'} }) }}
         <span class="form-error">{{ form_errors(form.suelo) }}</span>
@@ -32,7 +32,7 @@
 </div>
     
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Provincia</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Provincia*</label>
     <div class="col-sm-3">
         {{ form_widget(form.provincia, { 'attr': {'class': 'form-control provincia'} }) }}
         <span class="form-error">{{ form_errors(form.provincia) }}</span>
@@ -40,18 +40,18 @@
 </div>
 
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Localidad</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Localidad*</label>
     <div class="col-sm-3">
         {{ form_widget(form.localidad, { 'attr': {'class': 'form-control localidad'} }) }}
         <span class="form-error">{{ form_errors(form.localidad) }}</span>
     </div>
 </div>
-
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <button type="submit" style="background-color: #8bb837; border-color: #8bb837; color: white" class="btn">Guardar</button>
         <a class="btn btn-danger" href="{{url('lote')}}">Cancelar</a>
     </div>
 </div>
+<span>(*) Campos obligatorios </span>
 
 {{ form_end(form) }}

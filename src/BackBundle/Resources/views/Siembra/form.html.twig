@@ -1,7 +1,7 @@
 {{ form_start(form) }}
 
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Fecha</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Fecha*</label>
     <div class="col-sm-3">
         {{ form_widget(form.fecha, { 'attr': {'class': 'form-control fecha', 'placeholder': "DD-MM-AAAA", 'autocomplete': "off"} }) }}
         <span class="form-error">{{ form_errors(form.fecha) }}</span>
@@ -9,7 +9,7 @@
 </div>
     
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Cultivo</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Cultivo*</label>
     <div class="col-sm-3">
         {{ form_widget(form.cultivo, { 'attr': {'class': 'form-control'} }) }}
         <span class="form-error">{{ form_errors(form.cultivo) }}</span>
@@ -17,7 +17,7 @@
 </div>
     
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Lote</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Lote*</label>
     <div class="col-sm-3">
         {{ form_widget(form.lote, { 'attr': {'class': 'form-control'} }) }}
         <span class="form-error">{{ form_errors(form.lote) }}</span>
@@ -25,7 +25,7 @@
 </div>
     
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Agua recibida (mm)</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Agua recibida* (mm)</label>
     <div class="col-sm-3">
         {{ form_widget(form.aguaRecibida, { 'attr': {'class': 'form-control'} }) }}
         <span class="form-error">{{ form_errors(form.aguaRecibida) }}</span>
@@ -54,7 +54,7 @@
 </div>
 
 <div class="row form-group">
-    <label class="col-sm-1 col-md-offset-3 control-label">Costo ($)</label>
+    <label class="col-sm-1 col-md-offset-3 control-label">Costo* ($)</label>
     <div class="col-sm-3">
         {{ form_widget(form.costo, { 'attr': {'class': 'form-control'} }) }}
         <span class="form-error">{{ form_errors(form.costo) }}</span>
@@ -67,11 +67,13 @@
         {{ form_widget(form.descripcion, { 'attr': {'class': 'form-control'} }) }}
     </div>
 </div>
+    
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <button type="submit" style="background-color: #8bb837; border-color: #8bb837; color: white" class="btn">Guardar</button>
         <a class="btn btn-danger" href="{{url('siembra')}}">Cancelar</a>
     </div>
 </div>
+<span>(*) Campos obligatorios </span>
 
 {{ form_end(form) }}
