@@ -17,7 +17,7 @@
         <body class="login">
             <div id="login-page">
                 <div class="container">
-                    <form class="form-login" action="{{ path("fos_user_security_check") }}" method="post">
+                    <form class="form-login" action="{{ path("fos_user_security_check") }}" method="post" novalidate>
                         <h2 class="form-login-heading">iniciar sesión</h2>
                         <div class="login-wrap">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
@@ -44,7 +44,7 @@
 
                             <div class="registration">
                                 Todavía no tenes una cuenta?<br/>
-                                <a href="{{ path('registrar') }}">Registrarme</a>
+                                <a href="{{ path('registrar') }}" style="color:#8bb837">Registrarme</a>
                             </div>
                         </div>
                     </form>
