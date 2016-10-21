@@ -182,4 +182,20 @@ class CosechaRepository extends EntityRepository {
         
         return $query->getScalarResult();
     }
+    public function getBeneficioAnual($usuario) {
+        $sql = "SELECT EXTRACT(YEAR FROM s.fecha) AS year, SUM(co.beneficio) AS beneficio
+            FROM Cosecha co
+            JOIN Siembra s ON s.id = co.siembra_id            
+            JOIN Lote l ON s.lote_id = l.id
+            JOIN Usuario u ON l.usuario_id = u.id            
+            WHERE u.id = $usuario
+            GROUP BY EXTRACT(YEAR FROM s.fecha);";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('year', 'year');
+        $rsm->addScalarResult('beneficio', 'beneficio');
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        
+        return $query->getScalarResult();
+    }
 }

@@ -114,11 +114,10 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/cosechas_por_lotes", name="cosechas_por_lotes", options={"expose"=true})
+     * @Route("/beneficios_anuales", name="beneficios_anuales", options={"expose"=true})
      */
-    public function getUltimas4PorLoteAction() {
-        $datos = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getUltimas4PorLote($this->getUser()->getId());        
-     
+    public function getBeneficioAnualAction() {
+        $datos = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getBeneficioAnual($this->getUser()->getId());        
         return new Response(json_encode($datos));
     }
 
