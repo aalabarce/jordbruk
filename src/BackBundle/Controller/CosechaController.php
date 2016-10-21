@@ -5,6 +5,7 @@ namespace BackBundle\Controller;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\FormError;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ApiBundle\Entity\Cosecha;
 use ApiBundle\Form\CosechaType;
@@ -52,6 +53,12 @@ class CosechaController extends BaseController {
         $cosecha = new Cosecha();
         $form = $this->createForm(CosechaType::class, $cosecha);
         $form->handleRequest($request);
+        
+        $siembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->find($request->get('cosecha')["siembra"]);
+        if(new \DateTime($request->get('cosecha')["fecha"]) < $siembra->getFecha()) {
+            $error = new FormError("La fecha de la cosecha debe ser mayor a la de la siembra");
+            $form->get('fecha')->addError($error);
+        }
         
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->persist($cosecha);

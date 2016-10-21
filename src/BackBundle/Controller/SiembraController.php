@@ -5,6 +5,7 @@ namespace BackBundle\Controller;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\FormError;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ApiBundle\Entity\Siembra;
 use ApiBundle\Form\SiembraType;
@@ -70,9 +71,9 @@ class SiembraController extends BaseController {
         $form = $this->createForm(SiembraType::class, $siembra);
         $form->handleRequest($request);
         
-        $ultimaSiembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getUltimasSiembra($request->request->get('lote'));
-        if($ultimaSiembra && date_diff(new \DateTime($request->request->get('fecha')), $ultimaSiembra[0]->getFecha())->format("%d") < 90) {
-            $error = new FormError("Este lote ya esta sembrado");
+        $ultimaSiembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getUltimasSiembra($request->get('siembra')["lote"]);
+        if($ultimaSiembra && date_diff(new \DateTime($request->get('siembra')["fecha"]), $ultimaSiembra[0]->getFecha())->days < 90) {
+            $error = new FormError("Este lote ya esta sembrado para la fecha seleccionada.");
             $form->get('fecha')->addError($error);
         }
         
@@ -115,6 +116,12 @@ class SiembraController extends BaseController {
         
         $form = $this->createForm(SiembraType::class, $siembra);
         $form->handleRequest($request);
+
+        $ultimaSiembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getUltimasSiembra($request->get('siembra')["lote"]);
+        if($ultimaSiembra && date_diff(new \DateTime($request->get('siembra')["fecha"]), $ultimaSiembra[0]->getFecha())->days < 90) {
+            $error = new FormError("Este lote ya esta sembrado para la fecha seleccionada.");
+            $form->get('fecha')->addError($error);
+        }
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();

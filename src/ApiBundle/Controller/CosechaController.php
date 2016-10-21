@@ -32,6 +32,11 @@ class CosechaController extends FOSRestController {
         
         $cosecha = new Cosecha();
         $form = $this->createForm(CosechaType::class, $cosecha);
+                
+        $siembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->find($request->request->get('siembra'));
+        if(new \DateTime($request->get('cosecha')["fecha"]) < $siembra->getFecha()) {
+            throw new BadRequestHttpException("La fecha de la cosecha debe ser mayor a la de la siembra");
+        }
         
         $fecha = $request->request->get('fecha');
         if(strlen($fecha) > 10) {

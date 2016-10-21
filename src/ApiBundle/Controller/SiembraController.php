@@ -29,9 +29,10 @@ class SiembraController extends FOSRestController {
     public function newAction(Request $request) {
         $siembra = new Siembra();
         $form = $this->createForm(SiembraType::class, $siembra);
+
         $ultimaSiembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getUltimasSiembra($request->request->get('lote'));
         $fecha = $request->request->get('fecha');
-        if($ultimaSiembra && date_diff(new \DateTime($fecha), $ultimaSiembra[0]->getFecha())->format("%d") < 90) {
+        if($ultimaSiembra && date_diff(new \DateTime($fecha), $ultimaSiembra[0]->getFecha())->days < 90) {
             throw new BadRequestHttpException("Este lote ya esta sembrado");
         }
 
@@ -69,7 +70,12 @@ class SiembraController extends FOSRestController {
         $siembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->find($id);
         $form = $this->createForm(SiembraType::class, $siembra);
         
+        $ultimaSiembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getUltimasSiembra($request->request->get('lote'));
         $fecha = $request->request->get('fecha');
+        if($ultimaSiembra && date_diff(new \DateTime($fecha), $ultimaSiembra[0]->getFecha())->days < 90) {
+            throw new BadRequestHttpException("Este lote ya esta sembrado");
+        }
+
         if(strlen($fecha) > 10) {
            $y = substr($fecha, 0, 4);
            $m = substr($fecha, 5, 2);
