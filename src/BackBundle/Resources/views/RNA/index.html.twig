@@ -8,57 +8,55 @@
             <div class="tab-pane" id="chartjs">
                 <div class="row mt">
                     <div class="col-lg-12">
-                        <div class="form-panel">                            
-                            <div class="row form-group">
-                                <div>
-                                    <i id="loader" style="margin-left: 47%; display:none" class="fa fa-cog fa-spin fa-3x fa-fw"></i>
-                                </div>
+                        <div class="row form-group">
+                            <div>
+                                <i id="loader" style="margin-left: 47%; display:none" class="fa fa-cog fa-spin fa-3x fa-fw"></i>
                             </div>
-                            <div class="row form-group">
-                                <div class="col-sm-6">
-                                    <label class="col-sm-1 control-label">Lote</label>
-                                    <select name="lote" id="lote" class="form-control">
-                                        {% for lote in lotes %}
-                                            <option value="{{lote.id}}">{{lote.nombre}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label class="col-sm-1 control-label">Mes</label>
-                                    <select name="mes" id="mes" class="form-control">
-                                        <option value="1">Enero</option>
-                                        <option value="2">Febrero</option>
-                                        <option value="3">Marzo</option>
-                                        <option value="4">Abril</option>
-                                        <option value="5">Mayo</option>
-                                        <option value="6">Junio</option>
-                                        <option value="7">Julio</option>
-                                        <option value="8">Agosto</option>
-                                        <option value="9">Septiembre</option>
-                                        <option value="10">Octubre</option>
-                                        <option value="11">Noviembre</option>
-                                        <option value="12">Diciembre</option>
-                                    </select>
-                                </div>                          
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label class="col-sm-1 control-label">Lote</label>
+                                <select name="lote" id="lote" class="form-control">
+                                    {% for lote in lotes %}
+                                        <option value="{{lote.id}}">{{lote.nombre}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <div class="row form-group">
-                                <div class="col-sm-1">
-                                    <input type="checkbox" id="rotacion"/>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label class="control-label">Rotación de cultivos</label>
-                                </div>
+                            <div class="col-sm-6">
+                                <label class="col-sm-1 control-label">Mes</label>
+                                <select name="mes" id="mes" class="form-control">
+                                    <option value="1">Enero</option>
+                                    <option value="2">Febrero</option>
+                                    <option value="3">Marzo</option>
+                                    <option value="4">Abril</option>
+                                    <option value="5">Mayo</option>
+                                    <option value="6">Junio</option>
+                                    <option value="7">Julio</option>
+                                    <option value="8">Agosto</option>
+                                    <option value="9">Septiembre</option>
+                                    <option value="10">Octubre</option>
+                                    <option value="11">Noviembre</option>
+                                    <option value="12">Diciembre</option>
+                                </select>
+                            </div>                          
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-1">
+                                <input type="checkbox" id="rotacion"/>
                             </div>
-                            <div class="row form-group">
-                                <div class="col-md-4" style="margin-left: 44%;">
-                                    <a id="consultar" class="btn" style="background-color: #8bb837; border-color: #8bb837; color: white">Consultar</a>
-                                </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Rotación de cultivos</label>
                             </div>
-                            <div class="row form-group">
-                                <div class="col-md-12">
-                                    <p id="respuesta"></p>
-                                    <p id="ganancia"></p>
-                                </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-4" style="margin-left: 44%;">
+                                <a id="consultar" class="btn" style="background-color: #8bb837; border-color: #8bb837; color: white">Consultar</a>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <p id="respuesta"></p>
+                                <p id="ganancia"></p>
                             </div>
                         </div>
                     </div>

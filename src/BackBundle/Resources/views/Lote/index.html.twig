@@ -6,65 +6,63 @@
             <h3><i class="fa fa-angle-right"></i> Administrar Lotes</h3>
             <div class="row mt">
                 <div class="col-lg-12">
-                    <div class="form-panel">
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <a href="{{url('lote_new')}}" style="background-color: #8bb837; border-color: #8bb837; color: white" class="btn pull-right">Nuevo</a>
+                        </div>
+                    </div>
+                    <form id="lote_busqueda" action="{{url('lote')}}">
                         <div class="row">
-                            <div class="form-group col-lg-12">
-                                <a href="{{url('lote_new')}}" style="background-color: #8bb837; border-color: #8bb837; color: white" class="btn pull-right">Nuevo</a>
+                            <div class="form-group col-lg-3">
+                                <label>Buscar:</label>
+                                <input class="filtro form-control" value="{{busqueda}}" name="busqueda">
+                            </div>
+                            <div class="form-group col-lg-9" style="margin-top: 22px;">
+                                <button type="submit" style="background-color: #8bb837; border-color: #8bb837; color: white" class="btn"><i class="fa fa-search"></i> Buscar</button>
+                                <a id="limpiar" style="margin-left: 10px;" class="btn btn-default">Limpiar</a>
                             </div>
                         </div>
-                        <form id="lote_busqueda" action="{{url('lote')}}">
-                            <div class="row">
-                                <div class="form-group col-lg-3">
-                                    <label>Buscar:</label>
-                                    <input class="filtro form-control" value="{{busqueda}}" name="busqueda">
-                                </div>
-                                <div class="form-group col-lg-9" style="margin-top: 22px;">
-                                    <button type="submit" style="background-color: #8bb837; border-color: #8bb837; color: white" class="btn"><i class="fa fa-search"></i> Buscar</button>
-                                    <a id="limpiar" style="margin-left: 10px;" class="btn btn-default">Limpiar</a>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th><strong>Nombre</strong></th>
+                                    <th><strong>Superficie</strong></th>
+                                    <th><strong>Suelo</strong></th>
+                                    <th><strong>Descripción</strong></th>
+                                    <th><strong>Provincia</strong></th>
+                                    <th><strong>Localidad</strong></th>
+                                    <th class="col-sm-1"><strong>Acciones</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if lotes %}
+                                    {% for lote in lotes|reverse %}
+                                        <tr data-id="{{lote.id}}">
+                                            <td>{{lote.nombre}}</td>
+                                            <td>{{lote.superficie}} ha</td>
+                                            <td>{{lote.suelo}}</td>
+                                            <td>{% if lote.descripcion %}{{lote.descripcion}}{% else %}-{% endif %}</td>
+                                            <td>{{lote.provincia.nombre}}</td>
+                                            <td>{{lote.localidad.nombre}}</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-xs" href="{{url('lote_edit', { 'id': lote.id })}}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil"></i></a>
+                                                <a class="btn btn-danger btn-xs confirm-delete" data-id="{{lote.id}}" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fa fa-trash-o"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
                                     <tr>
-                                        <th><strong>Nombre</strong></th>
-                                        <th><strong>Superficie</strong></th>
-                                        <th><strong>Suelo</strong></th>
-                                        <th><strong>Descripción</strong></th>
-                                        <th><strong>Provincia</strong></th>
-                                        <th><strong>Localidad</strong></th>
-                                        <th class="col-sm-1"><strong>Acciones</strong></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% if lotes %}
-                                        {% for lote in lotes|reverse %}
-                                            <tr data-id="{{lote.id}}">
-                                                <td>{{lote.nombre}}</td>
-                                                <td>{{lote.superficie}} ha</td>
-                                                <td>{{lote.suelo}}</td>
-                                                <td>{% if lote.descripcion %}{{lote.descripcion}}{% else %}-{% endif %}</td>
-                                                <td>{{lote.provincia.nombre}}</td>
-                                                <td>{{lote.localidad.nombre}}</td>
-                                                <td>
-                                                    <a class="btn btn-primary btn-xs" href="{{url('lote_edit', { 'id': lote.id })}}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil"></i></a>
-                                                    <a class="btn btn-danger btn-xs confirm-delete" data-id="{{lote.id}}" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fa fa-trash-o"></i></a>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    {% else %}
-                                        <tr>
-                                            <td>No se encontraron resultados</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>    
-                                    {% endif %}
-                                </tbody>
-                            </table>
-                        </div>
+                                        <td>No se encontraron resultados</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>    
+                                {% endif %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

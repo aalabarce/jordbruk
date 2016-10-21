@@ -6,108 +6,106 @@
             <h3><i class="fa fa-angle-right"></i> Administrar Siembras</h3>
             <div class="row mt">
                 <div class="col-lg-12">
-                    <div class="form-panel">
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <a href="{{url('siembra_new')}}" style="background-color: #8bb837; border-color: #8bb837; color: white" class="btn pull-right">Nuevo</a>
+                        </div>
+                    </div>
+                    <form id="siembra_busqueda" action="{{url('siembra')}}">
+                        <div class="row form-group">
+                            <div class="col-lg-3">
+                                <label>Buscar:</label>
+                                <input class="filtro form-control" value="{{busqueda}}" name="busqueda">
+                            </div>
+                            <div class="col-lg-2">
+                                <label>Desde:</label>
+                                <input class="filtro form-control fecha" autocomplete="off" value="{{fechaDesde}}" name="fechaDesde">
+                            </div>
+                            <div class="col-lg-2">
+                                <label>Hasta:</label>
+                                <input class="filtro form-control fecha" autocomplete="off" value="{{fechaHasta}}" name="fechaHasta">
+                            </div>
+                            <div class="col-lg-2">
+                                <label>Lote</label>
+                                <select name="loteId" class="filtro form-control">
+                                    <option></option>
+                                    {% for lote in lotes %}
+                                        <option value="{{lote.id}}" {% if lote.id == loteId %}selected{% endif %}>{{lote.nombre}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-lg-3" style="margin-top: 22px;">
+                                <button type="submit" class="btn" style="background-color: #8bb837; border-color: #8bb837; color: white"><i class="fa fa-search"></i> Buscar</button>
+                                <a id="limpiar" style="margin-left: 10px;" class="btn btn-default">Limpiar</a>
+                            </div>
+                        </div>
                         <div class="row">
-                            <div class="form-group col-lg-12">
-                                <a href="{{url('siembra_new')}}" style="background-color: #8bb837; border-color: #8bb837; color: white" class="btn pull-right">Nuevo</a>
+                            <div class="col-lg-2">
+                                <input type="checkbox" class="filtro" value="fertilizado" name="acciones[]" {% if fertilizado %} checked="checked" {% endif %}>
+                                <label>Fertilizado</label>
+                            </div>
+                            <div class="col-lg-2">
+                                <input type="checkbox" class="filtro" value="arado" name="acciones[]" {% if arado %} checked="checked" {% endif %}>
+                                <label>Arado</label>
+                            </div>
+                            <div class="col-lg-2">
+                                <input type="checkbox" class="filtro" value="fumigado" name="acciones[]" {% if fumigado %} checked="checked" {% endif %}>
+                                <label>Fumigado</label>
                             </div>
                         </div>
-                        <form id="siembra_busqueda" action="{{url('siembra')}}">
-                            <div class="row form-group">
-                                <div class="col-lg-3">
-                                    <label>Buscar:</label>
-                                    <input class="filtro form-control" value="{{busqueda}}" name="busqueda">
-                                </div>
-                                <div class="col-lg-2">
-                                    <label>Desde:</label>
-                                    <input class="filtro form-control fecha" autocomplete="off" value="{{fechaDesde}}" name="fechaDesde">
-                                </div>
-                                <div class="col-lg-2">
-                                    <label>Hasta:</label>
-                                    <input class="filtro form-control fecha" autocomplete="off" value="{{fechaHasta}}" name="fechaHasta">
-                                </div>
-                                <div class="col-lg-2">
-                                    <label>Lote</label>
-                                    <select name="loteId" class="filtro form-control">
-                                        <option></option>
-                                        {% for lote in lotes %}
-                                            <option value="{{lote.id}}" {% if lote.id == loteId %}selected{% endif %}>{{lote.nombre}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="col-lg-3" style="margin-top: 22px;">
-                                    <button type="submit" class="btn" style="background-color: #8bb837; border-color: #8bb837; color: white"><i class="fa fa-search"></i> Buscar</button>
-                                    <a id="limpiar" style="margin-left: 10px;" class="btn btn-default">Limpiar</a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <input type="checkbox" class="filtro" value="fertilizado" name="acciones[]" {% if fertilizado %} checked="checked" {% endif %}>
-                                    <label>Fertilizado</label>
-                                </div>
-                                <div class="col-lg-2">
-                                    <input type="checkbox" class="filtro" value="arado" name="acciones[]" {% if arado %} checked="checked" {% endif %}>
-                                    <label>Arado</label>
-                                </div>
-                                <div class="col-lg-2">
-                                    <input type="checkbox" class="filtro" value="fumigado" name="acciones[]" {% if fumigado %} checked="checked" {% endif %}>
-                                    <label>Fumigado</label>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="table-responsive" style="margin-top: 20px">
-                            <table class="table table-striped">
-                                <thead>
+                    </form>
+                    <div class="table-responsive" style="margin-top: 20px">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th><strong>Fecha</strong></th>
+                                    <th><strong>Cultivo</strong></th>
+                                    <th><strong>Lote</strong></th>
+                                    <th><strong>Agua recibida</strong></th>
+                                    <th><strong>Fertilizado</strong></th>
+                                    <th><strong>Fumigado</strong></th>
+                                    <th><strong>Arado</strong></th>
+                                    <th><strong>Costo</strong></th>
+                                    <th><strong>Descripción</strong></th>
+                                    <th class="col-sm-1"><strong>Acciones</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if siembras %}
+                                    {% for siembra in siembras|reverse %}
+                                        <tr data-id="{{siembra.id}}">
+                                            <td>{{siembra.fecha|date('d-m-Y')}}</td>
+                                            <td>{{siembra.cultivo}}</td>
+                                            <td>{{siembra.lote}}</td>
+                                            <td>{{siembra.aguaRecibida}} mm</td>
+                                            <td>{{siembra.fertilizado ? "Si" : "No"}}</td>
+                                            <td>{{siembra.fumigado ? "Si" : "No"}}</td>
+                                            <td>{{siembra.arado ? "Si" : "No"}}</td>
+                                            <td>${{siembra.costo}}</td>
+                                            <td>{% if siembra.descripcion %}{{siembra.descripcion}}{% else %}-{% endif %}</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-xs" href="{{url('siembra_edit', { 'id': siembra.id })}}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil"></i></a>
+                                                <a class="btn btn-danger btn-xs confirm-delete" data-id="{{siembra.id}}" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fa fa-trash-o"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
                                     <tr>
-                                        <th><strong>Fecha</strong></th>
-                                        <th><strong>Cultivo</strong></th>
-                                        <th><strong>Lote</strong></th>
-                                        <th><strong>Agua recibida</strong></th>
-                                        <th><strong>Fertilizado</strong></th>
-                                        <th><strong>Fumigado</strong></th>
-                                        <th><strong>Arado</strong></th>
-                                        <th><strong>Costo</strong></th>
-                                        <th><strong>Descripción</strong></th>
-                                        <th class="col-sm-1"><strong>Acciones</strong></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% if siembras %}
-                                        {% for siembra in siembras|reverse %}
-                                            <tr data-id="{{siembra.id}}">
-                                                <td>{{siembra.fecha|date('d-m-Y')}}</td>
-                                                <td>{{siembra.cultivo}}</td>
-                                                <td>{{siembra.lote}}</td>
-                                                <td>{{siembra.aguaRecibida}} mm</td>
-                                                <td>{{siembra.fertilizado ? "Si" : "No"}}</td>
-                                                <td>{{siembra.fumigado ? "Si" : "No"}}</td>
-                                                <td>{{siembra.arado ? "Si" : "No"}}</td>
-                                                <td>${{siembra.costo}}</td>
-                                                <td>{% if siembra.descripcion %}{{siembra.descripcion}}{% else %}-{% endif %}</td>
-                                                <td>
-                                                    <a class="btn btn-primary btn-xs" href="{{url('siembra_edit', { 'id': siembra.id })}}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil"></i></a>
-                                                    <a class="btn btn-danger btn-xs confirm-delete" data-id="{{siembra.id}}" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fa fa-trash-o"></i></a>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    {% else %}
-                                        <tr>
-                                            <td>No se encontraron resultados</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>      
-                                    {% endif %}
-                                </tbody>
-                            </table>
-                        </div>
+                                        <td>No se encontraron resultados</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>      
+                                {% endif %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
