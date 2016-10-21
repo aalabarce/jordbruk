@@ -50,7 +50,7 @@ class LoteRepository extends EntityRepository {
             ->setParameter('nombre', $nombre)
             ->setParameter('usuario', $usuario);
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
         
     public function getSueloTotalPorSiembra($usuario) {

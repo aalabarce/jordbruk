@@ -58,6 +58,10 @@ class LoteController extends FOSRestController {
      */
     public function editAction(Request $request, $id) {
         $lote = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->find($id);
+        
+        if($lote->getNombre() != $request->request->get('nombre') && $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->getPorNombre($request->request->get('nombre'), $this->getUser()->getId()))
+            throw new BadRequestHttpException("Ya existe un lote con ese nombre");
+        
         $form = $this->createForm(LoteType::class, $lote);
         $form->submit($request->request->all());
         

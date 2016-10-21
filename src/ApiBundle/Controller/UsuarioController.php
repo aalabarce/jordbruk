@@ -29,6 +29,16 @@ class UsuarioController extends FOSRestController {
         $form = $this->createForm(UsuarioType::class, $usuario);
         $form->submit($request->request->all());
         
+        if($this->getDoctrine()->getManager()->getRepository('ApiBundle:Usuario')->findOneBy(array('username' => $request->get('username')))) {
+            $error = new FormError("Este nombre de usuario ya esta en uso.");
+            $form->get('username')->addError($error);
+        }
+        
+        if($this->getDoctrine()->getManager()->getRepository('ApiBundle:Usuario')->findOneBy(array('email' => $request->get("email")))) {
+            $error = new FormError("Este email ya esta en uso.");
+            $form->get('email')->addError($error);
+        }
+        
         if ($form->isValid()) {
             $usuario->setEnabled(true);
             

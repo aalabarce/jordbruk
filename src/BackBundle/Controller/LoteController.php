@@ -5,6 +5,7 @@ namespace BackBundle\Controller;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\FormError;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ApiBundle\Entity\Lote;
 use ApiBundle\Form\LoteType;
@@ -49,6 +50,11 @@ class LoteController extends BaseController {
         $form = $this->createForm(LoteType::class, $lote);
         $form->handleRequest($request);
         
+        if($this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->getPorNombre($request->get('lote')["nombre"], $this->getUser()->getId())) {
+            $error = new FormError("Ya tienes un lote con ese nombre.");
+            $form->get('nombre')->addError($error);
+        }
+        
         if ($form->isValid()) {
             $usuario = $this->container->get('security.token_storage')->getToken()->getUser();
             $lote->setUsuario($usuario);
@@ -88,8 +94,15 @@ class LoteController extends BaseController {
         if (!$lote)
             throw $this->createNotFoundException('Unable to find entity');
         
+        $nombre = $lote->getNombre();
+        
         $form = $this->createForm(LoteType::class, $lote);
         $form->handleRequest($request);
+        
+        if($nombre != $request->get('lote')["nombre"]  && $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->getPorNombre($request->get('lote')["nombre"], $this->getUser()->getId())) {
+            $error = new FormError("Ya tienes un lote con ese nombre.");
+            $form->get('nombre')->addError($error);
+        }
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();

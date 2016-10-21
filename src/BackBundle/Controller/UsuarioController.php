@@ -5,6 +5,7 @@ namespace BackBundle\Controller;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Form\FormError;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ApiBundle\Entity\Usuario;
 use ApiBundle\Form\UsuarioType;
@@ -22,6 +23,16 @@ class UsuarioController extends BaseController
         $usuario = new Usuario();
         $form = $this->createForm(UsuarioType::class, $usuario);
         $form->handleRequest($request);
+        
+        if($this->getDoctrine()->getManager()->getRepository('ApiBundle:Usuario')->findOneBy(array('username' => $request->get('usuario')["username"] ))) {
+            $error = new FormError("Este nombre de usuario ya esta en uso.");
+            $form->get('username')->addError($error);
+        }
+        
+        if($this->getDoctrine()->getManager()->getRepository('ApiBundle:Usuario')->findOneBy(array('email' => $request->get('usuario')["email"] ))) {
+            $error = new FormError("Este email ya esta en uso.");
+            $form->get('email')->addError($error);
+        }
         
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $this->get('security.password_encoder')->encodePassword($usuario, $usuario->getPlainPassword());
