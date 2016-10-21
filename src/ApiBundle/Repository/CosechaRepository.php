@@ -12,6 +12,7 @@ class CosechaRepository extends EntityRepository {
         
         $qb->select('c')
             ->innerJoin("c.siembra","s")
+            ->innerJoin("s.cultivo","cu")
             ->innerJoin("s.lote","l")
             ->innerJoin("l.usuario","u")
             ->where($qb->expr()->eq("u.id", ":usuario"))
@@ -21,7 +22,9 @@ class CosechaRepository extends EntityRepository {
             $qb->andWhere($qb->expr()->orX(
                 "c.beneficio LIKE :busqueda",
                 "c.rinde LIKE :busqueda",
-                "c.descripcion LIKE :busqueda"
+                "c.descripcion LIKE :busqueda",
+                "cu.nombre LIKE :busqueda",
+                "l.nombre LIKE :busqueda"
             ));
             $qb->setParameter('busqueda', '%'.$busqueda.'%');
         }
