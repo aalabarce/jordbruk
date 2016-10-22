@@ -9,8 +9,9 @@ var Script = function () {
                     element: 'historico',
                     data: data.historico,
 //                    colors: ['#5fb677','#91c470','#bed57e','#c5c68a','#dddd95'],
-                    colors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0'],
+//                    colors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0'],
 //                    colors: ['#1792a4','#44b4c4','#80c9c6','#a3d5d1','#c8e5e3'],
+                    colors: ['#a6c732','#333333', '#1792a4', '#a31915'],
                     formatter: function (y) {
                         return y + " ha";
                     }
@@ -20,8 +21,9 @@ var Script = function () {
                     element: 'actual',
                     data: data.actual,
 //                    colors: ['#5fb677','#91c470','#bed57e','#c5c68a','#dddd95'],
-                    colors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0'],
+//                    colors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0'],
 //                    colors: ['#1792a4','#44b4c4','#80c9c6','#a3d5d1','#c8e5e3'],
+                    colors: ['#a6c732','#333333', '#1792a4', '#a31915'],
                     formatter: function (y) {
                         return y + " ha";
                     }
@@ -44,8 +46,9 @@ var Script = function () {
                     xLabelAngle: 35,
                     hideHover: 'auto',
 //                    barColors: ['#5fb677','#91c470','#bed57e','#c5c68a','#dddd95']
-                    barColors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0']
+//                    barColors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0']
 //                    barColors: ['#1792a4','#44b4c4','#80c9c6','#a3d5d1','#c8e5e3']
+                    barColors: ['#a6c732','#333333', '#1792a4', '#a31915']
                 });
             }
         });
@@ -65,8 +68,9 @@ var Script = function () {
                     xLabelAngle: 35,
                     hideHover: 'auto',
 //                    barColors: ['#5fb677','#91c470','#bed57e','#c5c68a','#dddd95']
-                    barColors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0']
+//                    barColors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0']
 //                    barColors: ['#1792a4','#44b4c4','#80c9c6','#a3d5d1','#c8e5e3']
+                    barColors: ['#a6c732','#333333', '#1792a4', '#a31915']
                 });
                 
                 if (!data.length) {
