@@ -1,7 +1,6 @@
 {% extends 'BackBundle::base.html.twig' %}
 
 {% block main %}
-    <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
     <section id="main-content">
         <section class="wrapper">
             <h3><i class="fa fa-angle-right"></i> Reportes</h3>
@@ -57,7 +56,6 @@
                 </div>
             </div>
         </section>          
-    </section>
 {% endblock %}
 
 {% block javascripts %}
@@ -66,7 +64,5 @@
         "bundles/back/js/morris-conf.js"
     %}
         <script type="text/javascript" src="{{ asset_url }}" ></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
     {% endjavascripts %}
 {% endblock %}

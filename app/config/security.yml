@@ -51,4 +51,3 @@ security:
         - { path: ^/zona, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, role: ROLE_USER }
-        - { path: ^/historial, role: ROLE_ADMIN }
