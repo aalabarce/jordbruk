@@ -89,4 +89,21 @@ class RNAController extends Controller {
         
         return new Response(json_encode($arrayCosechas));
     }
+    
+    /**
+     * @Route("/get_precios", name="get_precios", options={"expose"=true})
+     */
+    public function preciosAction() {
+        $cultivos = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cultivo')->findAll();
+        $arrayCultivos= [];
+        foreach($cultivos as $cultivo) {
+            $nuevoCultivo = [];
+            $nuevoCultivo['crop']= $cultivo->getNombre();
+            $nuevoCultivo['price']= $cultivo->getPrecio();
+            
+            $arrayCultivos[] = $nuevoCultivo;
+        }
+        
+        return new Response(json_encode($arrayCultivos));
+    }
 }

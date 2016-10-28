@@ -22,7 +22,7 @@ RNA.prototype.initConsultarRed = function () {
             var respuesta = datos.error;
         }
         if(datos.profit) {
-            var ganancia = "Se proyecta una ganancia aproximada a $" + datos.profit;
+            var ganancia = "Se proyecta una ganancia aproximada de $" + datos.profit;
         } else {
             respuesta = datos.error;
             var ganancia = "";

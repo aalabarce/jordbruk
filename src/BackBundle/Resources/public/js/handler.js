@@ -1,13 +1,3 @@
-const prices = [
-    { crop: 'Arroz',    price: 153 },
-    { crop: 'Avena',    price: 100 },
-    { crop: 'Girasol',  price: 295 },
-    { crop: 'Maiz',     price: 164 },
-    { crop: 'Soja',     price: 272 },
-    { crop: 'Sorgo',    price: 140 },
-    { crop: 'Trigo',    price: 147 }
-];
-
 const seasons = [
      {
     crop: 'Arroz',
@@ -22,7 +12,7 @@ const seasons = [
     months: [8, 9, 10]
   },
   {
-    crop: 'Maiz',
+    crop: 'Maíz',
     months: [9, 10, 11, 12]
   },
   {
@@ -43,7 +33,7 @@ const crops = [
     'Arroz',
     'Avena',
     'Girasol',
-    'Maiz',
+    'Maíz',
     'Soja',
     'Sorgo',
     'Trigo'
@@ -74,6 +64,17 @@ function applyRotation(cropProfits, lotId) {
 function getBestOption(lotId, shouldRotate, month) {
     lotId = parseInt(lotId, 10);
     month = parseInt(month, 10);
+
+    $.ajax({
+        type: 'GET',
+        async: false,
+        dataType: "JSON",
+        url: Routing.generate('get_precios'),
+        success: function (data) {
+            window.prices = data;
+        }
+    });
+    const prices = window.prices;
 
     $.ajax({
         type: 'GET',
