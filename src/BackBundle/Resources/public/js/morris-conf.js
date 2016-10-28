@@ -3,7 +3,7 @@ var Script = function () {
         $.ajax({
             type: 'GET',
             dataType: "JSON",
-            url: '/terreno_cultivado',
+            url: Routing.generate('terreno_cultivado'),
             success: function (data) {
                 console.log(data.historico)
                 Morris.Donut({
@@ -45,7 +45,7 @@ var Script = function () {
         $.ajax({
             type: 'GET',
             dataType: "JSON",
-            url: '/rinde_promedio_anual',
+            url: Routing.generate('rinde_promedio_anual'),
             success: function (data) {
                 Morris.Bar({
                     element: 'rinde',
@@ -72,7 +72,7 @@ var Script = function () {
         $.ajax({
             type: 'GET',
             dataType: "JSON",
-            url: '/beneficios_anuales',
+            url: Routing.generate('beneficios_anuales'),
             success: function (data) {
                 Morris.Bar({
                     element: 'beneficios',

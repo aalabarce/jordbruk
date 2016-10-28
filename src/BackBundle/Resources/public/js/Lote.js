@@ -13,7 +13,7 @@ Lote.prototype.init = function() {
         $.ajax({
             type: 'GET',
             dataType: "JSON",
-            url: '/lote/delete/'+id,
+            url: Routing.generate('lote_delete')+ "/" + id,
             success: function (data) {
                 $('tr[data-id='+id+']').remove();
                 $('#myModal').modal('hide');

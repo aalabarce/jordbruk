@@ -17,12 +17,12 @@ RNA.prototype.initConsultarRed = function () {
 
         var datos = getBestOption(lote, rotacion, mes);
         if(datos.crop) {
-            var respuesta = datos.crop;
+            var respuesta = "Conviene sembrar " + datos.crop;
         } else {
             var respuesta = datos.error;
         }
         if(datos.profit) {
-            var ganancia = "La ganancia seria: $" + datos.profit;
+            var ganancia = "Se proyecta una ganancia aproximada a $" + datos.profit;
         } else {
             respuesta = datos.error;
             var ganancia = "";
