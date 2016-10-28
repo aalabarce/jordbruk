@@ -5,7 +5,6 @@ var Script = function () {
             dataType: "JSON",
             url: Routing.generate('terreno_cultivado'),
             success: function (data) {
-                console.log(data.historico)
                 Morris.Donut({
                     element: 'historico',
                     data: data.historico,

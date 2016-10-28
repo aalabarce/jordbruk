@@ -17,7 +17,7 @@ RNA.prototype.initConsultarRed = function () {
 
         var datos = getBestOption(lote, rotacion, mes);
         if(datos.crop) {
-            var respuesta = "Conviene sembrar " + datos.crop;
+            var respuesta = "Se sugiere sembrar " + datos.crop;
         } else {
             var respuesta = datos.error;
         }
@@ -32,7 +32,7 @@ RNA.prototype.initConsultarRed = function () {
             return new Promise((resolve) => setTimeout(resolve, time));
         }
         
-        sleep(1000).then(() => {
+        sleep(2000).then(() => {
             $('#respuesta').text(respuesta);
             $('#ganancia').text(ganancia);
             $("#consultar").removeClass('disabled');
