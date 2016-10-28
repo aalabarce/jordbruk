@@ -104,6 +104,8 @@ fos_oauth_server:
     auth_code_class:     ApiBundle\Entity\AuthCode
     service:
         user_provider: fos_user.user_provider.username
+        options:   
+            access_token_lifetime: 7200000
         
 assetic:
     debug:          '%kernel.debug%'
