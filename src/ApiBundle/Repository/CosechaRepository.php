@@ -147,25 +147,6 @@ class CosechaRepository extends EntityRepository {
         
         return $qb->getQuery()->getResult();
     }
-           
-    public function getUltimas4PorLote($usuario) {
-        $sql = "SELECT c.id AS cosecha, c.fecha as fecha, c.beneficio AS beneficio, c.rinde AS rinde, l.id AS lote
-            FROM Cosecha c
-            JOIN Siembra s ON s.id = c.siembra_id
-            JOIN Lote l ON s.lote_id = l.id
-            JOIN Usuario u ON l.usuario_id = u.id
-            WHERE u.id = $usuario AND c.deletedAt is null;";
-        
-        $rsm = new ResultSetMapping;
-        $rsm->addScalarResult('cosecha', 'cosecha');
-        $rsm->addScalarResult('fecha', 'fecha');
-        $rsm->addScalarResult('beneficio', 'beneficio');
-        $rsm->addScalarResult('rinde', 'rinde');
-        $rsm->addScalarResult('lote', 'lote');
-        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
-        
-        return $query->getScalarResult();
-    }
     
     public function getRindePromedioAnual($usuario) {
         $sql = "SELECT EXTRACT(YEAR FROM s.fecha) AS year, AVG(co.rinde) AS cantidad, c.nombre AS cultivo
@@ -197,6 +178,26 @@ class CosechaRepository extends EntityRepository {
         $rsm = new ResultSetMapping;
         $rsm->addScalarResult('year', 'year');
         $rsm->addScalarResult('beneficio', 'beneficio');
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        
+        return $query->getScalarResult();
+    }
+           
+    public function getUltimas4PorLote($lote) {
+        $sql = "SELECT c.fecha as fecha, c.beneficio AS beneficio, c.rinde AS rinde
+            FROM Cosecha c
+            JOIN Siembra s ON s.id = c.siembra_id
+            JOIN Lote l ON s.lote_id = l.id
+            JOIN Usuario u ON l.usuario_id = u.id
+            WHERE l.id = $lote AND c.deletedAt is null
+            ORDER BY ;";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('cosecha', 'cosecha');
+        $rsm->addScalarResult('fecha', 'fecha');
+        $rsm->addScalarResult('beneficio', 'beneficio');
+        $rsm->addScalarResult('rinde', 'rinde');
+        $rsm->addScalarResult('lote', 'lote');
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
         
         return $query->getScalarResult();

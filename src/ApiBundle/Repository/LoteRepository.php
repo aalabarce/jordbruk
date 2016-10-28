@@ -86,4 +86,19 @@ class LoteRepository extends EntityRepository {
         
         return $query->getScalarResult();
     }
+        
+    public function getConCosecha($usuario) {
+        $sql = "SELECT l.id as lote
+            FROM Lote l
+            JOIN Usuario u ON l.usuario_id = u.id
+            JOIN Siembra s ON s.lote_id = l.id
+            JOIN Cosecha c ON s.id = c.siembra_id
+            WHERE u.id = $usuario AND l.deletedAt is null;";
+        
+        $rsm = new ResultSetMapping;
+        $rsm->addScalarResult('lote', 'lote');
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        
+        return $query->getScalarResult();
+    }
 }

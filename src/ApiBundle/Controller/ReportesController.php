@@ -173,9 +173,15 @@ class ReportesController extends FOSRestController {
      * @Get("/cosechas_por_lotes", name="cosechas_por_lotes")
      */
     public function getUltimas4PorLoteAction() {
-        $datos = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getUltimas4PorLote($this->getUser()->getId());        
+        $lotes = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getConCosecha($this->getUser()->getId());
+        
+        $array = [];
+        foreach ($lotes as $lote) {
+            $datos = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getUltimas4PorLote($lote[0]);        
+            
+        }
      
-        return $datos;
+        return $array;
     }
 
 }

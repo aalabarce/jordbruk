@@ -24,7 +24,13 @@ class SiembraType extends AbstractType {
                 
         $builder
             ->add('fecha', TextType::class, array("description" => "Fecha de siembra"))
-            ->add('cultivo', null, array("description" => "Cultivo"))
+            ->add('cultivo', EntityType::class , array(
+                "description" => "Cultivo",
+                'class' => 'ApiBundle:Cultivo',
+                'query_builder' => function (\Doctrine\ORM\EntityRepository $er) {
+                    return $er->createQueryBuilder('c')->orderBy('c.nombre');
+                },
+                'choice_label' => 'nombre'))
             ->add('lote', EntityType::class , array(
                 "description" => "Lote",
                 'class' => 'ApiBundle:Lote',

@@ -5,13 +5,19 @@ var Script = function () {
             dataType: "JSON",
             url: '/terreno_cultivado',
             success: function (data) {
+                console.log(data.historico)
                 Morris.Donut({
                     element: 'historico',
                     data: data.historico,
-//                    colors: ['#5fb677','#91c470','#bed57e','#c5c68a','#dddd95'],
-//                    colors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0'],
-//                    colors: ['#1792a4','#44b4c4','#80c9c6','#a3d5d1','#c8e5e3'],
-                    colors: ['#a6c732','#333333', '#1792a4', '#a31915'],
+                    colors: [
+                        '#333333', 
+                        '#a6c732',
+                        '#a31915', 
+                        '#1792a4', 
+                        '#e47c5d', 
+                        '#f9d422', 
+                        '#9a4a5e', 
+                    ],
                     formatter: function (y) {
                         return y + " ha";
                     }
@@ -20,10 +26,15 @@ var Script = function () {
                 Morris.Donut({
                     element: 'actual',
                     data: data.actual,
-//                    colors: ['#5fb677','#91c470','#bed57e','#c5c68a','#dddd95'],
-//                    colors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0'],
-//                    colors: ['#1792a4','#44b4c4','#80c9c6','#a3d5d1','#c8e5e3'],
-                    colors: ['#a6c732','#333333', '#1792a4', '#a31915'],
+                    colors: [
+                        '#333333', 
+                        '#a6c732',
+                        '#a31915', 
+                        '#1792a4', 
+                        '#e47c5d', 
+                        '#f9d422', 
+                        '#9a4a5e', 
+                    ],
                     formatter: function (y) {
                         return y + " ha";
                     }
@@ -45,10 +56,15 @@ var Script = function () {
                     barRatio: 0.4,
                     xLabelAngle: 35,
                     hideHover: 'auto',
-//                    barColors: ['#5fb677','#91c470','#bed57e','#c5c68a','#dddd95']
-//                    barColors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0']
-//                    barColors: ['#1792a4','#44b4c4','#80c9c6','#a3d5d1','#c8e5e3']
-                    barColors: ['#a6c732','#333333', '#1792a4', '#a31915']
+                    barColors: [
+                        '#333333', 
+                        '#a6c732',
+                        '#a31915', 
+                        '#1792a4', 
+                        '#e47c5d', 
+                        '#f9d422', 
+                        '#9a4a5e', 
+                    ],
                 });
             }
         });
@@ -67,10 +83,15 @@ var Script = function () {
                     barRatio: 0.4,
                     xLabelAngle: 35,
                     hideHover: 'auto',
-//                    barColors: ['#5fb677','#91c470','#bed57e','#c5c68a','#dddd95']
-//                    barColors: ['#a6c732','#b9d162','#ccdd91','#e0ebc2','#5bbec0']
-//                    barColors: ['#1792a4','#44b4c4','#80c9c6','#a3d5d1','#c8e5e3']
-                    barColors: ['#a6c732','#333333', '#1792a4', '#a31915']
+                    barColors: [
+                        '#333333', 
+                        '#a6c732',
+                        '#a31915', 
+                        '#1792a4', 
+                        '#e47c5d', 
+                        '#f9d422', 
+                        '#9a4a5e', 
+                    ],
                 });
                 
                 if (!data.length) {
