@@ -173,15 +173,27 @@ class ReportesController extends FOSRestController {
      * @Get("/cosechas_por_lotes", name="cosechas_por_lotes")
      */
     public function getUltimas4PorLoteAction() {
-        $lotes = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getConCosecha($this->getUser()->getId());
+        $lotes = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->getConCosecha($this->getUser()->getId());
         
         $array = [];
-        foreach ($lotes as $lote) {
-            $datos = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getUltimas4PorLote($lote[0]);        
-            
+        foreach ($lotes as $loteId) {
+            $arrayDatos = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->getUltimas4PorLote($loteId["id"]);        
+            $cosechas = [];
+            foreach ($arrayDatos as $datos) {
+                $aux = [];
+                $aux["moment"] = $datos["fecha"];
+                $aux["cost"] = $datos["costo"];
+                $aux["profit"] = $datos["beneficio"];
+                $cosechas[] = $aux;   
+            }
+
+            $lote = [];
+            $lote["lote"] = $datos["nombre"];
+            $lote["data"] = $cosechas;
+            $array[] = $lote;
         }
      
-        return $array;
+        return array("data" => $array);
     }
 
 }

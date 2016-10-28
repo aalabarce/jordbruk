@@ -88,7 +88,7 @@ class LoteRepository extends EntityRepository {
     }
         
     public function getConCosecha($usuario) {
-        $sql = "SELECT l.id as lote
+        $sql = "SELECT DISTINCT l.id as id
             FROM Lote l
             JOIN Usuario u ON l.usuario_id = u.id
             JOIN Siembra s ON s.lote_id = l.id
@@ -96,7 +96,7 @@ class LoteRepository extends EntityRepository {
             WHERE u.id = $usuario AND l.deletedAt is null;";
         
         $rsm = new ResultSetMapping;
-        $rsm->addScalarResult('lote', 'lote');
+        $rsm->addScalarResult('id', 'id');
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
         
         return $query->getScalarResult();

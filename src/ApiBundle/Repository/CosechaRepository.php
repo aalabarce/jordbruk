@@ -184,20 +184,19 @@ class CosechaRepository extends EntityRepository {
     }
            
     public function getUltimas4PorLote($lote) {
-        $sql = "SELECT c.fecha as fecha, c.beneficio AS beneficio, c.rinde AS rinde
+        $sql = "SELECT l.nombre as nombre, c.fecha as fecha, c.beneficio AS beneficio, s.costo AS costo
             FROM Cosecha c
             JOIN Siembra s ON s.id = c.siembra_id
             JOIN Lote l ON s.lote_id = l.id
-            JOIN Usuario u ON l.usuario_id = u.id
             WHERE l.id = $lote AND c.deletedAt is null
-            ORDER BY ;";
+            ORDER BY c.fecha DESC
+            LIMIT 4;";
         
         $rsm = new ResultSetMapping;
-        $rsm->addScalarResult('cosecha', 'cosecha');
+        $rsm->addScalarResult('nombre', 'nombre');
         $rsm->addScalarResult('fecha', 'fecha');
         $rsm->addScalarResult('beneficio', 'beneficio');
-        $rsm->addScalarResult('rinde', 'rinde');
-        $rsm->addScalarResult('lote', 'lote');
+        $rsm->addScalarResult('costo', 'costo');
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
         
         return $query->getScalarResult();
