@@ -123,4 +123,21 @@ class SiembraRepository extends EntityRepository {
         
         return $qb->getQuery()->getResult();
     }
+    
+    public function getPorRangoFecha($lote, $fecha, $siembra = null) {
+        $qb = $this->createQueryBuilder('s');
+        $qb->select('s')
+            ->innerJoin("s.lote","l")
+            ->where($qb->expr()->eq("l.id", ":lote"))
+            ->andWhere("(s.fecha <= :fecha and :fecha <= DATE_ADD(s.fecha, '90', 'day')) or (s.fecha >= :fecha and :fecha >= DATE_ADD(s.fecha, '-90', 'day'))")
+            ->setParameter('fecha', $fecha)
+            ->setParameter('lote', $lote);
+        
+        if($siembra) {
+            $qb->andWhere("s.id != :siembra")
+                ->setParameter('siembra', $siembra);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
 }

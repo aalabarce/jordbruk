@@ -67,12 +67,12 @@ class SiembraController extends BaseController {
      * @Route("/create", name="siembra_create")
      */
     public function createAction(Request $request) {
-        $siembra= new Siembra();
+        $siembra = new Siembra();
         $form = $this->createForm(SiembraType::class, $siembra);
         $form->handleRequest($request);
         
-        $ultimaSiembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getUltimasSiembra($request->get('siembra')["lote"]);
-        if($ultimaSiembra && date_diff(new \DateTime($request->get('siembra')["fecha"]), $ultimaSiembra[0]->getFecha())->days < 90) {
+        $dentroDelRango = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getPorRangoFecha($request->get('siembra')["lote"], new \DateTime($request->get('siembra')["fecha"]));
+        if(count($dentroDelRango) > 0) {
             $error = new FormError("Este lote ya esta sembrado para la fecha seleccionada.");
             $form->get('fecha')->addError($error);
         }
@@ -117,8 +117,8 @@ class SiembraController extends BaseController {
         $form = $this->createForm(SiembraType::class, $siembra);
         $form->handleRequest($request);
 
-        $ultimaSiembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getUltimasSiembra($request->get('siembra')["lote"]);
-        if($ultimaSiembra && date_diff(new \DateTime($request->get('siembra')["fecha"]), $ultimaSiembra[0]->getFecha())->days < 90) {
+        $dentroDelRango = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->getPorRangoFecha($request->get('siembra')["lote"], new \DateTime($request->get('siembra')["fecha"]), $id);
+        if(count($dentroDelRango) > 0) {
             $error = new FormError("Este lote ya esta sembrado para la fecha seleccionada.");
             $form->get('fecha')->addError($error);
         }
