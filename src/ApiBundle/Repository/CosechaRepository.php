@@ -201,4 +201,24 @@ class CosechaRepository extends EntityRepository {
         
         return $query->getScalarResult();
     }
+    
+        
+    public function getPorRangoFecha($lote, $fecha, $siembra = null) {
+        $qb = $this->createQueryBuilder('c');
+        $qb->select('c')
+            ->leftJoin("c.siembra","s")
+            ->innerJoin("s.lote","l")
+            ->where($qb->expr()->eq("l.id", ":lote"))
+            ->andWhere("(c.siembra is null and ) or 
+                    (c.siembra is not null and (s.fecha <= :fecha and :fecha <= DATE_ADD(s.fecha, '90', 'day')) or (s.fecha >= :fecha and :fecha >= DATE_ADD(s.fecha, '-90', 'day')))")
+            ->setParameter('fecha', $fecha)
+            ->setParameter('lote', $lote);
+        
+        if($siembra) {
+            $qb->andWhere("s.id != :siembra")
+                ->setParameter('siembra', $siembra);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
 }

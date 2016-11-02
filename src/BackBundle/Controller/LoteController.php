@@ -129,8 +129,8 @@ class LoteController extends BaseController {
             $em->remove($cosecha);
         }
         
-        foreach($em->getRepository('ApiBundle:Siembra')->findBy(array("lote" => $id)) as $siembras) {
-            $em->remove($siembras);
+        foreach($em->getRepository('ApiBundle:Siembra')->findBy(array("lote" => $id)) as $siembra) {
+            $em->remove($siembra);
         }
 
         $em->remove($lote);

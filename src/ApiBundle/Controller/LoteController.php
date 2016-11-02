@@ -87,8 +87,8 @@ class LoteController extends FOSRestController {
         foreach($em->getRepository('ApiBundle:Cosecha')->getPorLote($id) as $cosecha) {
             $em->remove($cosecha);
         }        
-        foreach($em->getRepository('ApiBundle:Siembra')->findBy(array("lote" => $id)) as $siembras) {
-            $em->remove($siembras);
+        foreach($em->getRepository('ApiBundle:Siembra')->findBy(array("lote" => $id)) as $siembra) {
+            $em->remove($siembra);
         }
         $em->remove($lote);
         $em->flush();

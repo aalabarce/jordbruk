@@ -76,7 +76,7 @@ class LoteRepository extends EntityRepository {
             JOIN Usuario u ON l.usuario_id = u.id
             JOIN Siembra s ON s.lote_id = l.id
             JOIN Cultivo c ON s.cultivo_id = c.id
-            WHERE u.id = $usuario AND DATEDIFF(s.fecha, CURRENT_DATE()) < -90 AND l.deletedAt is null
+            WHERE u.id = $usuario AND l.deletedAt is null AND DATEDIFF(s.fecha, CURRENT_DATE()) > -90 AND DATEDIFF(s.fecha, CURRENT_DATE()) < 90
             GROUP BY c.nombre;";
         
         $rsm = new ResultSetMapping;

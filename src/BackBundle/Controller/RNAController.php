@@ -20,7 +20,7 @@ class RNAController extends Controller {
      * @Route("/get_lotes", name="get_lotes", options={"expose"=true})
      */
     public function lotesAction() {
-        $lotes = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->getPorUsuario($this->getUser()->getId());
+        $lotes = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Lote')->findAll();
         
         $arrayLotes = [];
         foreach($lotes as $lote) {

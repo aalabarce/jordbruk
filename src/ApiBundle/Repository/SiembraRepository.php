@@ -128,8 +128,9 @@ class SiembraRepository extends EntityRepository {
         $qb = $this->createQueryBuilder('s');
         $qb->select('s')
             ->innerJoin("s.lote","l")
+            ->leftJoin('ApiBundle:Cosecha', 'c', 'WITH', 'c.siembra = s.id')
             ->where($qb->expr()->eq("l.id", ":lote"))
-            ->andWhere("(s.fecha <= :fecha and :fecha <= DATE_ADD(s.fecha, '90', 'day')) or (s.fecha >= :fecha and :fecha >= DATE_ADD(s.fecha, '-90', 'day'))")
+            ->andWhere("(c.id is null and s.fecha <= :fecha and :fecha <= c.fecha) or (c.id is not null and (s.fecha <= :fecha and :fecha <= DATE_ADD(s.fecha, '90', 'day')) or (s.fecha >= :fecha and :fecha >= DATE_ADD(s.fecha, '-90', 'day')))")
             ->setParameter('fecha', $fecha)
             ->setParameter('lote', $lote);
         
