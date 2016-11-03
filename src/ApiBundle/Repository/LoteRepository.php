@@ -59,7 +59,7 @@ class LoteRepository extends EntityRepository {
             JOIN Usuario u ON l.usuario_id = u.id
             JOIN Siembra s ON s.lote_id = l.id
             JOIN Cultivo c ON s.cultivo_id = c.id
-            WHERE u.id = $usuario AND l.deletedAt is null
+            WHERE u.id = $usuario AND l.deletedAt is null AND s.deletedAt is null
             GROUP BY c.nombre;";
         
         $rsm = new ResultSetMapping;
@@ -76,7 +76,7 @@ class LoteRepository extends EntityRepository {
             JOIN Usuario u ON l.usuario_id = u.id
             JOIN Siembra s ON s.lote_id = l.id
             JOIN Cultivo c ON s.cultivo_id = c.id
-            WHERE u.id = $usuario AND l.deletedAt is null AND DATEDIFF(s.fecha, CURRENT_DATE()) > -90 AND DATEDIFF(s.fecha, CURRENT_DATE()) < 90
+            WHERE u.id = $usuario AND l.deletedAt is null AND s.deletedAt is null AND DATEDIFF(s.fecha, CURRENT_DATE()) > -90 AND DATEDIFF(s.fecha, CURRENT_DATE()) < 90
             GROUP BY c.nombre;";
         
         $rsm = new ResultSetMapping;
@@ -93,7 +93,7 @@ class LoteRepository extends EntityRepository {
             JOIN Usuario u ON l.usuario_id = u.id
             JOIN Siembra s ON s.lote_id = l.id
             JOIN Cosecha c ON s.id = c.siembra_id
-            WHERE u.id = $usuario AND l.deletedAt is null;";
+            WHERE u.id = $usuario AND c.deletedAt is null;";
         
         $rsm = new ResultSetMapping;
         $rsm->addScalarResult('id', 'id');

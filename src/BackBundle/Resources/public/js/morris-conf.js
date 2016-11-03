@@ -15,29 +15,40 @@ var Script = function () {
                         '#1792a4', 
                         '#e47c5d', 
                         '#f9d422', 
-                        '#9a4a5e', 
+                        '#9a4a5e'
                     ],
                     formatter: function (y) {
                         return y + " ha";
                     }
                 });
 
-                Morris.Donut({
-                    element: 'actual',
-                    data: data.actual,
-                    colors: [
-                        '#333333', 
-                        '#a6c732',
-                        '#a31915', 
-                        '#1792a4', 
-                        '#e47c5d', 
-                        '#f9d422', 
-                        '#9a4a5e', 
-                    ],
-                    formatter: function (y) {
-                        return y + " ha";
-                    }
-                });
+                if (data.actual.length > 0){
+                    Morris.Donut({
+                        element: 'actual',
+                        data: data.actual,
+                        colors: [
+                            '#333333', 
+                            '#a6c732',
+                            '#a31915', 
+                            '#1792a4', 
+                            '#e47c5d', 
+                            '#f9d422', 
+                            '#9a4a5e'
+                        ],
+                        formatter: function (y) {
+                            return y + " ha";
+                        }
+                    });
+                } else {
+                    Morris.Donut({
+                        element: 'actual',
+                        data: [{label:"No tenes ningun cultivo", value:0}],
+                        colors: ["#928f8f"],
+                        formatter: function (y) {
+                            return "";
+                        }
+                    });
+                }
             }
         });
 
