@@ -42,7 +42,7 @@ var Script = function () {
                 } else {
                     Morris.Donut({
                         element: 'actual',
-                        data: [{label:"No tenes ningun cultivo", value:0}],
+                        data: [{label:"No tenes ningún cultivo", value:0}],
                         colors: ["#928f8f"],
                         formatter: function (y) {
                             return "";
