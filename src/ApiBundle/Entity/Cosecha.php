@@ -29,7 +29,7 @@ class Cosecha extends BaseEntitySoftDelete {
     protected $fecha;
     
     /**
-     * @ORM\OneToOne(targetEntity="ApiBundle\Entity\Siembra")
+     * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Siembra")
      * @Expose
      * @Groups({"Cosecha"})
      * @Assert\NotBlank(message="Este campo es obligatorio.")
