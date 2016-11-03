@@ -34,8 +34,9 @@ class CosechaController extends FOSRestController {
         $form = $this->createForm(CosechaType::class, $cosecha);
                 
         $siembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->find($request->request->get('siembra'));
-        if(new \DateTime($request->get('cosecha')["fecha"]) <= $siembra->getFecha()) {
-            throw new BadRequestHttpException("La fecha de la cosecha debe ser mayor a la de la siembra");
+
+        if(new \DateTime($request->request->get('fecha')) < $siembra->getFecha()->add(new DateInterval('P30D')) || new \DateTime($request->request->get('fecha')) > $siembra->getFecha()->add(new DateInterval('P90D'))) {
+            throw new BadRequestHttpException("La fecha de la cosecha es invalida");
         }
         
         $fecha = $request->request->get('fecha');
@@ -73,8 +74,8 @@ class CosechaController extends FOSRestController {
         $cosecha = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Cosecha')->find($id);
         $form = $this->createForm(CosechaType::class, $cosecha);
                 
-        if(new \DateTime($request->get('cosecha')["fecha"]) <= $cosecha->getSiembra()->getFecha()) {
-            throw new BadRequestHttpException("La fecha de la cosecha debe ser mayor a la de la siembra");
+        if(new \DateTime($request->request->get('fecha')) < $cosecha->getSiembra()->getFecha()->add(new DateInterval('P30D')) || new \DateTime($request->request->get('fecha')) > $cosecha->getSiembra()->getFecha()->add(new DateInterval('P90D'))) {
+            throw new BadRequestHttpException("La fecha de la cosecha es invalida");
         }
         
         $fecha = $request->request->get('fecha');
