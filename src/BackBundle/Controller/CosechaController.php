@@ -57,8 +57,13 @@ class CosechaController extends BaseController {
         $siembra = $this->getDoctrine()->getManager()->getRepository('ApiBundle:Siembra')->find($request->get('cosecha')["siembra"]);
 
         $fecha = new \DateTime($request->get('cosecha')["fecha"]);
-        if($fecha < $siembra->getFecha()->add(new DateInterval('P30D')) || $fecha > $siembra->getFecha()->add(new DateInterval('P90D'))) {
-            $error = new FormError("La fecha de la cosecha es invalida");
+        $fechaDesde = clone $siembra->getFecha();
+        $fechaDesde->add(new \DateInterval('P30D'));
+        $fechaHasta = clone $siembra->getFecha();
+        $fechaHasta->add(new \DateInterval('P90D'));
+        
+        if($fechaDesde > $fecha || $fecha > $fechaHasta) {
+            $error = new FormError("La fecha de la cosecha no es invalida.");
             $form->get('fecha')->addError($error);
         }
         
@@ -104,8 +109,13 @@ class CosechaController extends BaseController {
         $form->handleRequest($request);
 
         $fecha = new \DateTime($request->get('cosecha')["fecha"]);
-        if($fecha < $cosecha->getSiembra()->getFecha()->add(new DateInterval('P30D')) || $fecha > $cosecha->getSiembra()->getFecha()->add(new DateInterval('P90D'))) {
-            $error = new FormError("La fecha de la cosecha es invalida");
+        $fechaDesde = clone $cosecha->getSiembra()->getFecha();
+        $fechaDesde->add(new \DateInterval('P30D'));
+        $fechaHasta = clone $cosecha->getSiembra()->getFecha();
+        $fechaHasta->add(new \DateInterval('P90D'));
+        
+        if($fechaDesde > $fecha || $fecha > $fechaHasta) {
+            $error = new FormError("La fecha de la cosecha no es invalida.");
             $form->get('fecha')->addError($error);
         }
 
