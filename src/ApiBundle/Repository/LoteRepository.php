@@ -35,6 +35,7 @@ class LoteRepository extends EntityRepository {
         $qb->select('l')
             ->innerJoin("l.usuario","u")
             ->where($qb->expr()->eq("u.id", ":usuario"))
+            ->orderBy("l.nombre", "ASC")
             ->setParameter('usuario', $usuario);
 
         return $qb->getQuery()->getResult();

@@ -23,7 +23,7 @@ class UsuarioType extends AbstractType {
                 "description" => "Provincia",
                 'class' => 'ApiBundle:Provincia',
                 'query_builder' => function (\Doctrine\ORM\EntityRepository $er) {
-                    return $er->createQueryBuilder('p');
+                    return $er->createQueryBuilder('p')->orderBy('p.nombre', 'ASC');
                 },
                 'choice_label' => 'nombre'))
         ;
