@@ -42,7 +42,7 @@
                                         {% for lote in lotes|reverse %}
                                             <tr data-id="{{lote.id}}">
                                                 <td>{{lote.nombre}}</td>
-                                                <td>{{lote.superficie}} ha</td>
+                                                <td>{{lote.superficie}} has</td>
                                                 <td>{{lote.suelo}}</td>
                                                 <td>{% if lote.descripcion %}{{lote.descripcion}}{% else %}-{% endif %}</td>
                                                 <td>{{lote.provincia.nombre}}</td>
