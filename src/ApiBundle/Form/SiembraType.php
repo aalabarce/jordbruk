@@ -37,6 +37,7 @@ class SiembraType extends AbstractType {
                 'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($usuario) {
                     return $er->createQueryBuilder('l')
                             ->where('l.usuario = :usuario')
+                            ->orderBy('l.nombre','asc')
                             ->setParameter("usuario", $usuario->getId());
                 },
                 'choice_label' => 'nombre'))

@@ -39,7 +39,9 @@ class CosechaType extends AbstractType {
                     $qb = $er->createQueryBuilder('s');
                         $qb->innerJoin('s.lote', 'l')
                         ->where('l.usuario = :usuario')
-                        ->andWhere($qb->expr()->notIn('s.id', $qb2->getDQL()))                    
+                        ->andWhere($qb->expr()->notIn('s.id', $qb2->getDQL()))
+                        ->orderBy('l.nombre','asc')
+                        ->addOrderBy('s.cultivo','asc')
                         ->setParameter("usuario", $usuario->getId());
                     
                     if($entity->getId()) {                        

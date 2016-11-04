@@ -1,32 +1,32 @@
 const seasons = [
-     {
-    crop: 'Arroz',
-    months: [10, 11]
-  },
-  {
-    crop: 'Avena',
-    months: [2, 3]
-  },
-  {
-    crop: 'Girasol',
-    months: [8, 9, 10]
-  },
-  {
-    crop: 'Maíz',
-    months: [9, 10, 11, 12]
-  },
-  {
-    crop: 'Soja',
-    months: [10, 11, 12]
-  },
-  {
-    crop: 'Sorgo',
-    months: [10, 11]
-  },
-  {
-    crop: 'Trigo',
-    months: [6, 7, 8]
-  }
+    {
+        crop: 'Arroz',
+        months: [10, 11]
+    },
+    {
+        crop: 'Avena',
+        months: [2, 3]
+    },
+    {
+        crop: 'Girasol',
+        months: [8, 9, 10]
+    },
+    {
+        crop: 'Maíz',
+        months: [9, 10, 11, 12]
+    },
+    {
+        crop: 'Soja',
+        months: [10, 11, 12]
+    },
+    {
+        crop: 'Sorgo',
+        months: [10, 11]
+    },
+    {
+        crop: 'Trigo',
+        months: [6, 7, 8]
+    }
 ];
 
 const crops = [

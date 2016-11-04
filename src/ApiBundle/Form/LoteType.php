@@ -21,7 +21,7 @@ class LoteType extends AbstractType {
                 "description" => "Provincia",
                 'class' => 'ApiBundle:Provincia',
                 'query_builder' => function (\Doctrine\ORM\EntityRepository $er) {
-                    return $er->createQueryBuilder('p')->where('p.id in (2,3,4,7,8,10,19,22)');
+                    return $er->createQueryBuilder('p')->where('p.id in (2,3,4,7,8,10,19,22)')->orderBy('p.nombre','asc');
                 },
                 'choice_label' => 'nombre'))
         ;
