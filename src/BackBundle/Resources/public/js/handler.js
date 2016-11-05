@@ -59,7 +59,11 @@ function applyRotation(cropProfits, lotId) {
     const plantedHarvests = harvests.filter(harvest => harvest.sowing.lot.id === lotId);
     const orderedPlantedHarvests = _.sortBy(plantedHarvests, dateSort).reverse();
     const lastHarvest = _.head(orderedPlantedHarvests);
-    return cropProfits.filter(cropProfit => cropProfit.crop !== lastHarvest.sowing.crop);
+    if (lastHarvest) {
+        return cropProfits.filter(cropProfit => cropProfit.crop !== lastHarvest.sowing.crop);
+    } else {
+        return cropProfits;
+    }
 }
 
 function getBestOption(lotId, shouldRotate, month) {

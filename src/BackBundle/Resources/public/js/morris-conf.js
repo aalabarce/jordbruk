@@ -94,7 +94,7 @@ var Script = function () {
                     xLabelAngle: 35,
                     hideHover: 'auto',
                     barColors: [
-                        '#333333', 
+                        '#43591d', 
                         '#a6c732',
                         '#a31915', 
                         '#1792a4', 
