@@ -63,7 +63,7 @@ class CosechaController extends BaseController {
         $fechaHasta->add(new \DateInterval('P90D'));
         
         if($fechaDesde > $fecha || $fecha > $fechaHasta) {
-            $error = new FormError("La fecha de la cosecha no es invalida.");
+            $error = new FormError("La fecha de la cosecha es invalida.");
             $form->get('fecha')->addError($error);
         }
         
@@ -115,7 +115,7 @@ class CosechaController extends BaseController {
         $fechaHasta->add(new \DateInterval('P90D'));
         
         if($fechaDesde > $fecha || $fecha > $fechaHasta) {
-            $error = new FormError("La fecha de la cosecha no es invalida.");
+            $error = new FormError("La fecha de la cosecha es invalida.");
             $form->get('fecha')->addError($error);
         }
 
