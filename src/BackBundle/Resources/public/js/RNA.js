@@ -17,18 +17,8 @@ RNA.prototype.initConsultarRed = function () {
 
         var datos = getBestOption(lote, rotacion, mes);
         console.log(datos)
-        if(datos.crop) {
-            var respuesta = "Se sugiere sembrar " + datos.crop;
-            console.log(datos.profit);
-            if(datos.profit) {
-                var ganancia = "Se proyecta una ganancia aproximada de $" + datos.profit;
-            } else {
-                var ganancia = datos.casoParticular;
-            }
-        } else {
-            var ganancia = "";
-            var respuesta = datos.error;
-        }
+        var respuesta = datos.crop;
+        var ganancia = datos.message;
         
         function sleep (time) {
             return new Promise((resolve) => setTimeout(resolve, time));

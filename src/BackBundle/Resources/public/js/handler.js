@@ -58,7 +58,8 @@ function dateSort(harvest) {
 function applyRotation(cropProfits, lotId) {
     const plantedHarvests = harvests.filter(harvest => harvest.sowing.lot.id === lotId);
     const orderedPlantedHarvests = _.sortBy(plantedHarvests, dateSort).reverse();
-    return cropProfits.filter(cropProfit => cropProfit.crop !== _.head(orderedPlantedHarvests).sowing.crop);
+    const lastHarvest = _.head(orderedPlantedHarvests);
+    return cropProfits.filter(cropProfit => cropProfit.crop !== lastHarvest.sowing.crop);
 }
 
 function getBestOption(lotId, shouldRotate, month) {
@@ -143,13 +144,11 @@ function getBestOption(lotId, shouldRotate, month) {
         const result = _.maxBy(filterCropsBySeason(prices, month), cropPrice => cropPrice.price);
         if(result) {
             return {
-                crop: result.crop,
-                history: false,
+                crop: "Se sugiere sembrar " + result.crop,
                 message: 'El resultado se basa en los precios de los granos en el mercado y en el mes de siembra especificado.'
             };
         } else {
             return {
-                history: false,
                 message: 'No hay resultado.'
             };            
         }
@@ -158,36 +157,35 @@ function getBestOption(lotId, shouldRotate, month) {
             const result = _.head(applyRotation(filterCropsBySeason(orderedCropProfits, month), lotId));
             if (result) {
                 return {
-                    crop: result.crop,
-                    profit: result.profit,
-                    history: true,
-                    message: 'El resultado se basa en el precio actual de los granos, los rindes registrados de la zona del lote y la superficie del campo.'
+                    crop: "Se sugiere sembrar " + result.crop,
+                    message: "Se proyecta una ganancia aproximada de $" + result.profit
                 };
             } else {
-                const bestCrop = _.maxBy(filterCropsBySeason(prices, month), cropPrice => cropPrice.price);
-                return {
-                    crop: bestCrop ? bestCrop.crop : undefined,
-                    history: false,
-                    error: 'No hay datos para los cultivos que se pueden sembrar en el mes especificado o al aplicar el filtro de rotacion de cultivos no se encuentran cultivos.',
-                    message: 'El resultado se basa en los precios de los granos en el mercado y en el mes de siembra especificado.'
-                };
+                const bestCrop = _.maxBy(applyRotation(filterCropsBySeason(prices, month), lotId), cropPrice => cropPrice.price);
+                if (bestCrop) {
+                    return {
+                        crop: bestCrop ? "Se sugiere sembrar " + bestCrop.crop : "",
+                        message: 'No se cuenta con informacion suficiente para calcular la ganancia estimada.',
+                    };
+                } else {
+                    return {
+                        crop: "",
+                        message: 'No hay datos para los cultivos que se pueden sembrar en el mes especificado al aplicar el filtro de rotacion de cultivos.',
+                    };
+                }
             }
         } else {
             const result = _.head(filterCropsBySeason(orderedCropProfits, month));
             if (result) {
                 return {
-                    crop: result.crop,
-                    profit: result.profit,
-                    history: true,
-                    message: 'El resultado se basa en el precio actual de los granos, los rindes registrados de la zona del lote y la superficie del campo.'
+                    crop: "Se sugiere sembrar " + result.crop,
+                    message: "Se proyecta una ganancia aproximada de $" + result.profit
                 };
             } else {
                 const bestCrop = _.maxBy(filterCropsBySeason(prices, month), cropPrice => cropPrice.price);
                 return {
-                    crop: bestCrop ? bestCrop.crop : undefined,
-                    history: false,
-                    error: 'No hay datos para los cultivos que se pueden sembrar en el mes especificado.',
-                    casoParticular: 'No se cuenta con informacion suficiente para calcular la ganancia estimada.'
+                    crop: bestCrop ? "Se sugiere sembrar " + bestCrop.crop : "",
+                    message: 'No se cuenta con informacion suficiente para calcular la ganancia estimada.',
                 };
             }
         }
