@@ -187,7 +187,7 @@ function getBestOption(lotId, shouldRotate, month) {
                     crop: bestCrop ? bestCrop.crop : undefined,
                     history: false,
                     error: 'No hay datos para los cultivos que se pueden sembrar en el mes especificado.',
-                    message: 'El resultado se basa en los precios de los granos en el mercado y en el mes de siembra especificado.'
+                    casoParticular: 'No se cuenta con informacion suficiente para calcular la ganancia estimada.'
                 };
             }
         }
